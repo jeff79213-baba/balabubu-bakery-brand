@@ -1,1 +1,8 @@
-https://opencode-sk.web.app/projects/芭拉咘咘麵包車形象版/index.html
+--- GitHub ---
+https://github.com/jeff79213-baba/balabubu-bakery-brand
+
+--- Firebase Hosting ---
+（未部署 Firebase Hosting）
+
+--- 本地路徑 ---
+C:\Users\TW-10\Documents\firebase雲端資料夾\芭拉咘咘麵包車形象版
