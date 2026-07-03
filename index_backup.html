@@ -1,0 +1,2553 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>芭拉咘咘麵包車形象版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #C4843B;
+  --primary-light: #E8A84C;
+  --primary-dark: #8B5E2A;
+  --bg: #FDF8F3;
+  --card: #FFFFFF;
+  --text: #2C1810;
+  --text-light: #8B7355;
+  --accent: #E8A84C;
+  --border: #E8DDD0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(72px + var(--safe-bottom));
+  touch-action: manipulation;
+  line-height: 1.6;
+}
+header {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 60px;
+}
+.headerLeft { flex: 1; min-width: 0; }
+#shopTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: 1px;
+}
+#shopContact {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+.headerBtns { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.headerBtns button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.headerBtns button:hover { border-color: var(--text); color: var(--text); }
+#mainContent { flex: 1; padding: 24px; max-width: 820px; margin: 0 auto; width: 100%; }
+.view { display: none; animation: fadeIn 0.3s ease; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+#tabBar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding-bottom: var(--safe-bottom);
+  z-index: 100;
+}
+#tabBar button {
+  flex: 1; border: none; background: none; padding: 10px 0 8px;
+  font-size: 12px; font-weight: 400; color: var(--text-light);
+  cursor: pointer; position: relative;
+  transition: all 0.2s; font-family: var(--font-body); letter-spacing: 0.5px;
+}
+#tabBar button.active { color: var(--text); font-weight: 500; }
+#tabBar button.active::after {
+  content: ''; position: absolute; top: 0; left: 30%; right: 30%;
+  height: 2px; background: var(--text); border-radius: 0 0 2px 2px;
+}
+#tabBar button.hidden { display: none; }
+.cartBadge {
+  position: absolute; top: 2px; right: 50%; margin-right: -28px;
+  background: #D94A4A; color: #fff; font-size: 10px; font-weight: 700;
+  min-width: 18px; height: 18px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px; box-shadow: 0 2px 6px rgba(217,74,74,0.4);
+}
+.heroSlider {
+  position: relative; overflow: hidden; border-radius: var(--radius-lg);
+  margin-bottom: 28px; aspect-ratio: 16/9; background: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.heroSlider::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(44,24,16,0.4) 0%, transparent 50%, rgba(44,24,16,0.1) 100%);
+  pointer-events: none; z-index: 1;
+}
+.heroSlide {
+  position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px; color: #fff;
+  font-weight: 700; background-size: cover; background-position: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 0;
+}
+.heroSlide.active { opacity: 1; }
+.heroDots {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+.heroDots span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s;
+}
+.heroDots span.active { background: #fff; transform: scale(1.3); }
+.sectionTitle {
+  font-family: var(--font-display); font-size: 20px; font-weight: 600;
+  margin: 28px 0 16px; color: var(--text); letter-spacing: 0.5px;
+}
+.sectionTitle:first-of-type { margin-top: 0; }
+.featuredGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(min-width:600px){ .featuredGrid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+.featuredCard {
+  background: var(--card); border-radius: var(--radius); padding: 14px;
+  box-shadow: var(--shadow-sm); text-align: center; border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.featuredCard .fName { font-size: 14px; font-weight: 600; color: var(--text); }
+.featuredCard .fPrice { font-size: 13px; color: var(--primary); font-weight: 600; margin-top: 4px; }
+.aboutBlurb { font-size: 15px; line-height: 1.8; color: var(--text); margin-top: 8px; font-weight: 300; letter-spacing: 0.3px; }
+.vehicleGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media(min-width:600px){ .vehicleGrid { grid-template-columns: 1fr 1fr 1fr; } }
+.vehicleCard {
+  background: var(--card); border-radius: var(--radius-lg); padding: 28px 16px;
+  box-shadow: var(--shadow-sm); cursor: pointer; text-align: center;
+  transition: all 0.2s; border: 1px solid var(--border); position: relative; overflow: hidden;
+}
+.vehicleCard:hover { border-color: var(--accent); }
+.vehicleCard.active { border-color: var(--text); background: var(--card); }
+.vehicleCard .vIcon { font-size: 42px; margin-bottom: 10px; display: block; }
+.vehicleCard .vName { font-size: 16px; font-weight: 600; color: var(--text); }
+.vehicleCard .vCount { font-size: 12px; color: var(--text-light); margin-top: 4px; font-weight: 300; }
+.categoryTabs {
+  display: flex; gap: 8px; overflow-x: auto; padding: 0 0 14px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.categoryTabs::-webkit-scrollbar { display: none; }
+.categoryTabs button {
+  flex-shrink: 0; padding: 8px 20px; border-radius: 20px;
+  border: 1px solid var(--border); background: none;
+  color: var(--text-light); font-size: 13px; font-weight: 400;
+  cursor: pointer; transition: all 0.2s; font-family: var(--font-body);
+  letter-spacing: 0.3px;
+}
+.categoryTabs button:hover { border-color: var(--text); color: var(--text); }
+.categoryTabs button.active { background: var(--text); color: var(--card); border-color: var(--text); font-weight: 500; }
+.itemGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media(min-width:600px){ .itemGrid { grid-template-columns: 1fr 1fr 1fr; } }
+@media(min-width:900px){ .itemGrid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+.itemCard {
+  background: var(--card); border-radius: var(--radius-lg); padding: 0 0 16px;
+  box-shadow: var(--shadow-sm); transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+  border: 1px solid var(--border); position: relative;
+}
+.itemCard:hover { box-shadow: var(--shadow-md); }
+
+.itemCardImg {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  background: linear-gradient(135deg, var(--bg), var(--border)); display: block;
+}
+.itemCardTop { padding: 0 14px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+.itemCardTop .itemName { font-size: 15px; font-weight: 600; color: var(--text); }
+.itemCardTop .itemUnit { font-size: 12px; color: var(--text-light); font-weight: 300; }
+.itemPrices { padding: 0 14px; display: flex; flex-direction: column; gap: 6px; }
+.priceLine { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.priceLine .plLabel { font-size: 14px; color: var(--text); }
+.priceLine .plPrice { font-size: 15px; font-weight: 600; color: var(--text); font-family: var(--font-display); }
+.priceLine .addCartBtn {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: none; color: var(--text); border: 1px solid var(--border);
+  font-size: 16px; font-weight: 300; cursor: pointer;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; line-height: 1;
+}
+.priceLine .addCartBtn:hover { border-color: var(--text); }
+.priceLine.withDivider { border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 2px; }
+.cartEmpty { text-align: center; padding: 60px 20px; color: var(--text-light); font-size: 15px; font-weight: 300; line-height: 2; }
+.cartItem {
+  background: var(--card); border-radius: var(--radius); padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  border: 1px solid var(--border);
+}
+.cartItemInfo { flex: 1; }
+.cartItemName { font-size: 15px; font-weight: 600; }
+.cartItemMeta { font-size: 12px; color: var(--text-light); margin-top: 3px; font-weight: 300; }
+.cartItemActions { display: flex; align-items: center; gap: 10px; }
+.cartItemActions button {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--card);
+  font-size: 16px; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: all 0.15s; color: var(--text); font-family: var(--font-body);
+}
+.cartItemActions button:hover { border-color: var(--text); color: var(--text); }
+.cartItemActions .qty { font-size: 16px; font-weight: 700; min-width: 24px; text-align: center; }
+.cartItemActions .delBtn { color: #D94A4A; border-color: #D94A4A; background: #FFF5F5; }
+.cartItemActions .delBtn:hover { background: #FFE8E8; }
+.cartTotal {
+  background: var(--card); border-radius: var(--radius); padding: 16px;
+  margin-top: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  border: 1px solid var(--border);
+}
+.cartTotal .totalLabel { font-size: 14px; font-weight: 500; }
+.cartTotal .totalPrice { font-size: 22px; font-weight: 600; color: var(--text); font-family: var(--font-display); }
+.btnCheckout {
+  width: 100%; margin-top: 16px; padding: 16px; border: none;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: var(--card); font-size: 15px; font-weight: 500; cursor: pointer;
+  transition: all 0.2s; font-family: var(--font-body); letter-spacing: 0.5px;
+}
+.btnCheckout:hover { opacity: 0.85; }
+.btnCheckout:disabled { background: #ccc; cursor: not-allowed; opacity: 1; }
+.orderCard {
+  background: var(--card); border-radius: var(--radius-lg); padding: 16px;
+  margin-bottom: 12px; border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.orderHeader {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px; font-size: 13px; color: var(--text-light);
+  flex-wrap: wrap; gap: 6px;
+}
+.orderItems { font-size: 13px; line-height: 1.8; }
+.orderItemLine { display: flex; justify-content: space-between; padding: 2px 0; }
+.orderTotal {
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; font-weight: 700; font-size: 15px;
+}
+.orderStatus {
+  display: inline-block; padding: 3px 12px; border-radius: 12px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.3px;
+}
+.orderStatus.pending { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.orderStatus.completed { background: var(--bg); color: var(--text-light); border: 1px solid var(--border); }
+.btnCancelOrder {
+  padding: 5px 14px; border: 1.5px solid #D94A4A; border-radius: 8px;
+  background: #fff; color: #D94A4A; cursor: pointer; font-size: 12px;
+  font-weight: 500; font-family: var(--font-body); transition: all 0.15s;
+}
+.btnCancelOrder:hover { background: #FFF5F5; }
+.btnCompleteOrder {
+  padding: 5px 14px; border: none; border-radius: 8px;
+  background: var(--primary); color: #fff; cursor: pointer; font-size: 12px;
+  font-weight: 500; font-family: var(--font-body); transition: all 0.15s;
+}
+.btnCompleteOrder:hover { background: var(--primary-dark); }
+.aboutSection { margin-bottom: 20px; }
+.aboutSection h3 {
+  font-family: var(--font-display); font-size: 17px; font-weight: 600;
+  margin-bottom: 10px; color: var(--text); letter-spacing: 0.5px;
+}
+.aboutInfo { line-height: 2; font-size: 14px; color: var(--text); }
+.aboutInfo .label { color: var(--text-light); font-weight: 500; }
+.mapEmbed { width: 100%; height: 280px; border-radius: var(--radius-lg); border: none; margin-top: 14px; box-shadow: var(--shadow-sm); }
+.adminSection {
+  background: var(--card); border-radius: var(--radius-lg); padding: 20px;
+  margin-bottom: 16px; border: 1px solid var(--border);
+}
+.adminSection h3 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 600;
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--text);
+  letter-spacing: 0.5px;
+}
+.adminRow {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #F0EAE0; gap: 8px; transition: background 0.15s;
+}
+.adminRow:last-child { border-bottom: none; }
+.adminRow:hover { background: #FDF8F3; }
+.adminRowName { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.adminRowUnit { font-size: 12px; color: var(--text-light); flex-shrink: 0; margin: 0 6px; font-weight: 300; }
+.adminRowActions { display: flex; gap: 4px; flex-shrink: 0; }
+.adminRowActions button {
+  padding: 5px 10px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--card); cursor: pointer; font-size: 11px; line-height: 1; transition: all 0.15s; color: var(--text-light);
+}
+.adminRowActions .editBtn { color: var(--text); border-color: var(--border); }
+.adminRowActions .editBtn:hover { background: var(--text); color: var(--card); }
+.adminRowActions .delBtn { color: #D94A4A; border-color: #D94A4A; }
+.adminRowActions .delBtn:hover { background: #D94A4A; color: #fff; }
+.adminRowActions .priceBtn { color: var(--text); border-color: var(--border); }
+.adminRowActions .priceBtn:hover { background: var(--text); color: var(--card); }
+.dragHandle { cursor: grab; padding: 4px 8px 4px 2px; color: #C4B8A8; font-size: 16px; user-select: none; flex-shrink: 0; touch-action: none; }
+.dragHandle:active { cursor: grabbing; }
+.inlineEditInput {
+  padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 14px; outline: none; font-family: var(--font-body); background: var(--card);
+}
+.inlineEditInput:focus { border-color: var(--text); }
+.adminRow.dragging { opacity: 0.4; }
+.adminRow.dragOver { border-top: 2px solid var(--primary) !important; }
+.dragGhost {
+  position: fixed; pointer-events: none; z-index: 999; opacity: 0.9;
+  transform: scale(1.02); box-shadow: var(--shadow-lg); border-radius: var(--radius);
+  background: var(--card); padding: 10px 16px; font-size: 14px; min-width: 150px; border: 1px solid var(--border);
+}
+.adminPrices { padding: 0 0 6px 32px; display: flex; flex-direction: column; }
+.adminPriceRow {
+  display: flex; align-items: center; gap: 8px; padding: 6px 0;
+  border-bottom: 1px solid #F0EAE0; font-size: 13px;
+}
+.adminPriceRow:last-of-type { border-bottom: none; }
+.adminPriceRow .aplLabel { flex: 1; min-width: 0; color: var(--text); }
+.adminPriceRow .aplAmount { width: 60px; text-align: right; font-weight: 700; color: var(--primary); }
+.adminPriceRow input {
+  padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: var(--font-body); outline: none;
+}
+.adminPriceRow input:focus { border-color: var(--text); }
+.adminPriceRow input.apInputLabel { flex: 1; min-width: 0; }
+.adminPriceRow input.apInputAmount { width: 70px; text-align: right; }
+.inlineStockInput {
+  width: 56px; padding: 5px 6px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px; text-align: center; outline: none; font-family: var(--font-body);
+}
+.inlineStockInput:focus { border-color: var(--text); }
+.inlineAddRow { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.inlineAddRow input {
+  flex: 1; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 14px; outline: none; font-family: var(--font-body);
+  transition: border-color 0.2s; min-width: 60px;
+}
+.inlineAddRow input:focus { border-color: var(--text); }
+.inlineAddRow button {
+  padding: 10px 18px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--card); color: var(--text); font-size: 14px; font-weight: 400;
+  cursor: pointer; font-family: var(--font-body); transition: all 0.2s; white-space: nowrap;
+}
+.inlineAddRow button:hover { border-color: var(--text); }
+.themeGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.themeCard {
+  padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);
+  cursor: pointer; text-align: center; font-size: 12px; font-weight: 500;
+  transition: all 0.2s; background: var(--card);
+}
+.themeCard:hover { border-color: var(--text); }
+.themeCard.active { border-color: var(--text); }
+.themeCard .swatch { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; }
+.themeCard .swatch span {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.colorEditGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.colorEditItem { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.colorEditItem input[type="color"] { width: 42px; height: 36px; border: none; border-radius: 8px; cursor: pointer; padding: 0; background: none; }
+.colorEditItem input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+.colorEditItem input[type="color"]::-webkit-color-swatch { border-radius: 6px; border: 1px solid var(--border); }
+.colorEditItem label { flex: 1; font-weight: 500; }
+.settingRow { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.settingRow label { font-size: 14px; min-width: 60px; font-weight: 500; color: var(--text); }
+.settingRow input[type="text"],
+.settingRow input[type="password"],
+.settingRow textarea {
+  flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 14px; font-family: var(--font-body); outline: none; transition: border-color 0.2s;
+}
+.settingRow input:focus,
+.settingRow textarea:focus { border-color: var(--text); }
+.settingRow textarea { min-height: 70px; resize: vertical; box-sizing: border-box; }
+.settingRow .toggleWrap { display: flex; align-items: center; gap: 8px; }
+.toggleSwitch { width: 44px; height: 24px; border-radius: 12px; background: #D0C8B8; cursor: pointer; position: relative; transition: all 0.2s; border: none; padding: 0; flex-shrink: 0; }
+.toggleSwitch.on { background: var(--text); }
+.toggleSwitch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.toggleSwitch.on::after { transform: translateX(20px); }
+.activeToggle { width: 36px; height: 20px; border-radius: 10px; background: #D0C8B8; cursor: pointer; position: relative; transition: all 0.2s; border: none; padding: 0; flex-shrink: 0; }
+.activeToggle.on { background: #2E7D32; }
+.activeToggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.activeToggle.on::after { transform: translateX(16px); }
+.modalOverlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+.modalOverlay.open { display: flex; }
+.modalBox { background: var(--card); border-radius: var(--radius-lg); padding: 28px 24px; max-width: 380px; width: 100%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.1); animation: modalIn 0.25s ease; }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modalBox h2 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 16px; color: var(--text); letter-spacing: 0.5px; }
+.btnCloseModal { margin-top: 14px; padding: 10px 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); cursor: pointer; font-size: 14px; font-family: var(--font-body); transition: all 0.15s; color: var(--text-light); }
+.btnCloseModal:hover { border-color: var(--text); color: var(--text); }
+.loginForm { display: flex; flex-direction: column; gap: 14px; }
+.pwdWrap { position: relative; width: 100%; }
+.pwdWrap input { width: 100%; padding: 14px 44px 14px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 16px; font-family: var(--font-body); box-sizing: border-box; outline: none; transition: border-color 0.2s; }
+.pwdWrap input:focus { border-color: var(--text); }
+.pwdWrap .eyeBtn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 18px; padding: 6px; color: var(--text-light); line-height: 1; display: flex; align-items: center; }
+.loginForm .loginError { color: #D94A4A; font-size: 13px; display: none; font-weight: 500; }
+.loginForm button { padding: 14px; border: none; border-radius: 10px; background: var(--text); color: var(--card); font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font-body); transition: all 0.2s; }
+.loginForm button:hover { opacity: 0.85; }
+.priceOptions { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.priceOption { padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+.priceOption:hover { border-color: var(--text); }
+.priceOption.selected { border-color: var(--text); background: var(--bg); }
+.priceOption .optLabel { font-size: 15px; font-weight: 500; }
+.priceOption .optPrice { font-size: 18px; font-weight: 600; color: var(--text); font-family: var(--font-display); }
+.itemModalQty { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 18px 0; }
+.itemModalQty button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 20px; font-weight: 300; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+.itemModalQty button:hover { border-color: var(--text); }
+.itemModalQty span { font-size: 22px; font-weight: 700; min-width: 36px; text-align: center; }
+.btnAddToCart { width: 100%; padding: 16px; border: none; border-radius: 12px; background: var(--text); color: var(--card); font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font-body); transition: all 0.2s; letter-spacing: 0.5px; }
+.btnAddToCart:hover { opacity: 0.85; }
+.confirmContent { text-align: center; }
+.confirmContent p { font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
+.confirmBtns { display: flex; gap: 12px; }
+.confirmBtns button { flex: 1; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500; font-family: var(--font-body); transition: all 0.15s; }
+.confirmBtns .btnConfirmYes { background: #D94A4A; color: #fff; border: none; }
+.confirmBtns .btnConfirmYes:hover { background: #C0392B; }
+.confirmBtns .btnConfirmNo { background: var(--card); border: 1.5px solid var(--border); color: var(--text-light); }
+.confirmBtns .btnConfirmNo:hover { border-color: var(--text); color: var(--text); }
+.qrContent { text-align: center; }
+.qrContent img { max-width: 220px; border-radius: var(--radius); margin: 10px auto; display: block; }
+.qrUrl { font-size: 12px; color: var(--text-light); word-break: break-all; margin: 10px 0; font-weight: 300; }
+.toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: rgba(44,24,16,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; padding: 12px 28px; border-radius: 12px; font-size: 14px; font-weight: 500; z-index: 300; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; white-space: pre-line; text-align: center; max-width: 80vw; box-shadow: 0 4px 20px rgba(44,24,16,0.2); }
+.toast.show { opacity: 1; }
+.imgUrlText { font-size: 11px; color: var(--text-light); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adminItemTabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 12px; }
+.adminItemTabs button {
+  flex-shrink: 0; padding: 7px 16px; border-radius: 16px;
+  border: 1px solid var(--border); background: none;
+  color: var(--text-light); font-size: 13px; font-weight: 400;
+  cursor: pointer; font-family: var(--font-body); transition: all 0.15s;
+}
+.adminItemTabs button:hover { border-color: var(--text); color: var(--text); }
+.adminItemTabs button.active { background: var(--text); color: var(--card); border-color: var(--text); }
+.slideRow { display: flex; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0EAE0; }
+.slideRow input { flex: 1; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 13px; font-family: var(--font-body); outline: none; }
+.slideRow input:focus { border-color: var(--text); }
+.slideRow .previewBtn { cursor: pointer; font-size: 18px; background: none; border: none; padding: 4px; transition: transform 0.15s; }
+.slideRow .previewBtn:hover { transform: scale(1.2); }
+.slideRow .delSlideBtn { padding: 5px 10px; border: 1px solid #D94A4A; border-radius: 6px; background: #fff; color: #D94A4A; cursor: pointer; font-size: 11px; font-weight: 500; font-family: var(--font-body); transition: all 0.15s; }
+.slideRow .delSlideBtn:hover { background: #D94A4A; color: #fff; }
+.imgPreviewModal .modalBox { max-width: 520px; text-align: center; }
+.imgPreviewModal .modalBox img { max-width: 100%; max-height: 60vh; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+@media(max-width:380px) {
+  .itemGrid { gap: 10px; }
+  .vehicleGrid { gap: 10px; }
+  .modalBox { padding: 20px 16px; }
+  header { padding: 10px 14px; }
+  #shopTitle { font-size: 16px; }
+  #mainContent { padding: 16px; }
+  .heroSlide { font-size: 20px; }
+}
+@media(min-width:768px) {
+  #mainContent { padding: 32px; }
+  .itemGrid { gap: 20px; }
+  .vehicleGrid { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headerLeft">
+    <div id="shopTitle">芭拉咘咘麵包車</div>
+    <div id="shopContact" style="display:none"></div>
+  </div>
+  <div class="headerBtns">
+    <button id="qrBtn">QR</button>
+  </div>
+</header>
+
+<div id="mainContent">
+  <div class="view" id="view-home">
+    <div id="homeContent"></div>
+  </div>
+  <div class="view active" id="view-vehicles">
+    <div id="vehiclesContent"></div>
+  </div>
+  <div class="view" id="view-menu">
+    <div id="menuVehicleInfo" style="margin-bottom:10px;font-size:15px;font-weight:600;color:var(--primary);font-family:var(--font-display)"></div>
+    <div class="categoryTabs" id="categoryTabs"></div>
+    <div class="itemGrid" id="itemGrid"></div>
+  </div>
+  <div class="view" id="view-cart">
+    <div id="cartVehicleInfo" style="margin-bottom:10px;font-size:15px;font-weight:600;color:var(--primary);font-family:var(--font-display)"></div>
+    <div id="cartContent"></div>
+  </div>
+  <div class="view" id="view-orders">
+    <div id="ordersContent"></div>
+  </div>
+  <div class="view" id="view-about">
+    <div id="aboutContent"></div>
+  </div>
+  <div class="view" id="view-admin">
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+<nav id="tabBar">
+  <button data-view="home">首頁</button>
+  <button data-view="vehicles" class="active">車輛</button>
+  <button data-view="cart">購物車</button>
+  <button data-view="orders">訂單</button>
+  <button data-view="about">關於</button>
+  <button data-view="admin" class="hidden">管理</button>
+</nav>
+
+<div id="loginModal" class="modalOverlay">
+  <div class="modalBox">
+    <h2>管理員登入</h2>
+    <div class="loginForm">
+      <div class="pwdWrap">
+        <input type="password" id="loginPwd" placeholder="請輸入管理員密碼" autocomplete="off">
+        <button class="eyeBtn" id="pwdEye" type="button" tabindex="-1"></button>
+      </div>
+      <div class="loginError" id="loginError">密碼錯誤，請重試</div>
+      <button id="loginBtn">登入</button>
+      <button style="background:none;color:var(--text-light);border:1.5px solid var(--border);padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-family:var(--font-body);font-weight:500" id="loginCancelBtn">取消</button>
+    </div>
+  </div>
+</div>
+
+<div id="itemModal" class="modalOverlay">
+  <div class="modalBox">
+    <h2 id="itemModalTitle">品項名稱</h2>
+    <div class="priceOptions" id="priceOptions"></div>
+    <div class="itemModalQty">
+      <button id="itemQtyMinus">−</button>
+      <span id="itemQtyDisplay">1</span>
+      <button id="itemQtyPlus">+</button>
+    </div>
+    <button class="btnAddToCart" id="btnAddToCart">加入購物車</button>
+  </div>
+</div>
+
+<div id="qrModal" class="modalOverlay">
+  <div class="modalBox">
+    <h2>掃碼點餐</h2>
+    <div class="qrContent">
+      <img id="qrImage" src="" alt="QR Code">
+      <div class="qrUrl" id="qrUrl"></div>
+      <button class="btnCloseModal" id="qrCloseBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div id="confirmModal" class="modalOverlay">
+  <div class="modalBox">
+    <div class="confirmContent">
+      <p id="confirmMsg">確定要執行此操作嗎？</p>
+      <div class="confirmBtns">
+        <button class="btnConfirmYes" id="confirmYes">確定</button>
+        <button class="btnConfirmYes" id="confirmAlt" style="display:none">替代</button>
+        <button class="btnConfirmNo" id="confirmNo">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="imgPreviewModal" class="modalOverlay imgPreviewModal">
+  <div class="modalBox">
+    <h2>圖片預覽</h2>
+    <img id="imgPreviewContent" src="" alt="preview" style="max-width:100%;max-height:60vh;border-radius:8px;">
+    <button class="btnCloseModal" id="imgPreviewClose" style="margin-top:12px;padding:10px 24px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;font-size:14px;font-family:var(--font-body);color:var(--text-light)">關閉</button>
+  </div>
+</div>
+
+<input type="file" id="importInput" accept=".json" style="display:none">
+
+<div id="importModal" class="modalOverlay">
+  <div class="modalBox" style="max-width:500px">
+    <h2>匯入品項</h2>
+    <div style="margin-bottom:6px;font-size:13px;color:var(--text-light)">選擇要匯入到的分類：</div>
+    <select id="importCatSelect" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-family:var(--font-body);margin-bottom:12px;background:var(--card);outline:none"></select>
+    <div style="margin-bottom:6px;font-size:13px;color:var(--text-light)">貼上品項資料（每行一筆）：</div>
+    <textarea id="importTextarea" style="width:100%;height:180px;padding:12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--font-body);resize:vertical;box-sizing:border-box;outline:none" placeholder="品項名稱-單位-價錢&#10;紅豆麵包-個-35&#10;菠蘿麵包-個-30"></textarea>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button onclick="execImport()" style="flex:1;padding:12px;border:none;border-radius:8px;background:var(--primary);color:#fff;cursor:pointer;font-size:14px;font-weight:500;font-family:var(--font-body)">匯入</button>
+      <button onclick="document.getElementById('importModal').classList.remove('open')" style="flex:1;padding:12px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;font-size:14px;font-family:var(--font-body);color:var(--text-light)">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+
+<script>
+// ============ DATA ============
+const THEMES = {
+  "?箇???": { primary:"#C4843B", bg:"#FFF8F0", card:"#FFFFFF", text:"#3D2B1F", accent:"#E8A84C" },
+  "???啣?": { primary:"#6B8E23", bg:"#F5F0E8", card:"#FFFFFF", text:"#2F4F2F", accent:"#DAA520" },
+  "??蝪∠?": { primary:"#2C2C2C", bg:"#F5F5F5", card:"#FFFFFF", text:"#1A1A1A", accent:"#B87333" },
+  "??蝎咿": { primary:"#E8A0B4", bg:"#FFF5F7", card:"#FFFFFF", text:"#4A3540", accent:"#F4C2C2" },
+  "敺拙甇◢": { primary:"#8B3A3A", bg:"#FDF5E6", card:"#FFFFFF", text:"#2B1E16", accent:"#C9A96E" },
+  "???韏閬?": { primary:"#B8860B", bg:"#FAFAFA", card:"#FFFFFF", text:"#1A1A1A", accent:"#D4A574" }
+};
+
+const DEFAULT_VEHICLES = [
+  { id:"v1", name:"??撠?頠?, sortOrder:0 },
+  { id:"v2", name:"敺拙?", sortOrder:1 }
+];
+
+const DEFAULT_CATEGORIES = {
+  v1: [
+    { name:"暻萄?", items:[
+      { name:"?暻萄?", unit:"??, active:true, image:"", prices:[{ label:"1", price:30 },{ label:"3", price:80 }] },
+      { name:"?亥暻萄?", unit:"??, active:true, image:"", prices:[{ label:"1", price:28 }] },
+      { name:"蝝?暻萄?", unit:"??, active:true, image:"", prices:[{ label:"1", price:30 }] }
+    ]},
+    { name:"??", items:[
+      { name:"????", unit:"??, active:true, image:"", prices:[{ label:"1", price:45 },{ label:"璇?, price:180 }] },
+      { name:"頛像?芾?蝟?, unit:"??, active:true, image:"", prices:[{ label:"1", price:50 }] }
+    ]}
+  ],
+  v2: [
+    { name:"?", items:[
+      { name:"?賢???, unit:"??", active:true, image:"", prices:[{ label:"??", price:40 },{ label:"?湔?", price:75 }] },
+      { name:"?券漸?", unit:"??", active:true, image:"", prices:[{ label:"??", price:45 },{ label:"?湔?", price:80 }] }
+    ]},
+    { name:"摮????", items:[
+      { name:"??暻萄?", unit:"??, active:true, image:"", prices:[{ label:"1", price:45 }] }
+    ]}
+  ]
+};
+
+const DEFAULT_CONFIG = {
+  password:"0000", shopName:"?剜???暻萄?頠耦鞊∠?",
+  address:"?潸瓷撣?頝舐?都??頝?88??, phone:"1681681688",
+  showAddress:false, showPhone:false,
+  themeName:"???韏閬?", colors:{...THEMES["???韏閬?"]},
+  aboutDescription:"?剜???暻萄?頠?靘??圈悅??雿熊??瘥?曄?曇都嚗?????暻萄?頠?韏瑕??曉兢蝳??喲?嚗?,
+  homepageSlides:[]
+};
+
+// ============ STATE ============
+let CONFIG = {};
+let VEHICLES = [];
+let CATEGORIES = {};
+let ORDERS = [];
+let CART = [];
+let currentVehicleId = null;
+let isAdmin = false;
+let currentCategory = 0;
+let itemModalState = null;
+let confirmCallback = null;
+let confirmAltCallback = null;
+let confirmNoCallback = null;
+let editingCatIdx = -1;
+let editingItemIdx = -1;
+let editingPriceIdx = -1;
+let expandedPrices = new Set();
+let heroTimer = null;
+let heroIdx = 0;
+
+// ============ FIREBASE ============
+let STOCK = {};
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD3quPJCOUoUH_Um5UceWXYuUXfRpJEuyo",
+  authDomain: "opencode-sk.firebaseapp.com",
+  projectId: "opencode-sk",
+  storageBucket: "opencode-sk.firebasestorage.app"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const SHOP_ID = "?剜???暻萄?頠耦鞊∠?";
+
+async function loadStockFromFirebase() {
+  try {
+    const doc = await db.collection("stock").doc(SHOP_ID).get();
+    STOCK = doc.exists ? (doc.data().items || {}) : {};
+  } catch(e) { STOCK = {}; }
+}
+
+let stockUnsub = null;
+let ordersUnsub = null;
+
+function listenStock() {
+  if (stockUnsub) stockUnsub();
+  stockUnsub = db.collection("stock").doc(SHOP_ID).onSnapshot(snap => {
+    STOCK = snap.exists ? (snap.data().items || {}) : {};
+    const av = document.querySelector(".view.active");
+    if (av) renderView(av.id.replace("view-",""));
+  }, err => console.error("摨怠???憭望?", err));
+}
+
+function listenOrders() {
+  if (ordersUnsub) ordersUnsub();
+  ordersUnsub = db.collection("shops").doc(SHOP_ID).onSnapshot(snap => {
+    if (snap.exists) {
+      const data = snap.data();
+      if (data.orders) {
+        ORDERS = data.orders;
+        localStorage.setItem("bala_orders", JSON.stringify(ORDERS));
+        const av = document.querySelector(".view.active");
+        if (av) renderView(av.id.replace("view-",""));
+      }
+    }
+  }, err => console.error("閮??憭望?", err));
+}
+
+async function saveStockToFirebase() {
+  try {
+    await db.collection("stock").doc(SHOP_ID).set({
+      items: STOCK,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return true;
+  } catch(e) { return false; }
+}
+
+async function loadShopFromFirebase() {
+  try {
+    const doc = await db.collection("shops").doc(SHOP_ID).get();
+    if (doc.exists) {
+      const data = doc.data();
+      if (data.config) CONFIG = data.config;
+      if (data.vehicles) VEHICLES = data.vehicles;
+      if (data.categories) CATEGORIES = data.categories;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+async function saveShopToFirebase() {
+  try {
+    await db.collection("shops").doc(SHOP_ID).set({
+      config: CONFIG,
+      vehicles: VEHICLES,
+      categories: CATEGORIES,
+      orders: ORDERS,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+  } catch(e) {}
+}
+
+// ============ PERSISTENCE ============
+function loadData() {
+  try { CONFIG = JSON.parse(localStorage.getItem("mv_config")) || JSON.parse(JSON.stringify(DEFAULT_CONFIG)); } catch(e) { CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
+  if (CONFIG.showContact !== undefined && CONFIG.showAddress === undefined) {
+    CONFIG.showAddress = CONFIG.showContact;
+    CONFIG.showPhone = CONFIG.showPhone === undefined ? CONFIG.showContact : CONFIG.showPhone;
+    delete CONFIG.showContact;
+  }
+  try { VEHICLES = JSON.parse(localStorage.getItem("mv_vehicles")) || JSON.parse(JSON.stringify(DEFAULT_VEHICLES)); } catch(e) { VEHICLES = JSON.parse(JSON.stringify(DEFAULT_VEHICLES)); }
+  try { CATEGORIES = JSON.parse(localStorage.getItem("mv_categories")) || JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)); } catch(e) { CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)); }
+  try { ORDERS = JSON.parse(localStorage.getItem("mv_orders")) || []; } catch(e) { ORDERS = []; }
+  try { CART = JSON.parse(localStorage.getItem("mv_cart")) || []; } catch(e) { CART = []; }
+  currentVehicleId = localStorage.getItem("mv_currentVehicle") || null;
+  isAdmin = localStorage.getItem("mv_admin") === "true";
+}
+function saveConfig() { localStorage.setItem("mv_config", JSON.stringify(CONFIG)); saveShopToFirebase(); }
+function saveVehicles() { localStorage.setItem("mv_vehicles", JSON.stringify(VEHICLES)); saveShopToFirebase(); }
+function saveCategories() { localStorage.setItem("mv_categories", JSON.stringify(CATEGORIES)); saveShopToFirebase(); }
+function saveOrders() { localStorage.setItem("mv_orders", JSON.stringify(ORDERS)); saveShopToFirebase(); }
+function saveCart() { localStorage.setItem("mv_cart", JSON.stringify(CART)); }
+function saveCurrentVehicle() { localStorage.setItem("mv_currentVehicle", currentVehicleId || ""); }
+function saveAdmin() { localStorage.setItem("mv_admin", isAdmin ? "true" : ""); }
+
+function getAllData() {
+  return { config: CONFIG, vehicles: VEHICLES, categories: CATEGORIES, orders: ORDERS, exportedAt: new Date().toISOString() };
+}
+
+// ============ THEME & HEADER ============
+function applyTheme(colors) {
+  const r = document.documentElement.style;
+  r.setProperty("--primary", colors.primary);
+  r.setProperty("--bg", colors.bg);
+  r.setProperty("--card", colors.card);
+  r.setProperty("--text", colors.text);
+  r.setProperty("--accent", colors.accent);
+}
+
+function updateHeader() {
+  const name = CONFIG.shopName || "?剜???暻萄?頠耦鞊∠?";
+  document.getElementById("shopTitle").textContent = name;
+  document.title = name;
+  const contact = document.getElementById("shopContact");
+  const parts = [];
+  if (CONFIG.showAddress && CONFIG.address) parts.push(CONFIG.address);
+  if (CONFIG.showPhone && CONFIG.phone) parts.push(CONFIG.phone);
+  if (parts.length) {
+    contact.style.display = "block";
+    contact.textContent = parts.join(" 繚 ");
+  } else {
+    contact.style.display = "none";
+  }
+}
+
+// ============ TOAST ============
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+// ============ CART BADGE ============
+function updateCartBadge() {
+  const total = CART.reduce((s, c) => s + c.qty, 0);
+  const cartBtn = document.querySelector('#tabBar button[data-view="cart"]');
+  if (!cartBtn) return;
+  const old = cartBtn.querySelector(".cartBadge");
+  if (old) old.remove();
+  if (total > 0) {
+    const badge = document.createElement("span");
+    badge.className = "cartBadge";
+    badge.textContent = total > 99 ? "99+" : total;
+    cartBtn.appendChild(badge);
+  }
+}
+
+// ============ TABS ============
+function switchTab(viewName) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById("view-" + viewName).classList.add("active");
+  document.querySelectorAll("#tabBar button").forEach(b => {
+    b.classList.toggle("active", b.dataset.view === viewName);
+  });
+  if (viewName === "home" && heroTimer === null) startHero();
+  else if (viewName !== "home") stopHero();
+  renderView(viewName);
+}
+
+function renderView(viewName) {
+  switch(viewName) {
+    case "home": renderHome(); break;
+    case "vehicles": renderVehicles(); break;
+    case "menu": renderMenu(); break;
+    case "cart": renderCart(); break;
+    case "orders": renderOrders(); break;
+    case "about": renderAbout(); break;
+    case "admin": renderAdmin(); break;
+  }
+}
+
+function updateTabVisibility() {
+  document.querySelectorAll("#tabBar button[data-view]").forEach(b => {
+    const v = b.dataset.view;
+    if (v === "home" || v === "vehicles" || v === "cart" || v === "orders" || v === "about") { b.classList.remove("hidden"); return; }
+    b.classList.toggle("hidden", !isAdmin);
+  });
+  if (!isAdmin) {
+    const active = document.querySelector("#tabBar button.active");
+    if (active && active.dataset.view === "admin") {
+      switchTab("home");
+    }
+  }
+  updateCartBadge();
+}
+
+// ============ HOME ============
+function startHero() {
+  stopHero();
+  heroTimer = setInterval(() => {
+    const slides = document.querySelectorAll(".heroSlide");
+    if (!slides.length) return;
+    slides.forEach(s => s.classList.remove("active"));
+    heroIdx = (heroIdx + 1) % slides.length;
+    slides[heroIdx].classList.add("active");
+    document.querySelectorAll(".heroDots span").forEach((d, i) => d.classList.toggle("active", i === heroIdx));
+  }, 4000);
+}
+
+function stopHero() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+
+function renderHome() {
+  const container = document.getElementById("homeContent");
+  const slides = CONFIG.homepageSlides && CONFIG.homepageSlides.length ? CONFIG.homepageSlides : [{ imageUrl: "" }];
+  heroIdx = 0;
+  let heroHtml = `<div class="heroSlider">
+    ${slides.map((s, i) => `<div class="heroSlide${i===0?' active':''}" style="background:${s.imageUrl?'url('+s.imageUrl+') center/cover':'var(--accent)'}">${s.imageUrl?'':'?? ?剜???暻萄?頠?}</div>`).join("")}
+    <div class="heroDots">
+      ${slides.map((s, i) => `<span class="${i===0?'active':''}" data-idx="${i}"></span>`).join("")}
+    </div>
+  </div>`;
+
+  // Featured products: first 8 active items across all vehicles
+  let featuredItems = [];
+  VEHICLES.forEach(v => {
+    const cats = CATEGORIES[v.id] || [];
+    cats.forEach(cat => {
+      cat.items.forEach(item => {
+        if (item.active && featuredItems.length < 8) {
+          const minPrice = Math.min(...item.prices.map(p => p.price));
+          featuredItems.push({ name: item.name, price: minPrice, vehicleName: v.name });
+        }
+      });
+    });
+  });
+
+  const featuredHtml = featuredItems.length ? `
+    <div class="sectionTitle">??蝎暸??</div>
+    <div class="featuredGrid">
+      ${featuredItems.map(f => `<div class="featuredCard"><div class="fName">${f.name}</div><div class="fPrice">敺?$${f.price} 韏?/div><div style="font-size:11px;color:#aaa;margin-top:2px">${f.vehicleName}</div></div>`).join("")}
+    </div>
+  ` : "";
+
+  const aboutHtml = CONFIG.aboutDescription ? `
+    <div class="sectionTitle">?? ???/div>
+    <div class="aboutBlurb">${CONFIG.aboutDescription}</div>
+  ` : "";
+
+  container.innerHTML = heroHtml + featuredHtml + aboutHtml;
+
+  // Hero dot clicks
+  container.querySelectorAll(".heroDots span").forEach(dot => {
+    dot.addEventListener("click", () => {
+      const idx = parseInt(dot.dataset.idx);
+      document.querySelectorAll(".heroSlide").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".heroDot span").forEach(d => d.classList.remove("active"));
+      document.querySelectorAll(".heroSlide")[idx].classList.add("active");
+      dot.classList.add("active");
+      heroIdx = idx;
+    });
+  });
+
+  startHero();
+}
+
+// ============ VEHICLES ============
+function renderVehicles() {
+  const container = document.getElementById("vehiclesContent");
+  const icons = ["?", "??", "??", "??", "??", "??"];
+  container.innerHTML = `<div class="sectionTitle">?? ?豢?頠?</div>
+    <div class="vehicleGrid">
+      ${VEHICLES.map((v, i) => {
+        const cats = CATEGORIES[v.id] || [];
+        let count = 0;
+        cats.forEach(c => c.items.forEach(item => { if (item.active) count++; }));
+        const isActive = currentVehicleId === v.id;
+        return `<div class="vehicleCard${isActive?' active':''}" data-vid="${v.id}">
+          <div class="vIcon">${icons[i % icons.length]}</div>
+          <div class="vName">${v.name}</div>
+          <div class="vCount">${count} ????/div>
+        </div>`;
+      }).join("")}
+    </div>`;
+}
+
+// ============ MENU ============
+function getStockKey(vid, itemName) { return vid + "_" + itemName; }
+
+function getPendingQty(itemName, priceLabel) {
+  let total = 0;
+  ORDERS.filter(o => o.status === "pending").forEach(o => {
+    o.items.forEach(item => {
+      if (item.name === itemName && item.priceLabel === priceLabel) total += item.stockQty || item.quantity;
+    });
+  });
+  return total;
+}
+
+function getPendingTotal(itemName) {
+  let total = 0;
+  ORDERS.filter(o => o.status === "pending").forEach(o => {
+    o.items.forEach(item => {
+      if (item.name === itemName) total += item.stockQty || item.quantity;
+    });
+  });
+  return total;
+}
+
+function renderMenu() {
+  const vehicleInfo = document.getElementById("menuVehicleInfo");
+  const tabs = document.getElementById("categoryTabs");
+  const grid = document.getElementById("itemGrid");
+
+  if (!currentVehicleId || !VEHICLES.find(v => v.id === currentVehicleId)) {
+    vehicleInfo.textContent = "隢??豢?頠?";
+    tabs.innerHTML = "";
+    grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#aaa">隢??頛??ａ?熊??</div>';
+    return;
+  }
+
+  const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+  vehicleInfo.textContent = "?? " + vehicle.name;
+
+  const cats = CATEGORIES[currentVehicleId] || [];
+  tabs.innerHTML = cats.map((c, i) =>
+    `<button class="${i===currentCategory?'active':''}" data-idx="${i}">${c.name}</button>`
+  ).join("");
+
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#aaa">?怎??</div>';
+    return;
+  }
+
+  const activeItems = cat.items.filter(item => item.active);
+  if (!activeItems.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#aaa">甇文?憿?∪???/div>';
+    return;
+  }
+
+  grid.innerHTML = activeItems.map((item, idx) => {
+    const origIdx = cat.items.indexOf(item);
+    const u = item.unit || "??;
+    const sk = getStockKey(currentVehicleId, item.name);
+    const itemStock = STOCK[sk]?.stock;
+    const pendingTotal = getPendingTotal(item.name);
+    const remaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingTotal : null;
+    const stockText = (remaining !== null)
+      ? (remaining > 0
+          ? `<span style="font-size:11px;color:#888;margin-left:6px">摨怠? ${itemStock} | ??${remaining} ${u}</span>`
+          : `<span style="font-size:11px;color:#e74c3c;margin-left:6px">撌脣摰?/span>`)
+      : '';
+    const imgHtml = item.image ? `<img class="itemCardImg" src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">` : '';
+    return `<div class="itemCard" data-idx="${origIdx}">
+      ${imgHtml}
+      <div class="itemCardTop">
+        <div class="itemName">${item.name}</div>
+        <span class="itemUnit">/ ${u}</span>
+        ${stockText}
+      </div>
+      <div class="itemPrices">
+        ${item.prices.map((p, pi) => {
+          const pendingPrice = getPendingQty(item.name, p.label);
+          const itemRemaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingPrice : null;
+          const isSoldOut = itemRemaining !== null && itemRemaining <= 0;
+          let actionHtml;
+          if (isSoldOut) {
+            actionHtml = `<span style="font-size:11px;color:#e74c3c;font-weight:600">?桀?</span>`;
+          } else {
+            actionHtml = item.prices.length > 1
+              ? `<button class="addCartBtn" data-orig-idx="${origIdx}" data-price="${pi}" data-multi="1">+</button>`
+              : `<button class="addCartBtn" data-orig-idx="${origIdx}" data-price="${pi}">+</button>`;
+          }
+          const displayLabel = isNaN(parseInt(p.label)) ? p.label : `${p.label}${u}`;
+          return `<div class="priceLine${pi < item.prices.length-1 ? ' withDivider' : ''}">
+            <span class="plLabel">${displayLabel}</span>
+            <span class="plPrice">$${p.price}</span>
+            ${actionHtml}
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ============ ITEM MODAL ============
+function openItemModal(catIdx, itemIdx, preselectIdx) {
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const item = cats[catIdx]?.items[itemIdx];
+  if (!item || item.prices.length < 2) return;
+  const startPrice = (preselectIdx !== undefined && preselectIdx < item.prices.length) ? preselectIdx : 0;
+  itemModalState = { categoryIdx: catIdx, itemIdx, selectedPrice: startPrice, qty: 1 };
+  document.getElementById("itemModalTitle").textContent = item.name;
+  const container = document.getElementById("priceOptions");
+  container.innerHTML = item.prices.map((p, i) =>
+    `<div class="priceOption ${i===startPrice?'selected':''}" data-idx="${i}">
+      <span class="optLabel">${p.label}</span>
+      <span class="optPrice">$${p.price}</span>
+    </div>`
+  ).join("");
+  document.getElementById("itemQtyDisplay").textContent = "1";
+  document.getElementById("itemModal").classList.add("open");
+}
+
+// ============ CART ============
+function switchVehicle(vid) {
+  if (vid === currentVehicleId) {
+    switchTab("menu");
+    return;
+  }
+  if (CART.length > 0) {
+    showConfirm("??撠?蝛箄頃?抵?嚗Ⅱ摰?????", () => {
+      CART = [];
+      saveCart();
+      currentVehicleId = vid;
+      saveCurrentVehicle();
+      currentCategory = 0;
+      updateCartBadge();
+      switchTab("menu");
+    });
+  } else {
+    currentVehicleId = vid;
+    saveCurrentVehicle();
+    currentCategory = 0;
+    switchTab("menu");
+  }
+}
+
+function addToCart(catIdx, itemIdx, priceIdx, qty) {
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const item = cats[catIdx]?.items[itemIdx];
+  if (!item) return;
+  const price = item.prices[priceIdx];
+  const sk = getStockKey(currentVehicleId, item.name);
+  const itemStock = STOCK[sk]?.stock;
+  const pendingPrice = getPendingQty(item.name, price.label);
+  const remaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingPrice : null;
+  if (remaining !== null && remaining <= 0) {
+    showToast(item.name + " 撌脣摰?);
+    return;
+  }
+  const existing = CART.find(c =>
+    c.vehicleId === currentVehicleId && c.itemIdx === itemIdx && c.priceIdx === priceIdx
+  );
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+    CART.push({
+      vehicleId: currentVehicleId, vehicleName: vehicle ? vehicle.name : "",
+      catIdx, itemIdx, priceIdx, qty,
+      itemName: item.name, priceLabel: price.label, unitPrice: price.price
+    });
+  }
+  saveCart();
+  showToast("撌脣???" + item.name + " (" + price.label + ") ? " + qty);
+  updateCartBadge();
+  if (document.getElementById("view-cart").classList.contains("active")) renderCart();
+}
+
+function removeFromCart(index) {
+  CART.splice(index, 1);
+  saveCart();
+  renderCart();
+  updateCartBadge();
+}
+
+function changeCartQty(index, delta) {
+  CART[index].qty = Math.max(1, CART[index].qty + delta);
+  saveCart();
+  renderCart();
+  updateCartBadge();
+}
+
+function renderCart() {
+  const vehicleInfo = document.getElementById("cartVehicleInfo");
+  const container = document.getElementById("cartContent");
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+
+  if (currentVehicleId) {
+    const v = VEHICLES.find(vv => vv.id === currentVehicleId);
+    vehicleInfo.textContent = "?? " + (v ? v.name : "");
+  } else {
+    vehicleInfo.textContent = "";
+  }
+
+  if (!cartItems.length) {
+    container.innerHTML = '<div class="cartEmpty">鞈潛頠蝛箇?<br>敹怠暺??改?</div>';
+    return;
+  }
+  let html = '';
+  cartItems.forEach((c, i) => {
+    const absIdx = CART.indexOf(c);
+    const sub = c.unitPrice * c.qty;
+    html += `<div class="cartItem">
+      <div class="cartItemInfo">
+        <div class="cartItemName">${c.itemName}</div>
+        <div class="cartItemMeta">${c.priceLabel} 繚 $${c.unitPrice} ? ${c.qty} = $${sub}</div>
+      </div>
+      <div class="cartItemActions">
+        <button onclick="changeCartQty(${absIdx},-1)">??/button>
+        <span class="qty">${c.qty}</span>
+        <button onclick="changeCartQty(${absIdx},1)">+</button>
+        <button class="delBtn" onclick="removeFromCart(${absIdx})">??/button>
+      </div>
+    </div>`;
+  });
+  const total = cartItems.reduce((s, c) => s + c.unitPrice * c.qty, 0);
+  html += `<div class="cartTotal">
+    <span class="totalLabel">蝮質?</span>
+    <span class="totalPrice">$${total}</span>
+  </div>`;
+  html += `<button class="btnCheckout" onclick="checkout()">?閮</button>`;
+  container.innerHTML = html;
+}
+
+async function checkout() {
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+  if (!cartItems.length) return;
+
+  await loadStockFromFirebase();
+
+  const insufficient = [];
+  for (const c of cartItems) {
+    const sk = getStockKey(currentVehicleId, c.itemName);
+    const s = STOCK[sk]?.stock;
+    const pendingPrice = getPendingQty(c.itemName, c.priceLabel);
+    const remaining = (s !== undefined && s !== null) ? s - pendingPrice : null;
+    if (remaining !== null && remaining !== -1 && c.qty > remaining) {
+      insufficient.push({ name: c.itemName, stock: s, pending: pendingPrice, remaining, ordered: c.qty });
+    }
+  }
+
+  if (insufficient.length > 0) {
+    const msg = insufficient.map(i =>
+      i.name + " 摨怠? " + i.stock + "嚗歇閮?" + i.pending + "嚗 " + i.remaining + "嚗?閬?" + i.ordered + " ??
+    ).join("\n");
+    showToast("摨怠?銝雲嚗n" + msg);
+    return;
+  }
+
+  await placeOrder();
+}
+
+async function placeOrder() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const mo = String(now.getMonth()+1).padStart(2,"0");
+  const d = String(now.getDate()).padStart(2,"0");
+  const h = String(now.getHours()).padStart(2,"0");
+  const mi = String(now.getMinutes()).padStart(2,"0");
+  const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const order = {
+    id: Date.now(),
+    vehicleId: currentVehicleId,
+    vehicleName: vehicle ? vehicle.name : "",
+    date: y + "/" + mo + "/" + d,
+    time: h + ":" + mi,
+    week: getWeekNumber(now),
+    month: now.getMonth()+1,
+    year: y,
+    status: "pending",
+    items: cartItems.map(c => ({
+      category: cats[c.catIdx]?.name || "",
+      name: c.itemName,
+      priceLabel: c.priceLabel,
+      unitPrice: c.unitPrice,
+      quantity: c.qty,
+      stockQty: c.qty,
+      subtotal: c.unitPrice * c.qty
+    })),
+    total: cartItems.reduce((s, c) => s + c.unitPrice * c.qty, 0)
+  };
+  ORDERS.unshift(order);
+  saveOrders();
+  CART = CART.filter(c => c.vehicleId !== currentVehicleId);
+  saveCart();
+  renderCart();
+  updateCartBadge();
+  switchTab("orders");
+  showToast("閮撌脤嚗??疏");
+}
+
+function getWeekNumber(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(d.getFullYear(), 0, 4);
+  return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+
+// ============ ORDERS ============
+function renderOrders() {
+  const container = document.getElementById("ordersContent");
+  const displayOrders = isAdmin ? ORDERS : ORDERS.filter(o => o.status === "pending");
+  if (!displayOrders.length) {
+    container.innerHTML = '<div class="cartEmpty">?怎閮閮?</div>';
+    return;
+  }
+  container.innerHTML = displayOrders.map((o, i) => {
+    const origIdx = ORDERS.indexOf(o);
+    const isPending = o.status === "pending";
+    const statusHtml = `<span class="orderStatus ${isPending?'pending':'completed'}">${isPending ? '?? 敺?鞎? : '??撌脣???}</span>`;
+    const itemsHtml = o.items.map(item =>
+      `<div class="orderItemLine">
+        <span>${item.name} (${item.priceLabel}) ? ${item.quantity}</span>
+        <span>$${item.subtotal}</span>
+      </div>`
+    ).join("");
+    const actionsHtml = isAdmin
+      ? (isPending
+          ? `<button class="btnCompleteOrder" onclick="completeOrder(${origIdx})">??蝯</button> <button class="btnCancelOrder" onclick="deleteOrder(${origIdx})">?芷</button>`
+          : `<button class="btnCancelOrder" onclick="cancelOrder(${origIdx})">??閮</button> <button class="btnCancelOrder" onclick="deleteOrder(${origIdx})">?芷</button>`)
+      : (isPending ? `<button class="btnCancelOrder" onclick="cancelOrder(${origIdx})">??閮</button>` : '');
+    return `<div class="orderCard">
+      <div class="orderHeader">
+        <span>?? ${o.vehicleName || ""} 繚 ${o.date} ${o.time} ${statusHtml}</span>
+        <span>${actionsHtml}</span>
+      </div>
+      <div class="orderItems">${itemsHtml}</div>
+      <div class="orderTotal">
+        <span>??</span>
+        <span>$${o.total}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+async function completeOrder(index) {
+  await loadStockFromFirebase();
+  const order = ORDERS[index];
+  const insufficient = [];
+  for (const item of order.items) {
+    const sk = getStockKey(order.vehicleId, item.name);
+    const s = STOCK[sk]?.stock;
+    if (s !== undefined && s !== null && s !== -1 && item.stockQty > s) {
+      insufficient.push({ name: item.name, stock: s, needed: item.stockQty });
+    }
+  }
+  if (insufficient.length > 0) {
+    const msg = insufficient.map(i => i.name + " ?芸 " + i.stock + "嚗? " + i.needed).join("\n");
+    showConfirm("摨怠?銝雲?⊥?蝯嚗n" + msg + "\n\n隞?撘瑕蝯??嚗澈摮?鞎嚗?, async () => {
+      await deductStockForOrder(order);
+      order.status = "completed";
+      saveOrders();
+      renderOrders();
+      showToast("撌脩??殷?撘瑕嚗澈摮鞎?");
+    });
+    return;
+  }
+  await deductStockForOrder(order);
+  order.status = "completed";
+  saveOrders();
+  renderOrders();
+  showToast("閮撌脣???摨怠?撌脫");
+}
+
+async function deductStockForOrder(order) {
+  for (const item of order.items) {
+    const sk = getStockKey(order.vehicleId, item.name);
+    if (STOCK[sk]) {
+      STOCK[sk].stock = Math.max(-999, (STOCK[sk].stock || 0) - item.stockQty);
+    } else {
+      STOCK[sk] = { stock: -item.stockQty };
+    }
+  }
+  await saveStockToFirebase();
+}
+
+async function cancelOrder(index) {
+  const order = ORDERS[index];
+  if (order.status === "completed") {
+    showConfirm("蝣箏???甇文歇摰?閮嚗?摨怠?撠???", async () => {
+      await loadStockFromFirebase();
+      for (const item of order.items) {
+        const sk = getStockKey(order.vehicleId, item.name);
+        if (STOCK[sk]) {
+          STOCK[sk].stock = (STOCK[sk].stock || 0) + item.stockQty;
+        } else {
+          STOCK[sk] = { stock: item.stockQty };
+        }
+      }
+      await saveStockToFirebase();
+      ORDERS.splice(index, 1);
+      saveOrders();
+      renderOrders();
+      showToast("閮撌脣?瘨?摨怠?撌脣???);
+    });
+  } else {
+    showConfirm("蝣箏???甇方??殷?", () => {
+      ORDERS.splice(index, 1);
+      saveOrders();
+      renderOrders();
+      showToast("閮撌脣?瘨?);
+    });
+  }
+}
+
+function deleteOrder(index) {
+  showConfirm("蝣箏??芷甇方??殷?嚗??芷閮?嚗?敶梢摨怠?嚗?, () => {
+    ORDERS.splice(index, 1);
+    saveOrders();
+    renderOrders();
+    showToast("閮撌脣??);
+  });
+}
+
+// ============ ABOUT ============
+function renderAbout() {
+  const container = document.getElementById("aboutContent");
+  const address = CONFIG.address || "";
+  const phone = CONFIG.phone || "";
+  const mapUrl = address ? "https://maps.google.com/maps?q=" + encodeURIComponent(address) + "&output=embed" : "";
+  container.innerHTML = `
+    <div class="aboutSection">
+      <h3>?? ${CONFIG.shopName || "?剜???暻萄?頠耦鞊∠?"}</h3>
+      ${CONFIG.aboutDescription ? `<div class="aboutBlurb">${CONFIG.aboutDescription}</div>` : ""}
+    </div>
+    <div class="aboutSection">
+      <h3>?? ?平鞈?</h3>
+      <div class="aboutInfo">
+        ${address ? `<div><span class="label">?啣?嚗?/span>${address}</div>` : ""}
+        ${phone ? `<div><span class="label">?餉店嚗?/span>${phone}</div>` : ""}
+        <div><span class="label">?平??嚗?/span>10:00 - 21:00</div>
+      </div>
+    </div>
+    ${mapUrl ? `<iframe class="mapEmbed" src="${mapUrl}" allowfullscreen loading="lazy"></iframe>` : ""}
+  `;
+}
+
+// ============ ADMIN ============
+function renderAdmin() {
+  editingCatIdx = -1;
+  editingItemIdx = -1;
+  editingPriceIdx = -1;
+  expandedPrices = new Set();
+  const sn = CONFIG.shopName || "?剜???暻萄?頠耦鞊∠?";
+  const container = document.getElementById("adminContent");
+  container.innerHTML = `
+    <div class="adminSection">
+      <h3>?? 頠?蝞∠?</h3>
+      <div id="adminVehicles"></div>
+      <div class="inlineAddRow">
+        <input type="text" id="newVehicleInput" placeholder="?啗?頛?蝔?.." maxlength="20">
+        <button onclick="addVehicle()">+ ?啣?</button>
+      </div>
+    </div>
+    <div class="adminSection">
+      <h3>?? ??蝞∠?</h3>
+      <div style="margin-bottom:8px">
+        <select id="adminVehicleSelect" style="width:100%;padding:8px;border-radius:8px;border:1.5px solid #ddd;font-size:14px"></select>
+      </div>
+      <div id="adminItemTabs"></div>
+      <div id="adminItems"></div>
+      <div class="inlineAddRow" style="flex-wrap:wrap">
+        <input type="text" id="newItemName" placeholder="?啣???蝔?.." maxlength="20" style="flex:2;min-width:60px">
+        <input type="text" id="newItemLabel" placeholder="?賊?" value="1" style="flex:1;min-width:40px">
+        <input type="number" id="newItemPrice" placeholder="?寥" value="" style="width:60px">
+        <input type="number" id="newItemStock" placeholder="摨怠?" value="" min="0" style="width:60px">
+        <button onclick="addItemInline()">+ ?啣?</button>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="showImportModal()" style="padding:6px 14px;border:1px solid var(--primary);border-radius:6px;background:var(--card);color:var(--primary);cursor:pointer;font-size:12px">? ?臬??</button>
+      </div>
+    </div>
+    <div class="adminSection">
+      <h3>? 憭?閮剖?</h3>
+      <div class="themeGrid" id="themeGrid"></div>
+      <div class="colorEditGrid" id="colorEditGrid"></div>
+    </div>
+    <div class="adminSection">
+      <h3>?? 摨振鞈?</h3>
+      <div class="settingRow">
+        <label>摨?</label>
+        <input type="text" id="editShopName" value="${sn}" maxlength="20" style="flex:1">
+        <button onclick="saveShopInfo()" style="padding:8px 14px;border:none;border-radius:8px;background:var(--primary);color:#fff;cursor:pointer;font-size:13px">?脣?</button>
+      </div>
+      <div class="settingRow">
+        <label>?啣?</label>
+        <input type="text" id="editAddress" value="${CONFIG.address||''}" maxlength="50" style="flex:1">
+        <button class="toggleSwitch ${CONFIG.showAddress?'on':''}" id="toggleAddress" style="flex-shrink:0"></button>
+      </div>
+      <div class="settingRow">
+        <label>?餉店</label>
+        <input type="text" id="editPhone" value="${CONFIG.phone||''}" maxlength="20" style="flex:1">
+        <button class="toggleSwitch ${CONFIG.showPhone?'on':''}" id="togglePhone" style="flex-shrink:0"></button>
+      </div>
+      <div class="settingRow" style="flex-wrap:wrap">
+        <label style="min-width:100%">??膩</label>
+        <textarea id="editAboutDesc" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;resize:vertical;min-height:60px;box-sizing:border-box">${CONFIG.aboutDescription||''}</textarea>
+      </div>
+    </div>
+    <div class="adminSection">
+      <h3>?儭?擐?頛芣</h3>
+      <div id="slideList"></div>
+      <div class="inlineAddRow">
+        <input type="text" id="newSlideUrl" placeholder="??蝬脣?..." style="flex:1">
+        <button onclick="addSlide()">+ ?啣?</button>
+      </div>
+    </div>
+    <div class="adminSection">
+      <h3>?? 蝟餌絞閮剖?</h3>
+      <div class="settingRow">
+        <label>?啣?蝣?/label>
+        <div class="pwdWrap" style="flex:1">
+          <input type="password" id="newPwdInput" placeholder="?喳?4雿">
+          <button class="eyeBtn" id="newPwdEye" type="button" tabindex="-1"></button>
+        </div>
+        <button onclick="changePassword()" style="padding:8px 14px;border:none;border-radius:8px;background:var(--primary);color:#fff;cursor:pointer;font-size:13px">靽格</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button onclick="exportData()" style="flex:1;padding:10px;border:1.5px solid var(--primary);border-radius:8px;background:var(--card);color:var(--primary);cursor:pointer;font-size:13px">? ?臬閮剖?</button>
+        <button onclick="document.getElementById('importInput').click()" style="flex:1;padding:10px;border:1.5px solid var(--primary);border-radius:8px;background:var(--card);color:var(--primary);cursor:pointer;font-size:13px">? ?臬閮剖?</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <button onclick="resetAll()" style="flex:1;padding:10px;border:1.5px solid #e74c3c;border-radius:8px;background:#fff;color:#e74c3c;cursor:pointer;font-size:13px">?Ｗ儔?身??/button>
+        <button onclick="logout()" style="flex:1;padding:10px;border:1.5px solid #999;border-radius:8px;background:#fff;color:#666;cursor:pointer;font-size:13px">?餃蝞∠???/button>
+      </div>
+    </div>
+  `;
+  renderAdminVehicles();
+  renderAdminVehicleSelect();
+  renderAdminItemTabs();
+  renderAdminItems();
+  renderThemeSettings();
+  renderSlideList();
+
+  const newEye = document.getElementById("newPwdEye");
+  if (newEye && !newEye._listenerAttached) {
+    newEye.addEventListener("click", () => {
+      const input = document.getElementById("newPwdInput");
+      const visible = input.type === "password";
+      input.type = visible ? "text" : "password";
+      setEye(newEye, visible);
+    });
+    newEye._listenerAttached = true;
+    setEye(newEye, false);
+  }
+}
+
+// Admin: Vehicles
+function renderAdminVehicles() {
+  const container = document.getElementById("adminVehicles");
+  if (!container) return;
+  container.innerHTML = VEHICLES.map((v, i) => `
+    <div class="adminRow" draggable="true" data-idx="${i}">
+      <span class="dragHandle">??/span>
+      <span class="adminRowName">${v.name}</span>
+      <div class="adminRowActions">
+        <button class="editBtn" onclick="renameVehicle(${i})">??</button>
+        <button class="delBtn" onclick="deleteVehicle(${i})">??儭?/button>
+      </div>
+    </div>
+  `).join("");
+  initDragSort(container, "vehicle");
+}
+
+function addVehicle() {
+  const input = document.getElementById("newVehicleInput");
+  const name = input.value.trim();
+  if (!name) { showToast("隢撓?亥?頛?蝔?); return; }
+  const id = "v" + Date.now();
+  VEHICLES.push({ id, name, sortOrder: VEHICLES.length });
+  CATEGORIES[id] = [];
+  saveVehicles();
+  saveCategories();
+  input.value = "";
+  renderAdminVehicles();
+  renderAdminVehicleSelect();
+  renderAdminItemTabs();
+  renderAdminItems();
+  showToast("撌脫憓?頛? + name + "??);
+}
+
+function renameVehicle(idx) {
+  const v = VEHICLES[idx];
+  const name = prompt("隢撓?交?迂嚗?, v.name);
+  if (!name || !name.trim()) return;
+  VEHICLES[idx].name = name.trim();
+  saveVehicles();
+  renderAdminVehicles();
+  renderAdminVehicleSelect();
+  showToast("頠??迂撌脫??);
+}
+
+function deleteVehicle(idx) {
+  const v = VEHICLES[idx];
+  const count = (CATEGORIES[v.id] || []).reduce((s, c) => s + c.items.length, 0);
+  showConfirm("蝣箏??芷頠??? + v.name + "??嚗??" + count + " ????", () => {
+    VEHICLES.splice(idx, 1);
+    delete CATEGORIES[v.id];
+    if (currentVehicleId === v.id) currentVehicleId = null;
+    saveVehicles();
+    saveCategories();
+    renderAdminVehicles();
+    renderAdminVehicleSelect();
+    renderAdminItemTabs();
+    renderAdminItems();
+    showToast("頠?撌脣??);
+  });
+}
+
+// Admin: Item Categories
+function renderAdminVehicleSelect() {
+  const sel = document.getElementById("adminVehicleSelect");
+  if (!sel) return;
+  const cur = sel.value || (VEHICLES.length ? VEHICLES[0].id : "");
+  sel.innerHTML = VEHICLES.map(v => `<option value="${v.id}" ${v.id===cur?'selected':''}>${v.name}</option>`).join("");
+}
+
+function getSelectedVehicleId() {
+  const sel = document.getElementById("adminVehicleSelect");
+  return sel ? sel.value : null;
+}
+
+function renderAdminItemTabs() {
+  const container = document.getElementById("adminItemTabs");
+  const vid = getSelectedVehicleId();
+  if (!container || !vid) return;
+  const cats = CATEGORIES[vid] || [];
+  container.innerHTML = cats.map((c, i) =>
+    `<button class="${i===currentCategory?'active':''}" data-idx="${i}">${c.name}</button>`
+  ).join("");
+  if (!cats.length) {
+    container.innerHTML = `<div style="font-size:13px;color:#aaa;padding:4px 0">撠??嚗??啣?</div>`;
+  }
+}
+
+function renderAdminItems() {
+  const container = document.getElementById("adminItems");
+  const vid = getSelectedVehicleId();
+  if (!container || !vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat) {
+    container.innerHTML = `<div class="inlineAddRow" style="margin-top:4px">
+      <input type="text" id="newAdminCatInput" placeholder="?啣?憿?蝔?.." maxlength="20" style="flex:1">
+      <button onclick="addAdminCategory()">+ ?啣?</button>
+    </div>`;
+    return;
+  }
+
+  const itemsHtml = cat.items.map((item, i) => {
+    const pricesHtml = item.prices.map((p, pi) => {
+      if (editingItemIdx === i && editingPriceIdx === pi) {
+        return `<div class="adminPriceRow">
+          <input class="apInputLabel" id="peQty_${i}_${pi}" value="${p.label}" style="flex:1">
+          <span style="font-size:13px;color:#888">${item.unit||"??}</span>
+          <input class="apInputAmount" id="peAmt_${i}_${pi}" value="${p.price}" type="number" style="width:70px">
+          <button class="editBtn" onclick="saveEditPrice(${i},${pi})">??</button>
+          <button class="delBtn" onclick="cancelEditPrice()">??/button>
+        </div>`;
+      }
+      return `<div class="adminPriceRow">
+        <span class="aplLabel">${p.label}</span>
+        <span class="aplAmount">$${p.price}</span>
+        <button class="editBtn" onclick="startEditPrice(${i},${pi})">??</button>
+        <button class="delBtn" onclick="deleteItemPrice(${i},${pi})">??儭?/button>
+      </div>`;
+    }).join("");
+
+    const sk = getStockKey(vid, item.name);
+    const currentStock = STOCK[sk]?.stock;
+    const stockVal = (currentStock !== undefined && currentStock !== null) ? currentStock : "";
+
+    if (editingItemIdx === i) {
+      return `<div class="adminRow" draggable="true" data-idx="${i}">
+        <span class="dragHandle">??/span>
+        <input class="inlineEditInput" id="itemEditName" value="${item.name}" maxlength="20" style="flex:1;min-width:0">
+        <input class="inlineEditInput" id="itemEditUnit" value="${item.unit||"??}" maxlength="5" style="width:50px;text-align:center">
+        <input class="inlineEditInput" id="itemEditStock" value="${stockVal}" type="number" min="0" style="width:55px;text-align:center" placeholder="摨怠?" step="1">
+        <div class="adminRowActions">
+          <button class="editBtn" onclick="saveEditItem(${i})">??</button>
+          <button class="delBtn" onclick="cancelEditItem()">??/button>
+        </div>
+      </div>
+      <div class="adminRow" style="padding-left:28px;gap:6px;font-size:12px;color:#888;flex-wrap:wrap">
+        <span>??:</span>
+        <input type="text" id="itemEditImage" value="${item.image||''}" placeholder="??蝬脣?" style="flex:1;min-width:60px;padding:4px 6px;border:1px solid #ddd;border-radius:4px;font-size:12px">
+        <button class="previewBtn" onclick="previewImage(document.getElementById('itemEditImage').value)">??儭?/button>
+      </div>
+      <div class="adminRow" style="padding-left:28px;gap:6px;font-size:12px;color:#888">
+        <span>銝:</span>
+        <button class="activeToggle ${item.active?'on':''}" id="itemEditActive" onclick="toggleItemActive(${i})"></button>
+      </div>
+      <div class="adminPrices" id="adminPrices${i}" style="display:${expandedPrices.has(i)?'block':'none'}">
+        ${pricesHtml}
+        <div class="adminPriceRow" style="border:none;gap:6px;margin-top:6px">
+          <input class="apInputLabel" id="aqty${i}" value="1" style="width:50px">
+          <input class="apInputAmount" id="apa${i}" placeholder="?寥" type="number" value="" style="width:70px">
+          <button onclick="addItemPrice(${i})" style="padding:5px 12px;border:none;border-radius:6px;background:var(--primary);color:#fff;cursor:pointer;font-size:12px">+?嫣?</button>
+        </div>
+      </div>`;
+    }
+
+    const priceSummary = item.prices.map(p => "$" + p.price).join("繚");
+    const imgText = item.image ? `<span class="imgUrlText" title="${item.image}">${item.image.length > 25 ? item.image.substring(0,25)+"?? : item.image}</span>` : "";
+    return `<div class="adminRow" draggable="true" data-idx="${i}">
+      <span class="dragHandle">??/span>
+      <span class="adminRowName">${item.active ? "" : "? "}${item.name}</span>
+      <span class="adminRowUnit">[${item.unit||"??}]</span>
+      <span style="color:#999;font-size:11px;flex-shrink:0">${priceSummary}</span>
+      <input type="number" min="0" class="inlineStockInput" value="${stockVal}" data-vid="${vid}" data-item="${item.name}" placeholder="摨怠?" onchange="inlineUpdateStock(this)">
+      <div class="adminRowActions">
+        <button class="editBtn" onclick="startEditItem(${i})">??</button>
+        <button class="editBtn" onclick="toggleAdminPrices(${i})" title="蝞∠??嫣?">?</button>
+        <button class="delBtn" onclick="deleteItem(${i})">??儭?/button>
+      </div>
+    </div>
+    <div class="adminRow" style="padding-left:28px;gap:6px;font-size:11px;color:#999;flex-wrap:wrap">
+      ${imgText} ${item.image ? `<button class="previewBtn" onclick="previewImage('${item.image.replace(/'/g, "\\'")}')">??儭?/button>` : ""}
+      <button class="activeToggle ${item.active?'on':''}" onclick="toggleItemActive(${i})" style="margin-left:auto"></button>
+      <span style="font-size:11px;color:#999">${item.active ? '撌脖??? : '撌脖???}</span>
+    </div>
+    <div class="adminPrices" id="adminPrices${i}" style="display:${expandedPrices.has(i)?'block':'none'}">
+      ${pricesHtml}
+      <div class="adminPriceRow" style="border:none;gap:6px;margin-top:6px">
+        <input class="apInputLabel" id="aqty${i}" value="1" style="width:50px">
+        <input class="apInputAmount" id="apa${i}" placeholder="?寥" type="number" value="" style="width:70px">
+        <button onclick="addItemPrice(${i})" style="padding:5px 12px;border:none;border-radius:6px;background:var(--primary);color:#fff;cursor:pointer;font-size:12px">+?嫣?</button>
+      </div>
+    </div>`;
+  }).join("");
+
+  container.innerHTML = `
+    <div class="inlineAddRow" style="margin-bottom:8px">
+      <input type="text" id="newAdminCatInput" placeholder="?啣?憿?蝔?.." maxlength="20" style="flex:1">
+      <button onclick="addAdminCategory()">+ ?啣???</button>
+      <button onclick="deleteAdminCategory()" style="padding:8px 12px;border:1px solid #e74c3c;border-radius:8px;background:#fff;color:#e74c3c;cursor:pointer;font-size:13px">?? ?芷甇文?憿?/button>
+    </div>
+    ${itemsHtml}
+    <div class="adminPrices" style="margin-top:4px">
+      <div class="adminPriceRow">
+        <input class="apInputLabel" id="newItemImageUrl" placeholder="??蝬脣?嚗憛恬?" style="flex:2">
+      </div>
+    </div>
+  `;
+  initDragSort(container, "item");
+}
+
+// Admin: Category within a vehicle
+function addAdminCategory() {
+  const vid = getSelectedVehicleId();
+  if (!vid) { showToast("隢??豢?頠?"); return; }
+  const input = document.getElementById("newAdminCatInput");
+  const name = input.value.trim();
+  if (!name) { showToast("隢撓?亙?憿?蝔?); return; }
+  if (!CATEGORIES[vid]) CATEGORIES[vid] = [];
+  CATEGORIES[vid].push({ name, items: [] });
+  saveCategories();
+  input.value = "";
+  currentCategory = CATEGORIES[vid].length - 1;
+  renderAdminItemTabs();
+  renderAdminItems();
+  showToast("撌脫憓?憿? + name + "??);
+}
+
+function deleteAdminCategory() {
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat) return;
+  const count = cat.items.length;
+  showConfirm("蝣箏??芷???? + cat.name + "??嚗 " + count + " ????", () => {
+    cats.splice(currentCategory, 1);
+    if (currentCategory >= cats.length) currentCategory = Math.max(0, cats.length - 1);
+    saveCategories();
+    renderAdminItemTabs();
+    renderAdminItems();
+    showToast("??撌脣??);
+  });
+}
+
+// Admin: Items within category
+function addItemInline() {
+  const vid = getSelectedVehicleId();
+  if (!vid) { showToast("隢??豢?頠?"); return; }
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat) { showToast("隢?撱箇???"); return; }
+  const nameInput = document.getElementById("newItemName");
+  const labelInput = document.getElementById("newItemLabel");
+  const priceInput = document.getElementById("newItemPrice");
+  const stockInput = document.getElementById("newItemStock");
+  const imageInput = document.getElementById("newItemImageUrl");
+  const name = nameInput.value.trim();
+  if (!name) { showToast("隢撓?亙???蝔?); return; }
+  const label = labelInput.value.trim() || "1";
+  const price = parseInt(priceInput.value);
+  if (isNaN(price) || price < 0) { showToast("隢撓?交????); return; }
+  const image = imageInput ? imageInput.value.trim() : "";
+  cat.items.push({ name, unit: "??, active: true, image, prices: [{ label, price }] });
+  saveCategories();
+
+  const sk = getStockKey(vid, name);
+  const stockVal = stockInput.value.trim();
+  const num = stockVal !== "" ? parseInt(stockVal) : 0;
+  if (!isNaN(num) && num >= 0) {
+    STOCK[sk] = { stock: num };
+    saveStockToFirebase();
+  }
+
+  nameInput.value = "";
+  priceInput.value = "";
+  if (stockInput) stockInput.value = "";
+  if (imageInput) imageInput.value = "";
+  renderAdminItems();
+  showToast("撌脫憓??? + name + "??);
+}
+
+function startEditItem(idx) {
+  editingItemIdx = idx;
+  editingCatIdx = -1;
+  editingPriceIdx = -1;
+  renderAdminItems();
+}
+
+async function saveEditItem(idx) {
+  const name = document.getElementById("itemEditName")?.value.trim();
+  const unit = document.getElementById("itemEditUnit")?.value.trim();
+  if (!name) { showToast("?迂銝?箇征"); return; }
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items[idx]) return;
+  const oldName = cat.items[idx].name;
+  cat.items[idx].name = name;
+  cat.items[idx].unit = unit || "??;
+  const imgInput = document.getElementById("itemEditImage");
+  if (imgInput) cat.items[idx].image = imgInput.value.trim();
+
+  editingItemIdx = -1;
+  saveCategories();
+
+  const oldSk = getStockKey(vid, oldName);
+  const newSk = getStockKey(vid, name);
+  if (oldName !== name && STOCK[oldSk] !== undefined) {
+    STOCK[newSk] = STOCK[oldSk];
+    delete STOCK[oldSk];
+  }
+
+  const stockInput = document.getElementById("itemEditStock");
+  if (stockInput) {
+    const val = stockInput.value.trim();
+    const num = val !== "" ? parseInt(val) : (STOCK[newSk]?.stock ?? 10);
+    if (!isNaN(num) && num >= 0) {
+      STOCK[newSk] = { stock: num };
+      await saveStockToFirebase();
+    }
+  } else if (STOCK[newSk] === undefined) {
+    STOCK[newSk] = { stock: 10 };
+    await saveStockToFirebase();
+  }
+
+  renderAdminItems();
+  showToast("??撌脫??);
+}
+
+function cancelEditItem() {
+  editingItemIdx = -1;
+  editingPriceIdx = -1;
+  renderAdminItems();
+}
+
+async function deleteItem(idx) {
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat) return;
+  const itemName = cat.items[idx].name;
+  showConfirm("蝣箏??芷???? + itemName + "??", async () => {
+    cat.items.splice(idx, 1);
+    const sk = getStockKey(vid, itemName);
+    delete STOCK[sk];
+    await saveStockToFirebase();
+    saveCategories();
+    renderAdminItems();
+    showToast("??撌脣??);
+  });
+}
+
+function toggleItemActive(idx) {
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items[idx]) return;
+  cat.items[idx].active = !cat.items[idx].active;
+  saveCategories();
+  renderAdminItems();
+  showToast(cat.items[idx].active ? "撌脖??? : "撌脖???);
+}
+
+function toggleAdminPrices(idx) {
+  if (expandedPrices.has(idx)) expandedPrices.delete(idx);
+  else expandedPrices.add(idx);
+  renderAdminItems();
+}
+
+function addItemPrice(itemIdx) {
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx]) return;
+  const item = cat.items[itemIdx];
+  const qty = parseInt(document.getElementById("aqty" + itemIdx)?.value) || 1;
+  const price = parseInt(document.getElementById("apa" + itemIdx)?.value);
+  if (isNaN(price) || price < 0) { showToast("隢撓?交????); return; }
+  item.prices.push({ label: qty.toString(), price });
+  saveCategories();
+  renderAdminItems();
+  showToast("?嫣?撌脫憓?);
+}
+
+function startEditPrice(itemIdx, priceIdx) {
+  editingItemIdx = itemIdx;
+  editingPriceIdx = priceIdx;
+  editingCatIdx = -1;
+  renderAdminItems();
+}
+
+function saveEditPrice(itemIdx, priceIdx) {
+  const qty = parseInt(document.getElementById("peQty_" + itemIdx + "_" + priceIdx)?.value);
+  const amt = parseInt(document.getElementById("peAmt_" + itemIdx + "_" + priceIdx)?.value);
+  if (!qty || qty < 1) { showToast("隢撓?交????); return; }
+  if (isNaN(amt) || amt < 0) { showToast("隢撓?交????); return; }
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx] || !cat.items[itemIdx].prices[priceIdx]) return;
+  cat.items[itemIdx].prices[priceIdx].label = qty.toString();
+  cat.items[itemIdx].prices[priceIdx].price = amt;
+  editingItemIdx = -1;
+  editingPriceIdx = -1;
+  saveCategories();
+  renderAdminItems();
+  showToast("?嫣?撌脫??);
+}
+
+function cancelEditPrice() {
+  editingItemIdx = -1;
+  editingPriceIdx = -1;
+  renderAdminItems();
+}
+
+function deleteItemPrice(itemIdx, priceIdx) {
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx]) return;
+  const item = cat.items[itemIdx];
+  if (item.prices.length <= 1) { showToast("?喳??靽?銝?雿?); return; }
+  showConfirm("蝣箏??芷?? + item.prices[priceIdx].label + " $" + item.prices[priceIdx].price + "??", () => {
+    item.prices.splice(priceIdx, 1);
+    saveCategories();
+    renderAdminItems();
+    showToast("?嫣?撌脣??);
+  });
+}
+
+function inlineUpdateStock(input) {
+  const vid = input.dataset.vid;
+  const itemName = input.dataset.item;
+  if (!vid || !itemName) return;
+  const sk = getStockKey(vid, itemName);
+  const val = input.value.trim();
+  if (val === "") {
+    delete STOCK[sk];
+  } else {
+    const num = parseInt(val);
+    if (!isNaN(num) && num >= 0) {
+      STOCK[sk] = { stock: num };
+    }
+  }
+  saveStockToFirebase();
+}
+
+// Admin: Image preview
+function previewImage(url) {
+  if (!url) { showToast("隢?頛詨??蝬脣?"); return; }
+  document.getElementById("imgPreviewContent").src = url;
+  document.getElementById("imgPreviewModal").classList.add("open");
+}
+
+// Admin: Theme
+function renderThemeSettings() {
+  const grid = document.getElementById("themeGrid");
+  if (!grid) return;
+  const themeNames = Object.keys(THEMES);
+  grid.innerHTML = themeNames.map(name => {
+    const c = THEMES[name];
+    const active = CONFIG.themeName === name ? 'active' : '';
+    return `<div class="themeCard ${active}" data-theme="${name}">
+      <div class="swatch">
+        <span style="background:${c.primary}"></span>
+        <span style="background:${c.bg}"></span>
+        <span style="background:${c.card};border-color:#ddd"></span>
+        <span style="background:${c.accent}"></span>
+      </div>
+      ${name}
+    </div>`;
+  }).join("");
+
+  const colorGrid = document.getElementById("colorEditGrid");
+  if (!colorGrid) return;
+  const labels = { primary:"銝餉", bg:"?", card:"?∠?", text:"??", accent:"撘瑁矽" };
+  const colors = CONFIG.colors;
+  colorGrid.innerHTML = Object.keys(colors || THEMES["???韏閬?"]).map(k =>
+    `<div class="colorEditItem">
+      <label>${labels[k]||k}</label>
+      <input type="color" value="${(colors||THEMES["???韏閬?"])[k]}" data-key="${k}" onchange="customColor(this)">
+    </div>`
+  ).join("");
+}
+
+function selectTheme(name) {
+  CONFIG.themeName = name;
+  CONFIG.colors = { ...THEMES[name] };
+  applyTheme(CONFIG.colors);
+  saveConfig();
+  renderThemeSettings();
+}
+
+function customColor(input) {
+  CONFIG.colors[input.dataset.key] = input.value;
+  CONFIG.themeName = "";
+  applyTheme(CONFIG.colors);
+  saveConfig();
+  document.querySelectorAll(".themeCard").forEach(c => c.classList.remove("active"));
+}
+
+// Admin: Slides
+function renderSlideList() {
+  const container = document.getElementById("slideList");
+  if (!container) return;
+  const slides = CONFIG.homepageSlides || [];
+  container.innerHTML = slides.map((s, i) =>
+    `<div class="slideRow">
+      <span style="color:#999;font-size:12px">${i+1}.</span>
+      <input type="text" value="${s.imageUrl}" onchange="updateSlide(${i}, this.value)" placeholder="??蝬脣?">
+      <button class="previewBtn" onclick="previewImage('${s.imageUrl.replace(/'/g, "\\'")}')">??儭?/button>
+      <button class="delSlideBtn" onclick="deleteSlide(${i})">??/button>
+    </div>`
+  ).join("");
+}
+
+function addSlide() {
+  const input = document.getElementById("newSlideUrl");
+  const url = input.value.trim();
+  if (!url) { showToast("隢撓?亙??雯?"); return; }
+  if (!CONFIG.homepageSlides) CONFIG.homepageSlides = [];
+  CONFIG.homepageSlides.push({ imageUrl: url });
+  saveConfig();
+  input.value = "";
+  renderSlideList();
+  showToast("撌脫憓憚?剖???);
+}
+
+function updateSlide(idx, url) {
+  if (!CONFIG.homepageSlides) CONFIG.homepageSlides = [];
+  CONFIG.homepageSlides[idx].imageUrl = url;
+  saveConfig();
+}
+
+function deleteSlide(idx) {
+  CONFIG.homepageSlides.splice(idx, 1);
+  saveConfig();
+  renderSlideList();
+  showToast("撌脣??);
+}
+
+// Admin: Info
+function saveShopInfo() {
+  const name = document.getElementById("editShopName").value.trim();
+  if (!name) { showToast("摨?銝?箇征"); return; }
+  CONFIG.shopName = name;
+  CONFIG.address = document.getElementById("editAddress").value.trim();
+  CONFIG.phone = document.getElementById("editPhone").value.trim();
+  CONFIG.aboutDescription = document.getElementById("editAboutDesc")?.value.trim() || "";
+  saveConfig();
+  updateHeader();
+  renderAdmin();
+  showToast("摨振鞈?撌脫??);
+}
+
+// Admin: Drag & Drop
+function initDragSort(container, type) {
+  let dragSrc = null;
+  const rows = () => container.querySelectorAll(".adminRow");
+
+  function onDragStart(e) {
+    const row = e.target.closest(".adminRow");
+    if (!row) return;
+    dragSrc = parseInt(row.dataset.idx);
+    row.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    try { e.dataTransfer.setData("text/plain", ""); } catch(ex) {}
+  }
+  function onDragEnd(e) {
+    const row = e.target.closest(".adminRow");
+    if (row) row.classList.remove("dragging");
+    rows().forEach(r => r.classList.remove("dragOver"));
+  }
+  function onDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    const row = e.target.closest(".adminRow");
+    if (!row) return;
+    rows().forEach(r => r.classList.remove("dragOver"));
+    if (parseInt(row.dataset.idx) !== dragSrc) row.classList.add("dragOver");
+  }
+  function onDrop(e) {
+    e.preventDefault();
+    rows().forEach(r => r.classList.remove("dragOver", "dragging"));
+    const row = e.target.closest(".adminRow");
+    if (!row || dragSrc === null) return;
+    const dropIdx = parseInt(row.dataset.idx);
+    if (dragSrc === dropIdx) { dragSrc = null; return; }
+
+    if (type === "vehicle") {
+      const [item] = VEHICLES.splice(dragSrc, 1);
+      VEHICLES.splice(dropIdx, 0, item);
+      VEHICLES.forEach((v, i) => v.sortOrder = i);
+      saveVehicles();
+      renderAdminVehicles();
+      renderAdminVehicleSelect();
+    } else if (type === "item") {
+      const vid = getSelectedVehicleId();
+      if (!vid) return;
+      const cats = CATEGORIES[vid] || [];
+      const cat = cats[currentCategory];
+      if (!cat) return;
+      const [item] = cat.items.splice(dragSrc, 1);
+      cat.items.splice(dropIdx, 0, item);
+      saveCategories();
+      renderAdminItems();
+    }
+    dragSrc = null;
+  }
+
+  container.removeEventListener("dragstart", onDragStart);
+  container.removeEventListener("dragend", onDragEnd);
+  container.removeEventListener("dragover", onDragOver);
+  container.removeEventListener("drop", onDrop);
+  container.addEventListener("dragstart", onDragStart);
+  container.addEventListener("dragend", onDragEnd);
+  container.addEventListener("dragover", onDragOver);
+  container.addEventListener("drop", onDrop);
+}
+
+// ============ EXPORT / IMPORT ============
+function exportData() {
+  const data = getAllData();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = (CONFIG.shopName || "bakery") + "_?遢_" + new Date().toISOString().slice(0,10) + ".json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("鞈?撌脣??);
+}
+
+function showImportModal() {
+  const vid = getSelectedVehicleId();
+  if (!vid) { showToast("隢??豢?頠?"); return; }
+  const cats = CATEGORIES[vid] || [];
+  const sel = document.getElementById("importCatSelect");
+  if (!sel) return;
+  sel.innerHTML = cats.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
+  document.getElementById("importTextarea").value = "";
+  document.getElementById("importModal").classList.add("open");
+}
+
+function execImport() {
+  const text = document.getElementById("importTextarea").value.trim();
+  if (!text) { showToast("隢票?亙?????); return; }
+  const vid = getSelectedVehicleId();
+  if (!vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const sel = document.getElementById("importCatSelect");
+  const cat = cats.find(c => c.name === sel?.value);
+  if (!cat) { showToast("隢??憿?); return; }
+  const lines = text.split("\n").filter(l => l.trim());
+  let count = 0;
+  lines.forEach(line => {
+    const parts = line.split("-").map(s => s.trim());
+    if (parts.length >= 3) {
+      const name = parts.slice(0, parts.length - 2).join("-");
+      const unit = parts[parts.length - 2];
+      const price = parseInt(parts[parts.length - 1]);
+      if (name && !isNaN(price)) {
+        cat.items.push({ name, unit: unit || "??, active: true, image: "", prices: [{ label: "1", price }] });
+        count++;
+      }
+    } else if (parts.length >= 2) {
+      const name = parts.slice(0, parts.length - 1).join("-");
+      const price = parseInt(parts[parts.length - 1]);
+      if (name && !isNaN(price)) {
+        cat.items.push({ name, unit: "??, active: true, image: "", prices: [{ label: "1", price }] });
+        count++;
+      }
+    }
+  });
+  if (count > 0) {
+    saveCategories();
+    document.getElementById("importModal").classList.remove("open");
+    renderAdminItems();
+    showToast("撌脣??" + count + " 蝑???);
+  } else {
+    showToast("瘝??臬?亦?鞈?嚗?瑼Ｘ?澆?");
+  }
+}
+
+function importData(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.config && data.categories) {
+        CONFIG = data.config;
+        VEHICLES = data.vehicles || VEHICLES;
+        CATEGORIES = data.categories;
+        ORDERS = data.orders || [];
+        saveConfig();
+        saveVehicles();
+        saveCategories();
+        saveOrders();
+        applyTheme(CONFIG.colors);
+        updateHeader();
+        renderAdmin();
+        showToast("鞈?撌脤???);
+      } else {
+        showToast("瑼??澆??航炊");
+      }
+    } catch(e) {
+      showToast("瑼??澆??航炊");
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ============ SYSTEM ============
+function changePassword() {
+  const input = document.getElementById("newPwdInput");
+  const pwd = input.value.trim();
+  if (!pwd) { showToast("隢撓?交撖Ⅳ"); return; }
+  if (pwd.length < 4) { showToast("撖Ⅳ?喳?4雿"); return; }
+  CONFIG.password = pwd;
+  saveConfig();
+  input.value = "";
+  showToast("撖Ⅳ撌脫??);
+}
+
+function resetAll() {
+  showConfirm("蝣箏??Ｗ儔???閮剖潘?嚗??閮????箏仃嚗?, () => {
+    localStorage.removeItem("mv_config");
+    localStorage.removeItem("mv_vehicles");
+    localStorage.removeItem("mv_categories");
+    localStorage.removeItem("mv_orders");
+    localStorage.removeItem("mv_cart");
+    localStorage.removeItem("mv_currentVehicle");
+    localStorage.removeItem("mv_admin");
+    location.reload();
+  });
+}
+
+function logout() {
+  isAdmin = false;
+  saveAdmin();
+  updateTabVisibility();
+  if (document.getElementById("view-admin").classList.contains("active")) {
+    switchTab("home");
+  }
+  showToast("撌脩??);
+}
+
+// ============ CONFIRM MODAL ============
+function showConfirm(msg, cb) {
+  document.getElementById("confirmMsg").textContent = msg;
+  document.getElementById("confirmAlt").style.display = "none";
+  confirmCallback = cb;
+  confirmAltCallback = null;
+  confirmNoCallback = null;
+  document.getElementById("confirmModal").classList.add("open");
+}
+
+// ============ LOGIN ============
+function showLogin() {
+  document.getElementById("loginPwd").value = "";
+  document.getElementById("loginError").style.display = "none";
+  document.getElementById("loginModal").classList.add("open");
+  setTimeout(() => document.getElementById("loginPwd").focus(), 100);
+}
+
+let loginCooldownTimer = null;
+
+function attemptLogin() {
+  if (loginCooldownTimer) return;
+  const pwd = document.getElementById("loginPwd").value;
+  const errEl = document.getElementById("loginError");
+  const loginBtn = document.getElementById("loginBtn");
+  if (pwd === CONFIG.password) {
+    localStorage.removeItem("mv_loginFails");
+    isAdmin = true;
+    saveAdmin();
+    document.getElementById("loginModal").classList.remove("open");
+    errEl.style.display = "none";
+    updateTabVisibility();
+    showToast("蝞∠??∪歇?餃");
+    return;
+  }
+  const fails = (parseInt(localStorage.getItem("mv_loginFails") || "0", 10)) + 1;
+  localStorage.setItem("mv_loginFails", String(fails));
+  const delay = Math.pow(2, fails - 1);
+  errEl.textContent = "撖Ⅳ?航炊嚗? " + delay + " 蝘??岫";
+  errEl.style.display = "block";
+  document.getElementById("loginPwd").value = "";
+  document.getElementById("loginPwd").focus();
+  loginBtn.disabled = true;
+  loginCooldownTimer = setTimeout(() => {
+    loginBtn.disabled = false;
+    loginCooldownTimer = null;
+  }, delay * 1000);
+}
+
+// ============ EYE SVG ============
+function eyeSVG(open) {
+  return open
+    ? '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>'
+    : '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12 Q12 6 21 12 M3 12 Q12 18 21 12"/><line x1="4" y1="4" x2="20" y2="20"/></svg>';
+}
+
+function setEye(btn, visible) {
+  btn.innerHTML = eyeSVG(visible);
+  btn.style.color = visible ? "var(--primary)" : "#999";
+}
+
+// ============ QR ============
+function showQR() {
+  const base = window.location.origin + window.location.pathname;
+  const url = base;
+  const img = document.getElementById("qrImage");
+  img.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(url);
+  img.onerror = function() {
+    img.src = "https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=" + encodeURIComponent(url);
+  };
+  document.getElementById("qrUrl").textContent = url;
+  document.getElementById("qrModal").classList.add("open");
+}
+
+// ============ INIT ============
+async function init() {
+  loadData();
+  await loadStockFromFirebase();
+  listenStock();
+  const loaded = await loadShopFromFirebase();
+  if (loaded) {
+    saveVehicles();
+    saveCategories();
+    saveConfig();
+  }
+  await loadStockFromFirebase();
+  listenOrders();
+
+  isAdmin = localStorage.getItem("mv_admin") === "true";
+  applyTheme(CONFIG.colors || THEMES["???韏閬?"]);
+  updateHeader();
+  updateTabVisibility();
+
+  if (currentVehicleId && !VEHICLES.find(v => v.id === currentVehicleId)) {
+    currentVehicleId = null;
+  }
+  switchTab("home");
+
+  // Tab bar
+  document.querySelectorAll("#tabBar button").forEach(btn => {
+    btn.addEventListener("click", () => switchTab(btn.dataset.view));
+  });
+
+  // Header click ??login
+  document.getElementById("shopTitle").addEventListener("click", () => showLogin());
+
+  // Login
+  document.getElementById("loginBtn").addEventListener("click", attemptLogin);
+  document.getElementById("loginPwd").addEventListener("keydown", e => { if (e.key === "Enter") attemptLogin(); });
+  function resetLoginState() {
+    localStorage.removeItem("mv_loginFails");
+    if (loginCooldownTimer) { clearTimeout(loginCooldownTimer); loginCooldownTimer = null; }
+    document.getElementById("loginBtn").disabled = false;
+    document.getElementById("loginError").style.display = "none";
+    document.getElementById("loginModal").classList.remove("open");
+  }
+  document.getElementById("loginCancelBtn").addEventListener("click", resetLoginState);
+  document.getElementById("loginModal").addEventListener("click", e => { if (e.target === e.currentTarget) resetLoginState(); });
+
+  document.getElementById("pwdEye").addEventListener("click", () => {
+    const input = document.getElementById("loginPwd");
+    const visible = input.type === "password";
+    input.type = visible ? "text" : "password";
+    setEye(document.getElementById("pwdEye"), visible);
+  });
+  setEye(document.getElementById("pwdEye"), false);
+
+  document.getElementById("qrBtn").addEventListener("click", showQR);
+  document.getElementById("qrCloseBtn").addEventListener("click", () => document.getElementById("qrModal").classList.remove("open"));
+
+  // Vehicle selection click
+  document.getElementById("vehiclesContent").addEventListener("click", e => {
+    const card = e.target.closest(".vehicleCard");
+    if (!card) return;
+    switchVehicle(card.dataset.vid);
+  });
+
+  // Menu: category tabs
+  document.getElementById("categoryTabs").addEventListener("click", e => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    currentCategory = parseInt(btn.dataset.idx);
+    renderMenu();
+  });
+
+  // Menu: add-to-cart
+  document.getElementById("itemGrid").addEventListener("click", e => {
+    const addBtn = e.target.closest(".addCartBtn");
+    if (!addBtn) return;
+    const origIdx = parseInt(addBtn.dataset.origIdx);
+    const priceIdx = addBtn.dataset.price !== undefined ? parseInt(addBtn.dataset.price) : 0;
+    const cats = CATEGORIES[currentVehicleId] || [];
+    const cat = cats[currentCategory];
+    if (!cat || !cat.items[origIdx]) return;
+    if (addBtn.dataset.multi === "1") {
+      openItemModal(currentCategory, origIdx, priceIdx);
+    } else {
+      addToCart(currentCategory, origIdx, priceIdx, 1);
+    }
+  });
+
+  // Item Modal
+  document.getElementById("priceOptions").addEventListener("click", e => {
+    const opt = e.target.closest(".priceOption");
+    if (!opt || !itemModalState) return;
+    document.querySelectorAll(".priceOption").forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    itemModalState.selectedPrice = parseInt(opt.dataset.idx);
+  });
+  document.getElementById("itemQtyMinus").addEventListener("click", () => {
+    if (!itemModalState) return;
+    itemModalState.qty = Math.max(1, itemModalState.qty - 1);
+    document.getElementById("itemQtyDisplay").textContent = itemModalState.qty;
+  });
+  document.getElementById("itemQtyPlus").addEventListener("click", () => {
+    if (!itemModalState) return;
+    itemModalState.qty = Math.min(99, itemModalState.qty + 1);
+    document.getElementById("itemQtyDisplay").textContent = itemModalState.qty;
+  });
+  document.getElementById("btnAddToCart").addEventListener("click", () => {
+    if (!itemModalState) return;
+    addToCart(itemModalState.categoryIdx, itemModalState.itemIdx, itemModalState.selectedPrice, itemModalState.qty);
+    document.getElementById("itemModal").classList.remove("open");
+    itemModalState = null;
+  });
+
+  // Close modals on overlay click
+  document.querySelectorAll(".modalOverlay").forEach(m => {
+    m.addEventListener("click", e => {
+      if (e.target === m) {
+        m.classList.remove("open");
+        confirmCallback = null;
+        confirmAltCallback = null;
+        confirmNoCallback = null;
+      }
+    });
+  });
+
+  // Confirm modal
+  document.getElementById("confirmYes").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmCallback) { const cb = confirmCallback; confirmCallback = null; cb(); }
+  });
+  document.getElementById("confirmAlt").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmAltCallback) { const cb = confirmAltCallback; confirmAltCallback = null; cb(); }
+  });
+  document.getElementById("confirmNo").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmNoCallback) { const cb = confirmNoCallback; confirmNoCallback = null; cb(); }
+    confirmCallback = null;
+    confirmAltCallback = null;
+  });
+
+  // Import file
+  document.getElementById("importInput").addEventListener("change", e => {
+    importData(e.target.files[0]);
+  });
+
+  // Admin: vehicle select change
+  document.addEventListener("change", e => {
+    if (e.target.id === "adminVehicleSelect") {
+      currentCategory = 0;
+      renderAdminItemTabs();
+      renderAdminItems();
+    }
+  });
+
+  // Admin: item tab clicks (delegated)
+  document.addEventListener("click", e => {
+    const tab = e.target.closest("#adminItemTabs button");
+    if (tab) {
+      currentCategory = parseInt(tab.dataset.idx);
+      renderAdminItemTabs();
+      renderAdminItems();
+    }
+  });
+
+  // Theme cards
+  document.addEventListener("click", e => {
+    const card = e.target.closest(".themeCard");
+    if (card && card.dataset.theme) selectTheme(card.dataset.theme);
+  });
+
+  // Image preview close
+  document.getElementById("imgPreviewClose").addEventListener("click", () => {
+    document.getElementById("imgPreviewModal").classList.remove("open");
+  });
+
+  // Admin: toggleAddress, togglePhone
+  document.addEventListener("click", e => {
+    if (e.target.id === "toggleAddress") {
+      const addr = document.getElementById("editAddress");
+      if (addr) CONFIG.address = addr.value.trim();
+      CONFIG.showAddress = !CONFIG.showAddress;
+      saveConfig();
+      updateHeader();
+      renderAdmin();
+    }
+    if (e.target.id === "togglePhone") {
+      const phone = document.getElementById("editPhone");
+      if (phone) CONFIG.phone = phone.value.trim();
+      CONFIG.showPhone = !CONFIG.showPhone;
+      saveConfig();
+      updateHeader();
+      renderAdmin();
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>

@@ -1,0 +1,1788 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>芭拉咘咘麵包車形象版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+TC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F7F3ED;
+  --parchment: #EDE5D8;
+  --warm-mid: #C9B99A;
+  --espresso: #2C1F14;
+  --ink: #3D2F22;
+  --dust: #8C7B68;
+  --white: #FDFAF6;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Noto Serif TC', Georgia, serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:14px;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.8;
+  min-height:100dvh;
+  padding-top:72px;
+}
+.nav{
+  position:fixed;top:0;left:0;right:0;height:72px;z-index:100;
+  background:rgba(247,243,237,0.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,185,154,0.25);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:100%;padding:0 80px;
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--espresso);
+  cursor:pointer;
+  user-select:none;
+  white-space:nowrap;
+}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a,.nav-links button{
+  font-family:var(--font-ui);
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--dust);
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:0;
+  text-decoration:none;
+  transition:color 0.3s;
+  position:relative;
+}
+.nav-links a:hover,.nav-links button:hover{color:var(--espresso)}
+.nav-links a.active,.nav-links button.active{color:var(--espresso)}
+.nav-links a.hidden,.nav-links button.hidden{display:none}
+.cart-badge{
+  position:absolute;top:-8px;right:-14px;
+  font-family:var(--font-ui);
+  font-size:9px;
+  background:var(--espresso);
+  color:var(--white);
+  min-width:16px;height:16px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;
+  line-height:1;
+}
+.tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;z-index:100;background:rgba(247,243,237,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(201,185,154,0.25)}
+.tab-bar-inner{display:flex;height:100%}
+.tab-bar a{flex:1;display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--dust);text-decoration:none;cursor:pointer;position:relative;padding:6px 4px;text-align:center;line-height:1.2}
+.tab-bar a.active{color:var(--espresso)}
+.tab-bar a.hidden{display:none}
+.tab-bar .cart-badge{top:4px;right:50%;margin-right:-20px}
+.main{padding:0 80px;max-width:1400px;margin:0 auto;width:100%}
+.view{display:none}
+.view.active{display:block}
+.view#view-home{padding:0;max-width:none}
+.view#view-about{padding:0;max-width:none}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;color:var(--espresso)}
+h1{font-size:52px;font-weight:300;line-height:1.1}
+h2{font-size:32px;line-height:1.2}
+h3{font-size:24px;line-height:1.3}
+.section-title{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--espresso);margin-bottom:40px}
+.section-divider{display:flex;align-items:center;gap:24px;margin:80px 0}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--parchment)}
+.section-divider span{font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:var(--warm-mid);white-space:nowrap}
+.hero-slider{position:relative;height:480px;margin:0 -80px 80px;overflow:hidden;background:var(--parchment)}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 0.8s ease;display:flex;align-items:flex-end}
+.hero-slide.active{opacity:1}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(44,31,20,0.55) 0%, transparent 60%);pointer-events:none}
+.hero-slide-content{position:relative;z-index:1;padding:60px 80px;max-width:700px}
+.hero-slide-title{font-family:var(--font-display);font-size:40px;font-weight:300;color:var(--white);line-height:1.2}
+.hero-dots{position:absolute;bottom:30px;right:80px;z-index:2;display:flex;gap:8px}
+.hero-dots span{width:24px;height:1px;background:rgba(253,250,246,0.4);cursor:pointer;transition:background 0.3s}
+.hero-dots span.active{background:var(--white)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px}
+.featured-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px}
+.vehicle-card{background:var(--white);padding:48px 32px;cursor:pointer;text-align:center;border:1px solid var(--parchment);transition:border-color 0.3s}
+.vehicle-card:hover{border-color:var(--warm-mid)}
+.vehicle-card.active{border-color:var(--espresso)}
+.vehicle-card .v-icon{margin-bottom:12px}
+.vehicle-card .v-icon svg{display:block;margin:0 auto;color:var(--espresso)}
+.vehicle-card .v-name{font-family:var(--font-display);font-size:24px;font-weight:400;color:var(--espresso)}
+.vehicle-card .v-count{font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-mid);margin-top:8px}
+.product-card{background:var(--white);padding:0 0 28px;display:flex;flex-direction:column}
+.product-card .pc-img{width:100%;aspect-ratio:1;background:var(--parchment);background-size:cover;background-position:center;overflow:hidden}
+.product-card .pc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease}
+.product-card:hover .pc-img img{transform:scale(1.04)}
+.product-card .pc-label{font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-mid);margin:20px 24px 4px}
+.product-card .pc-name{font-family:var(--font-display);font-size:24px;font-weight:400;color:var(--espresso);margin:0 24px 16px}
+.product-card .pc-prices{margin:0 24px;border-top:1px solid var(--parchment);padding-top:12px}
+.price-line{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
+.price-line .pl-label{font-family:var(--font-ui);font-size:11px;font-weight:400;color:var(--ink);letter-spacing:0.05em}
+.price-line .pl-price{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--espresso)}
+.price-line .add-btn{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--espresso);background:transparent;border:1px solid var(--espresso);padding:8px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all 0.3s}
+.price-line .add-btn:hover{background:var(--espresso);color:var(--cream)}
+.cat-tabs{display:flex;gap:24px;overflow-x:auto;padding:0 0 32px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tabs a{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);cursor:pointer;text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:all 0.3s;white-space:nowrap}
+.cat-tabs a:hover{color:var(--espresso)}
+.cat-tabs a.active{color:var(--espresso);border-bottom-color:var(--espresso)}
+.btn{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--espresso);background:transparent;border:1px solid var(--espresso);padding:14px 40px;cursor:pointer;transition:all 0.3s}
+.btn:hover{background:var(--espresso);color:var(--cream)}
+.btn-full{width:100%;text-align:center}
+.btn-sm{padding:10px 24px;font-size:9px}
+.cart-item{padding:24px 0;border-bottom:1px solid var(--parchment);display:flex;justify-content:space-between;align-items:center}
+.cart-item-info .ci-name{font-family:var(--font-display);font-size:20px;font-weight:400;color:var(--espresso)}
+.cart-item-info .ci-meta{font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--dust);margin-top:4px}
+.cart-item-actions{display:flex;align-items:center;gap:12px}
+.qty-btn{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--espresso);background:transparent;border:1px solid var(--espresso);padding:6px 12px;cursor:pointer;transition:all 0.3s;min-width:32px;text-align:center}
+.qty-btn:hover{background:var(--espresso);color:var(--cream)}
+.qty-num{font-family:var(--font-ui);font-size:13px;font-weight:400;color:var(--espresso);min-width:20px;text-align:center}
+.del-btn{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);background:transparent;border:1px solid var(--warm-mid);padding:6px 12px;cursor:pointer;transition:all 0.3s}
+.del-btn:hover{background:var(--espresso);border-color:var(--espresso);color:var(--cream)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding:24px 0;margin-top:8px;font-family:var(--font-display);font-size:28px;color:var(--espresso)}
+.cart-total .total-label{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust)}
+.order-card{padding:24px 0;border-bottom:1px solid var(--parchment)}
+.order-header{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.1em;color:var(--dust);margin-bottom:12px}
+.order-items{font-size:13px;line-height:2;color:var(--ink)}
+.order-item-line{display:flex;justify-content:space-between;padding:2px 0}
+.order-total{margin-top:12px;padding-top:12px;border-top:1px solid var(--parchment);display:flex;justify-content:space-between;font-family:var(--font-display);font-size:20px;color:var(--espresso)}
+.order-status{font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-mid)}
+.about-section{margin-bottom:48px}
+.about-section:last-child{margin-bottom:0}
+.about-section p{font-size:14px;line-height:2;color:var(--ink);max-width:640px}
+.about-info{font-size:14px;line-height:2;color:var(--ink)}
+.about-info .label{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);display:inline-block;min-width:80px}
+.about-blurb{font-size:14px;line-height:2;color:var(--ink);max-width:640px}
+.map-embed{width:100%;height:400px;border:none;margin-top:24px;filter:grayscale(0.5)}
+.empty-state{text-align:center;padding:80px 20px;font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);line-height:2}
+.featured-card{background:var(--white);padding:28px 20px;text-align:center;display:flex;flex-direction:column}
+.featured-card .pc-img{width:100%;aspect-ratio:1;background:var(--parchment);background-size:cover;background-position:center;overflow:hidden;margin-bottom:16px}
+.featured-card .pc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease}
+.featured-card:hover .pc-img img{transform:scale(1.04)}
+.featured-card .f-name{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--espresso)}
+.featured-card .f-price{font-family:var(--font-ui);font-size:10px;color:var(--warm-mid);margin-top:6px;letter-spacing:0.18em;text-transform:uppercase}
+.featured-card .f-vehicle{font-family:var(--font-ui);font-size:9px;color:var(--dust);margin-top:4px;letter-spacing:0.12em}
+.admin-section{padding:40px 0;border-bottom:1px solid var(--parchment)}
+.admin-section:last-child{border-bottom:none}
+.admin-section h3{font-family:var(--font-display);font-size:24px;font-weight:400;color:var(--espresso);margin-bottom:28px}
+.admin-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--parchment)}
+.admin-row-name{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--espresso);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.admin-row-unit{font-family:var(--font-ui);font-size:10px;color:var(--dust)}
+.admin-row-actions{display:flex;gap:8px;flex-shrink:0}
+.admin-row-actions button{font-family:var(--font-ui);font-size:9px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);background:transparent;border:1px solid var(--warm-mid);padding:6px 14px;cursor:pointer;transition:all 0.3s}
+.admin-row-actions button:hover{color:var(--espresso);border-color:var(--espresso)}
+.admin-row.dragging{opacity:0.3}
+.admin-row.dragOver{border-top:2px solid var(--espresso)!important}
+.drag-handle{cursor:grab;padding:4px;color:var(--warm-mid);flex-shrink:0;user-select:none;touch-action:none}
+.drag-handle:active{cursor:grabbing}
+.admin-inline-input{font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--ink);background:var(--white);border:1px solid var(--parchment);padding:10px 14px;outline:none;transition:border-color 0.3s}
+.admin-inline-input:focus{border-color:var(--warm-mid)}
+.admin-inline-btn{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--espresso);background:transparent;border:1px solid var(--espresso);padding:10px 20px;cursor:pointer;transition:all 0.3s}
+.admin-inline-btn:hover{background:var(--espresso);color:var(--cream)}
+.admin-price-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-family:var(--font-ui);font-size:11px;color:var(--ink)}
+.admin-price-row .apl-label{flex:1;color:var(--ink)}
+.admin-price-row .apl-amount{font-family:var(--font-display);font-size:16px;color:var(--espresso);min-width:60px;text-align:right}
+.admin-prices{padding:0 0 8px 32px}
+.stock-input{font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--ink);background:transparent;border:1px solid var(--parchment);padding:4px 8px;width:56px;text-align:center;outline:none}
+.stock-input:focus{border-color:var(--warm-mid)}
+.inline-stock-input{font-size:10px;padding:4px 6px;width:50px;text-align:center}
+.img-url-text{font-size:10px;color:var(--dust);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-btn{cursor:pointer;background:none;border:none;padding:4px;color:var(--dust);font-family:var(--font-ui);font-size:9px;letter-spacing:0.12em}
+.preview-btn:hover{color:var(--espresso)}
+.theme-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.theme-card{background:var(--white);padding:24px;cursor:pointer;text-align:center;font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--dust);border:1px solid var(--parchment);transition:all 0.3s}
+.theme-card:hover{border-color:var(--warm-mid)}
+.theme-card.active{border-color:var(--espresso);color:var(--espresso)}
+.theme-card .swatch{display:flex;gap:4px;justify-content:center;margin-bottom:10px}
+.theme-card .swatch span{width:20px;height:20px;border:1px solid var(--parchment)}
+.color-edit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px}
+.color-edit-item{display:flex;align-items:center;gap:10px;font-size:11px;font-family:var(--font-ui);color:var(--dust)}
+.color-edit-item input[type=""color""]{width:36px;height:30px;border:none;cursor:pointer;padding:0;background:none}
+.color-edit-item input[type=""color""]::-webkit-color-swatch-wrapper{padding:2px}
+.color-edit-item input[type=""color""]::-webkit-color-swatch{border:1px solid var(--parchment)}
+.setting-row{display:flex;align-items:center;gap:12px;padding:10px 0}
+.setting-row label{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--dust);min-width:70px}
+.setting-row input[type=""text""],.setting-row textarea{font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--ink);background:var(--white);border:1px solid var(--parchment);padding:10px 14px;outline:none;transition:border-color 0.3s;flex:1}
+.setting-row input:focus,.setting-row textarea:focus{border-color:var(--warm-mid)}
+.setting-row textarea{min-height:60px;resize:vertical}
+.toggle-switch{width:40px;height:20px;border:1px solid var(--warm-mid);cursor:pointer;position:relative;transition:all 0.3s;background:transparent;padding:0;flex-shrink:0}
+.toggle-switch.on{background:var(--espresso);border-color:var(--espresso)}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--cream);transition:transform 0.3s}
+.toggle-switch.on::after{transform:translateX(20px);background:var(--white)}
+.active-toggle{width:32px;height:16px;border:1px solid var(--warm-mid);cursor:pointer;position:relative;transition:all 0.3s;background:transparent;padding:0;flex-shrink:0}
+.active-toggle.on{background:var(--espresso);border-color:var(--espresso)}
+.active-toggle::after{content:'';position:absolute;top:1px;left:1px;width:12px;height:12px;background:var(--cream);transition:transform 0.3s}
+.active-toggle.on::after{transform:translateX(16px);background:var(--white)}
+.slide-row{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--parchment)}
+.slide-row input{flex:1;font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--ink);background:var(--white);border:1px solid var(--parchment);padding:8px 12px;outline:none}
+.slide-row input:focus{border-color:var(--warm-mid)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(44,31,20,0.4);z-index:200;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--cream);max-width:400px;width:100%;padding:48px;position:relative}
+.modal-box h2{font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--espresso);margin-bottom:28px}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dust);background:none;border:none;transition:color 0.3s;font-size:20px}
+.modal-close:hover{color:var(--espresso)}
+.price-options{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.price-option{padding:14px 18px;border:1px solid var(--parchment);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:border-color 0.3s}
+.price-option:hover{border-color:var(--warm-mid)}
+.price-option.selected{border-color:var(--espresso)}
+.price-option .opt-label{font-family:var(--font-ui);font-size:11px;color:var(--ink)}
+.price-option .opt-price{font-family:var(--font-display);font-size:20px;color:var(--espresso)}
+.modal-qty{display:flex;align-items:center;gap:16px;justify-content:center;margin:24px 0}
+.modal-qty button{width:36px;height:36px;font-family:var(--font-ui);font-size:14px;color:var(--espresso);background:transparent;border:1px solid var(--espresso);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.modal-qty button:hover{background:var(--espresso);color:var(--cream)}
+.modal-qty span{font-family:var(--font-display);font-size:22px;color:var(--espresso);min-width:32px;text-align:center}
+.login-form{display:flex;flex-direction:column;gap:14px}
+.pwd-wrap{position:relative;width:100%}
+.pwd-wrap input{width:100%;padding:12px 40px 12px 14px;font-family:var(--font-ui);font-size:12px;color:var(--ink);background:var(--white);border:1px solid var(--parchment);outline:none;box-sizing:border-box}
+.pwd-wrap input:focus{border-color:var(--warm-mid)}
+.pwd-wrap .eye-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;color:var(--dust)}
+.login-error{font-family:var(--font-ui);font-size:10px;color:var(--dust);display:none}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--espresso);color:var(--white);font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;padding:12px 28px;z-index:300;opacity:0;transition:opacity 0.3s ease;pointer-events:none;white-space:pre-line;text-align:center}
+.toast.show{opacity:1}
+.qr-content{text-align:center}
+.qr-content img{max-width:200px;margin:10px auto;display:block}
+.qr-url{font-family:var(--font-ui);font-size:10px;color:var(--dust);word-break:break-all;margin:10px 0}
+.import-textarea{width:100%;min-height:160px;padding:12px;font-family:var(--font-ui);font-size:11px;color:var(--ink);background:var(--white);border:1px solid var(--parchment);resize:vertical;outline:none}
+.import-textarea:focus{border-color:var(--warm-mid)}
+.import-select{width:100%;padding:10px;font-family:var(--font-ui);font-size:11px;color:var(--ink);background:var(--white);border:1px solid var(--parchment);outline:none;margin-bottom:12px}
+.admin-tabs{display:flex;gap:24px;overflow-x:auto;margin-bottom:24px;scrollbar-width:none}
+.admin-tabs::-webkit-scrollbar{display:none}
+.admin-tabs a{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);cursor:pointer;padding:4px 0;border-bottom:1px solid transparent;transition:all 0.3s;white-space:nowrap;text-decoration:none}
+.admin-tabs a:hover{color:var(--espresso)}
+.admin-tabs a.active{color:var(--espresso);border-bottom-color:var(--espresso)}
+.inline-add-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;align-items:center}
+.inline-add-row input,.inline-add-row select{font-family:var(--font-ui);font-size:11px;font-weight:300;color:var(--ink);background:var(--white);border:1px solid var(--parchment);padding:10px 14px;outline:none;transition:border-color 0.3s}
+.inline-add-row input:focus,.inline-add-row select:focus{border-color:var(--warm-mid)}
+.inline-add-row button{font-family:var(--font-ui);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--espresso);background:transparent;border:1px solid var(--espresso);padding:10px 20px;cursor:pointer;transition:all 0.3s}
+.inline-add-row button:hover{background:var(--espresso);color:var(--cream)}
+
+.hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:72px}
+.hero-split-image{background:var(--parchment);position:relative;overflow:hidden}
+.hero-split-image img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-split-image .img-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--warm-mid)}
+.hero-split-image .img-placeholder .slot-num{font-family:var(--font-display);font-size:28px;font-weight:300;color:rgba(201,185,154,0.5)}
+.hero-split-image .img-placeholder .slot-label{font-family:var(--font-ui);font-size:9px;letter-spacing:0.25em;text-transform:uppercase}
+.hero-split-content{display:flex;flex-direction:column;justify-content:center;padding:80px 72px;background:var(--cream)}
+.hero-split-eyebrow{font-family:var(--font-ui);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--warm-mid);margin-bottom:32px}
+.hero-split-title{font-family:var(--font-display);font-size:clamp(52px,5.5vw,82px);font-weight:300;line-height:1.08;color:var(--espresso);margin-bottom:28px}
+.hero-split-title em{font-style:italic;font-weight:300}
+.hero-split-body{font-family:var(--font-body);font-size:14px;line-height:1.9;color:var(--dust);max-width:360px;margin-bottom:56px}
+.hero-split .btn-primary{display:inline-block;padding:14px 40px;border:1px solid var(--espresso);font-family:var(--font-ui);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--espresso);text-decoration:none;background:transparent;transition:background 0.3s,color 0.3s;cursor:pointer;align-self:flex-start}
+.hero-split .btn-primary:hover{background:var(--espresso);color:var(--cream)}
+
+.band{height:480px;background:var(--parchment);position:relative;display:flex;align-items:flex-end;padding:48px 80px}
+.band-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,31,20,0.55) 0%,transparent 60%)}
+.band-text{position:relative;z-index:1}
+.band-quote{font-family:var(--font-display);font-size:clamp(28px,3.5vw,48px);font-weight:300;font-style:italic;color:var(--white);line-height:1.25;max-width:640px}
+.band-source{font-family:var(--font-ui);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(253,250,246,0.55);margin-top:16px}
+.band-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.band-placeholder span{background:rgba(201,185,154,0.4);padding:8px 20px;font-family:var(--font-ui);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--espresso)}
+
+.about-split{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.about-split-image{background:var(--parchment);position:relative;min-height:480px;overflow:hidden}
+.about-split-image img{width:100%;height:100%;object-fit:cover;display:block}
+.about-split-image .img-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--warm-mid)}
+.about-split-image .img-placeholder .slot-num{font-family:var(--font-display);font-size:28px;font-weight:300;color:rgba(201,185,154,0.5)}
+.about-split-image .img-placeholder .slot-label{font-family:var(--font-ui);font-size:9px;letter-spacing:0.25em;text-transform:uppercase}
+.about-split-content{display:flex;flex-direction:column;justify-content:center;padding:72px 80px}
+.about-split-eyebrow{font-family:var(--font-ui);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--warm-mid);margin-bottom:24px}
+.about-split-title{font-family:var(--font-display);font-size:40px;font-weight:300;line-height:1.15;color:var(--espresso);margin-bottom:24px}
+.about-split-rule{width:40px;height:1px;background:var(--warm-mid);margin:32px 0}
+.about-split-body{font-family:var(--font-body);font-size:14px;line-height:2;color:var(--dust);max-width:400px}
+
+.footer{background:var(--espresso);color:rgba(253,250,246,0.5);padding:64px 80px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px}
+.footer-brand{font-family:var(--font-display);font-size:28px;font-weight:300;letter-spacing:0.1em;color:var(--white);text-transform:uppercase;margin-bottom:16px}
+.footer-tagline{font-size:12px;font-style:italic;color:rgba(253,250,246,0.4);font-family:var(--font-display)}
+.footer-col h4{font-family:var(--font-ui);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-bottom:20px}
+.footer-col p,.footer-col address{font-size:13px;font-style:normal;line-height:1.9}
+.footer-bottom{background:var(--espresso);border-top:1px solid rgba(201,185,154,0.12);padding:24px 80px;font-family:var(--font-ui);font-size:11px;color:rgba(253,250,246,0.22);letter-spacing:0.06em}
+@media(max-width:900px){
+  .nav-inner{padding:0 24px}
+  .main{padding:0 24px}
+  .hero-slider{margin:0 -24px 60px}
+  .hero-slide-content{padding:40px 24px}
+  .hero-dots{right:24px}
+  h1{font-size:36px}
+  h2{font-size:28px}
+  h3{font-size:22px}
+  .section-title{font-size:28px;margin-bottom:32px}
+  .hero-slide-title{font-size:28px}
+  .grid-4,.featured-grid{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .theme-grid{grid-template-columns:1fr 1fr}
+  .color-edit-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .tab-bar{display:block}
+  body{padding-bottom:56px}
+  .hero-split{grid-template-columns:1fr}
+  .hero-split-image{min-height:400px}
+  .hero-split-content{padding:48px 24px}
+  .about-split{grid-template-columns:1fr}
+  .about-split-image{min-height:320px}
+  .about-split-content{padding:48px 24px}
+  .band{height:360px;padding:32px 24px}
+  .footer{grid-template-columns:1fr;gap:32px;padding:48px 24px}
+  .footer-bottom{padding:24px 24px}
+}
+@media(max-width:600px){
+  .main{padding:0 16px}
+  .hero-slider{margin:0 -16px 40px;height:360px}
+  .hero-slide-content{padding:32px 16px}
+  .hero-dots{right:16px;bottom:20px}
+  h1{font-size:28px}
+  h2{font-size:24px}
+  h3{font-size:20px}
+  .section-title{font-size:24px;margin-bottom:24px}
+  .hero-slide-title{font-size:22px}
+  .grid-4,.grid-3,.grid-2,.featured-grid{grid-template-columns:1fr}
+  .theme-grid,.color-edit-grid{grid-template-columns:1fr}
+  .section-divider{margin:48px 0}
+  .vehicle-card{padding:32px 20px}
+  .product-card .pc-label,.product-card .pc-name,.product-card .pc-prices{margin-left:16px;margin-right:16px}
+  .modal-box{padding:32px 24px}
+  .btn{padding:12px 28px}
+  .hero-split-image{min-height:300px}
+  .hero-split-content{padding:32px 16px}
+  .hero-split-title{font-size:36px}
+  .about-split-image{min-height:240px}
+  .about-split-content{padding:32px 16px}
+  .about-split-title{font-size:28px}
+  .band{height:280px;padding:24px 16px}
+  .band-quote{font-size:24px}
+  .footer{padding:32px 16px}
+  .footer-bottom{padding:16px}
+}
+</style>
+</head><body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" id="shopLogo">芭拉咘咘麵包車</div>
+    <div class="nav-links">
+      <a href="#" data-view="home" class="active">首頁</a>
+      <a href="#" data-view="vehicles">車輛</a>
+      <a href="#" data-view="cart">購物車<span class="cart-badge" id="navCartBadge" style="display:none">0</span></a>
+      <a href="#" data-view="orders">訂單</a>
+      <a href="#" data-view="about">關於</a>
+      <a href="#" data-view="admin" class="hidden">管理</a>
+    </div>
+  </div>
+</nav>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <a href="#" data-view="home" class="active">首頁</a>
+    <a href="#" data-view="vehicles">車輛</a>
+    <a href="#" data-view="cart">購物車<span class="cart-badge" id="mobileCartBadge" style="display:none">0</span></a>
+    <a href="#" data-view="orders">訂單</a>
+    <a href="#" data-view="about">關於</a>
+    <a href="#" data-view="admin" class="hidden">管理</a>
+  </div>
+</div>
+
+<main class="main">
+  <div class="view active" id="view-home"></div>
+  <div class="view" id="view-vehicles"></div>
+  <div class="view" id="view-menu"></div>
+  <div class="view" id="view-cart"></div>
+  <div class="view" id="view-orders"></div>
+  <div class="view" id="view-about"></div>
+  <div class="view" id="view-admin"></div>
+</main>
+
+<div id="loginModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" id="loginCloseBtn">&times;</button>
+    <h2>管理員登入</h2>
+    <div class="login-form">
+      <div class="pwd-wrap">
+        <input type="password" id="loginPwd" placeholder="請輸入管理員密碼" autocomplete="off">
+        <button class="eye-btn" id="pwdEye" type="button" tabindex="-1"></button>
+      </div>
+      <div class="login-error" id="loginError">密碼錯誤，請重試</div>
+      <button class="btn btn-full" id="loginBtn">登入</button>
+      <button class="btn btn-full" id="loginCancelBtn" style="color:var(--dust);border-color:var(--warm-mid)">取消</button>
+    </div>
+  </div>
+</div>
+
+<div id="itemModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" id="itemModalClose">&times;</button>
+    <h2 id="itemModalTitle">品項名稱</h2>
+    <div class="price-options" id="priceOptions"></div>
+    <div class="modal-qty">
+      <button id="itemQtyMinus">-</button>
+      <span id="itemQtyDisplay">1</span>
+      <button id="itemQtyPlus">+</button>
+    </div>
+    <button class="btn btn-full" id="btnAddToCart">加入購物車</button>
+  </div>
+</div>
+
+<div id="qrModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" id="qrCloseBtn">&times;</button>
+    <h2>掃碼點餐</h2>
+    <div class="qr-content">
+      <img id="qrImage" src="" alt="QR Code">
+      <div class="qr-url" id="qrUrl"></div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>確認</h2>
+    <p id="confirmMsg" style="font-family:var(--font-ui);font-size:11px;color:var(--ink);line-height:1.8;margin-bottom:24px">確定要執行此操作嗎？</p>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-full" id="confirmYes">確定</button>
+      <button class="btn btn-full" id="confirmAlt" style="display:none">替代</button>
+      <button class="btn btn-full" id="confirmNo" style="color:var(--dust);border-color:var(--warm-mid)">取消</button>
+    </div>
+  </div>
+</div>
+
+<div id="imgPreviewModal" class="modal-overlay">
+  <div class="modal-box" style="max-width:600px;text-align:center">
+    <button class="modal-close" id="imgPreviewClose">&times;</button>
+    <h2>圖片預覽</h2>
+    <img id="imgPreviewContent" src="" alt="preview" style="max-width:100%;max-height:60vh;display:block;margin:0 auto">
+  </div>
+</div>
+
+<input type="file" id="importInput" accept=".json" style="display:none">
+
+<div id="importModal" class="modal-overlay">
+  <div class="modal-box" style="max-width:500px">
+    <button class="modal-close" id="importModalClose">&times;</button>
+    <h2>匯入品項</h2>
+    <div style="font-family:var(--font-ui);font-size:10px;color:var(--dust);margin-bottom:6px">選擇要匯入到的分類：</div>
+    <select class="import-select" id="importCatSelect"></select>
+    <div style="font-family:var(--font-ui);font-size:10px;color:var(--dust);margin-bottom:6px">貼上品項資料（每行一筆）：</div>
+    <textarea class="import-textarea" id="importTextarea" placeholder="品項名稱-單位-價錢&#10;紅豆麵包-個-35&#10;菠蘿麵包-個-30"></textarea>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-full" onclick="execImport()">匯入</button>
+      <button class="btn btn-full" onclick="document.getElementById('importModal').classList.remove('open')" style="color:var(--dust);border-color:var(--warm-mid)">取消</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer" id="siteFooter">
+  <div>
+    <p class="footer-brand" id="footerBrand">芭拉咘咘麵包車</p>
+    <p class="footer-tagline">純粹，因為我們在乎</p>
+  </div>
+  <div class="footer-col">
+    <h4>門市資訊</h4>
+    <address id="footerAddress">
+      新北市三峽區民權街88號<br>
+      10:00 - 21:00
+    </address>
+  </div>
+  <div class="footer-col">
+    <h4>聯絡我們</h4>
+    <p id="footerContact">
+      1681681688<br>
+      @balabubu
+    </p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  © 2024 芭拉咘咘麵包車 · All rights reserved
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+
+<script>
+// ============ SVG ICONS ============
+const SVG_ICONS = {
+  truck: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><rect x="16" y="5" width="7" height="11"/><line x1="16" y1="9" x2="23" y2="9"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  van: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12"/><rect x="19" y="9" width="4" height="9"/><line x1="1" y1="6" x2="6" y2="2" x3="19" y3="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+  eye: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  eyeOff: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  x: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  grip: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="9" cy="5" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg>',
+};
+
+// ============ DATA ============
+const THEMES = {
+  "出爐暖棕": { primary:"#C4843B", bg:"#F7F3ED", card:"#FDFAF6", text:"#2C1F14", accent:"#E8A84C" },
+  "鄉村田園": { primary:"#6B8E23", bg:"#F5F0E8", card:"#FDFAF6", text:"#2F4F2F", accent:"#DAA520" },
+  "文青簡約": { primary:"#2C2C2C", bg:"#F7F3ED", card:"#FDFAF6", text:"#1A1A1A", accent:"#B87333" },
+  "莓果奶油": { primary:"#C4547A", bg:"#FDF0F3", card:"#FDFAF6", text:"#2D1A22", accent:"#E8929B" },
+  "法式粉黑": { primary:"#1A1A1A", bg:"#FDF0F4", card:"#FDFAF6", text:"#1A1A1A", accent:"#D4788A" },
+  "日系粉棕": { primary:"#8B4D5A", bg:"#FAF0EE", card:"#FDFAF6", text:"#2E1A1A", accent:"#C9848E" },
+  "復古歐風": { primary:"#8B3A3A", bg:"#F7F3ED", card:"#FDFAF6", text:"#2B1E16", accent:"#C9A96E" },
+  "經典質感": { primary:"#B8860B", bg:"#F7F3ED", card:"#FDFAF6", text:"#1A1A1A", accent:"#D4A574" }
+};
+
+const DEFAULT_VEHICLES = [
+  { id:"v1", name:"三峽老街", sortOrder:0 },
+  { id:"v2", name:"鶯歌陶瓷", sortOrder:1 }
+];
+
+const DEFAULT_CATEGORIES = {
+  v1: [
+    { name:"歐式麵包", items:[
+      { name:"酸種麵包", unit:"個", active:true, image:"", prices:[{ label:"1", price:30 },{ label:"3", price:80 }] },
+      { name:"核桃麵包", unit:"個", active:true, image:"", prices:[{ label:"1", price:28 }] },
+      { name:"法式長棍", unit:"個", active:true, image:"", prices:[{ label:"1", price:30 }] }
+    ]},
+    { name:"甜點", items:[
+      { name:"可頌", unit:"個", active:true, image:"", prices:[{ label:"1", price:45 },{ label:"盒", price:180 }] },
+      { name:"肉桂捲", unit:"個", active:true, image:"", prices:[{ label:"1", price:50 }] }
+    ]}
+  ],
+  v2: [
+    { name:"飲品", items:[
+      { name:"手沖咖啡", unit:"杯", active:true, image:"", prices:[{ label:"中杯", price:40 },{ label:"大杯", price:75 }] },
+      { name:"拿鐵咖啡", unit:"杯", active:true, image:"", prices:[{ label:"中杯", price:45 },{ label:"大杯", price:80 }] }
+    ]},
+    { name:"輕食", items:[
+      { name:"法式鹹派", unit:"個", active:true, image:"", prices:[{ label:"1", price:45 }] }
+    ]}
+  ]
+};
+
+const DEFAULT_CONFIG = {
+  password:"0000", shopName:"芭拉咘咘麵包車",
+  address:"新北市三峽區民權街88號", phone:"1681681688",
+  showAddress:false, showPhone:false,
+  themeName:"經典質感", colors:{...THEMES["經典質感"]},
+  aboutDescription:"芭拉咘咘麵包車為您帶來每日新鮮出爐的歐式手工麵包，堅持使用天然食材，傳承經典烘焙工藝，讓每一口都充滿溫度與幸福。",
+  homepageSlides:[]
+};
+
+// ============ STATE ============
+let CONFIG = {};
+let VEHICLES = [];
+let CATEGORIES = {};
+let ORDERS = [];
+let CART = [];
+let currentVehicleId = null;
+let isAdmin = false;
+let currentCategory = 0;
+let itemModalState = null;
+let confirmCallback = null;
+let confirmAltCallback = null;
+let confirmNoCallback = null;
+let editingItemIdx = -1;
+let editingPriceIdx = -1;
+let expandedPrices = new Set();
+let heroTimer = null;
+let heroIdx = 0;
+
+// ============ FIREBASE ============
+let STOCK = {};
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD3quPJCOUoUH_Um5UceWXYuUXfRpJEuyo",
+  authDomain: "opencode-sk.firebaseapp.com",
+  projectId: "opencode-sk",
+  storageBucket: "opencode-sk.firebasestorage.app"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const SHOP_ID = "芭拉咘咘麵包車";
+
+async function loadStockFromFirebase() {
+  try {
+    const doc = await db.collection("stock").doc(SHOP_ID).get();
+    STOCK = doc.exists ? (doc.data().items || {}) : {};
+  } catch(e) { STOCK = {}; }
+}
+
+let stockUnsub = null;
+let ordersUnsub = null;
+
+function listenStock() {
+  if (stockUnsub) stockUnsub();
+  stockUnsub = db.collection("stock").doc(SHOP_ID).onSnapshot(snap => {
+    STOCK = snap.exists ? (snap.data().items || {}) : {};
+    const av = document.querySelector(".view.active");
+    if (av) renderView(av.id.replace("view-",""));
+  }, err => console.error("庫存監聽錯誤", err));
+}
+
+function listenOrders() {
+  if (ordersUnsub) ordersUnsub();
+  ordersUnsub = db.collection("shops").doc(SHOP_ID).onSnapshot(snap => {
+    if (snap.exists) {
+      const data = snap.data();
+      if (data.orders) {
+        ORDERS = data.orders;
+        localStorage.setItem("mv_orders", JSON.stringify(ORDERS));
+        const av = document.querySelector(".view.active");
+        if (av) renderView(av.id.replace("view-",""));
+      }
+    }
+  }, err => console.error("訂單監聽錯誤", err));
+}
+
+async function saveStockToFirebase() {
+  try {
+    await db.collection("stock").doc(SHOP_ID).set({
+      items: STOCK,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return true;
+  } catch(e) { return false; }
+}
+
+async function loadShopFromFirebase() {
+  try {
+    const doc = await db.collection("shops").doc(SHOP_ID).get();
+    if (doc.exists) {
+      const data = doc.data();
+      if (data.config) CONFIG = data.config;
+      if (data.vehicles) VEHICLES = data.vehicles;
+      if (data.categories) CATEGORIES = data.categories;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+async function saveShopToFirebase() {
+  try {
+    await db.collection("shops").doc(SHOP_ID).set({
+      config: CONFIG,
+      vehicles: VEHICLES,
+      categories: CATEGORIES,
+      orders: ORDERS,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+  } catch(e) {}
+}
+// ============ PERSISTENCE ============
+function loadData() {
+  try { CONFIG = JSON.parse(localStorage.getItem("mv_config")) || JSON.parse(JSON.stringify(DEFAULT_CONFIG)); } catch(e) { CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
+  if (CONFIG.showContact !== undefined && CONFIG.showAddress === undefined) {
+    CONFIG.showAddress = CONFIG.showContact;
+    CONFIG.showPhone = CONFIG.showPhone === undefined ? CONFIG.showContact : CONFIG.showPhone;
+    delete CONFIG.showContact;
+  }
+  try { VEHICLES = JSON.parse(localStorage.getItem("mv_vehicles")) || JSON.parse(JSON.stringify(DEFAULT_VEHICLES)); } catch(e) { VEHICLES = JSON.parse(JSON.stringify(DEFAULT_VEHICLES)); }
+  try { CATEGORIES = JSON.parse(localStorage.getItem("mv_categories")) || JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)); } catch(e) { CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)); }
+  try { ORDERS = JSON.parse(localStorage.getItem("mv_orders")) || []; } catch(e) { ORDERS = []; }
+  try { CART = JSON.parse(localStorage.getItem("mv_cart")) || []; } catch(e) { CART = []; }
+  currentVehicleId = localStorage.getItem("mv_currentVehicle") || null;
+  isAdmin = localStorage.getItem("mv_admin") === "true";
+}
+function saveConfig() { localStorage.setItem("mv_config", JSON.stringify(CONFIG)); saveShopToFirebase(); }
+function saveVehicles() { localStorage.setItem("mv_vehicles", JSON.stringify(VEHICLES)); saveShopToFirebase(); }
+function saveCategories() { localStorage.setItem("mv_categories", JSON.stringify(CATEGORIES)); saveShopToFirebase(); }
+function saveOrders() { localStorage.setItem("mv_orders", JSON.stringify(ORDERS)); saveShopToFirebase(); }
+function saveCart() { localStorage.setItem("mv_cart", JSON.stringify(CART)); }
+function saveCurrentVehicle() { localStorage.setItem("mv_currentVehicle", currentVehicleId || ""); }
+function saveAdmin() { localStorage.setItem("mv_admin", isAdmin ? "true" : ""); }
+function getAllData() { return { config: CONFIG, vehicles: VEHICLES, categories: CATEGORIES, orders: ORDERS, exportedAt: new Date().toISOString() }; }
+
+// ============ THEME ============
+function applyTheme(colors) {
+  const r = document.documentElement.style;
+  if (colors.bg) r.setProperty("--cream", colors.bg);
+  if (colors.card) r.setProperty("--white", colors.card);
+  if (colors.primary) r.setProperty("--espresso", colors.primary);
+  if (colors.text) r.setProperty("--ink", colors.text);
+  if (colors.accent) r.setProperty("--warm-mid", colors.accent);
+}
+
+function updateLogo() {
+  const name = CONFIG.shopName || "芭拉咘咘麵包車";
+  document.getElementById("shopLogo").textContent = name;
+  document.title = name;
+  
+  // Update footer
+  const footerBrand = document.getElementById("footerBrand");
+  if (footerBrand) footerBrand.textContent = name;
+  
+  const footerAddress = document.getElementById("footerAddress");
+  if (footerAddress) {
+    const address = CONFIG.address || "新北市三峽區民權街88號";
+    footerAddress.innerHTML = address + '<br>10:00 - 21:00';
+  }
+  
+  const footerContact = document.getElementById("footerContact");
+  if (footerContact) {
+    const phone = CONFIG.phone || "1681681688";
+    footerContact.innerHTML = phone + '<br>@' + name.replace(/\s+/g, '');
+  }
+}
+
+// ============ TOAST ============
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+// ============ CART BADGE ============
+function updateCartBadge() {
+  const total = CART.reduce((s, c) => s + c.qty, 0);
+  [document.getElementById("navCartBadge"), document.getElementById("mobileCartBadge")].forEach(badge => {
+    if (!badge) return;
+    if (total > 0) { badge.style.display = "flex"; badge.textContent = total > 99 ? "99+" : total; }
+    else { badge.style.display = "none"; }
+  });
+}
+
+// ============ VIEWS ============
+function switchTab(viewName) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById("view-" + viewName).classList.add("active");
+  document.querySelectorAll(".nav-links a, .tab-bar a").forEach(b => {
+    b.classList.toggle("active", b.dataset.view === viewName);
+  });
+  if (viewName === "home") { if (heroTimer === null) startHero(); }
+  else stopHero();
+  renderView(viewName);
+}
+
+function renderView(viewName) {
+  switch(viewName) {
+    case "home": renderHome(); break;
+    case "vehicles": renderVehicles(); break;
+    case "menu": renderMenu(); break;
+    case "cart": renderCart(); break;
+    case "orders": renderOrders(); break;
+    case "about": renderAbout(); break;
+    case "admin": renderAdmin(); break;
+  }
+  updateCartBadge();
+}
+
+function updateNavVisibility() {
+  document.querySelectorAll(".nav-links a[data-view], .tab-bar a[data-view]").forEach(b => {
+    const v = b.dataset.view;
+    if (v === "home" || v === "vehicles" || v === "cart" || v === "orders" || v === "about") { b.classList.remove("hidden"); return; }
+    b.classList.toggle("hidden", !isAdmin);
+  });
+  if (!isAdmin) {
+    const active = document.querySelector(".nav-links a.active, .tab-bar a.active");
+    if (active && active.dataset.view === "admin") switchTab("home");
+  }
+  updateCartBadge();
+}
+
+// ============ HOME ============
+function startHero() {
+  stopHero();
+  heroTimer = setInterval(() => {
+    const slides = document.querySelectorAll(".hero-slide");
+    if (!slides.length) return;
+    slides.forEach(s => s.classList.remove("active"));
+    heroIdx = (heroIdx + 1) % slides.length;
+    slides[heroIdx].classList.add("active");
+    document.querySelectorAll(".hero-dots span").forEach((d, i) => d.classList.toggle("active", i === heroIdx));
+  }, 4000);
+}
+
+function stopHero() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+
+function renderHome() {
+  const container = document.getElementById("view-home");
+  const slides = CONFIG.homepageSlides && CONFIG.homepageSlides.length ? CONFIG.homepageSlides : [{ imageUrl: "" }];
+  const heroImage = slides[0]?.imageUrl || "";
+  
+  let heroHtml = '<div class="hero-split">';
+  heroHtml += '<div class="hero-split-image">';
+  if (heroImage) {
+    heroHtml += '<img src="' + heroImage + '" alt="Hero">';
+  } else {
+    heroHtml += '<div class="img-placeholder"><span class="slot-num">① 主視覺</span><span class="slot-label">Hero Image</span></div>';
+  }
+  heroHtml += '</div>';
+  heroHtml += '<div class="hero-split-content">';
+  heroHtml += '<p class="hero-split-eyebrow">' + (CONFIG.shopName || "芭拉咘咘麵包車") + '</p>';
+  heroHtml += '<h1 class="hero-split-title">以麵粉、<br>時間與<em>誠意</em><br>烘焙每一日</h1>';
+  heroHtml += '<p class="hero-split-body">' + (CONFIG.aboutDescription || "我們相信好的麵包不需要多餘的添加物。只需要優質的原料、足夠的發酵時間，以及對每個細節的堅持。") + '</p>';
+  heroHtml += '<a href="#" class="btn-primary" onclick="event.preventDefault();switchTab(\'vehicles\')">探索本週麵包</a>';
+  heroHtml += '</div></div>';
+
+  let featuredItems = [];
+  VEHICLES.forEach(v => {
+    const cats = CATEGORIES[v.id] || [];
+    cats.forEach(cat => {
+      cat.items.forEach(item => {
+        if (item.active && featuredItems.length < 8) {
+          const minPrice = Math.min(...item.prices.map(p => p.price));
+          featuredItems.push({ name: item.name, price: minPrice, vehicleName: v.name, image: item.image });
+        }
+      });
+    });
+  });
+
+  let featuredHtml = "";
+  if (featuredItems.length) {
+    featuredHtml = '<div class="section-divider"><span>本週精選</span></div><div class="featured-grid">';
+    featuredItems.forEach(f => {
+      const imgHtml = f.image ? '<div class="pc-img"><img src="' + f.image + '" alt="' + f.name + '" onerror="this.parentElement.innerHTML=\'\'"></div>' : '';
+      featuredHtml += '<div class="featured-card">' + imgHtml + '<div class="f-name">' + f.name + '</div><div class="f-price">NT$ ' + f.price + '</div><div class="f-vehicle">' + f.vehicleName + '</div></div>';
+    });
+    featuredHtml += '</div>';
+  }
+
+  let bandHtml = '<div class="band"><div class="band-placeholder"><span>橫幅圖片 · 1600 × 480px</span></div><div class="band-overlay"></div><div class="band-text"><p class="band-quote">「好麵包是時間的副產品，<br>急不得，也省不了。」</p><p class="band-source">— ' + (CONFIG.shopName || "芭拉咘咘麵包車") + '</p></div></div>';
+
+  container.innerHTML = heroHtml + featuredHtml + bandHtml;
+  stopHero();
+}
+// ============ VEHICLES ============
+function renderVehicles() {
+  const container = document.getElementById("view-vehicles");
+  const icons = [SVG_ICONS.truck, SVG_ICONS.van, SVG_ICONS.truck, SVG_ICONS.van, SVG_ICONS.truck, SVG_ICONS.van];
+  let html = '<div class="section-divider"><span>選擇車輛</span></div><div class="grid-3">';
+  VEHICLES.forEach((v, i) => {
+    const cats = CATEGORIES[v.id] || [];
+    let count = 0;
+    cats.forEach(c => c.items.forEach(item => { if (item.active) count++; }));
+    const isActive = currentVehicleId === v.id;
+    html += '<div class="vehicle-card' + (isActive?' active':'') + '" data-vid="' + v.id + '"><div class="v-icon">' + icons[i % icons.length] + '</div><div class="v-name">' + v.name + '</div><div class="v-count">' + count + ' 項商品</div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ============ MENU ============
+function getStockKey(vid, itemName) { return vid + "_" + itemName; }
+
+function getPendingQty(itemName, priceLabel) {
+  let total = 0;
+  ORDERS.filter(o => o.status === "pending").forEach(o => {
+    o.items.forEach(item => {
+      if (item.name === itemName && item.priceLabel === priceLabel) total += item.stockQty || item.quantity;
+    });
+  });
+  return total;
+}
+
+function getPendingTotal(itemName) {
+  let total = 0;
+  ORDERS.filter(o => o.status === "pending").forEach(o => {
+    o.items.forEach(item => {
+      if (item.name === itemName) total += item.stockQty || item.quantity;
+    });
+  });
+  return total;
+}
+
+function renderMenu() {
+  const container = document.getElementById("view-menu");
+  if (!currentVehicleId || !VEHICLES.find(v => v.id === currentVehicleId)) {
+    container.innerHTML = '<div class="empty-state">請先選擇車輛</div>'; return;
+  }
+  const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+  const cats = CATEGORIES[currentVehicleId] || [];
+  let tabsHtml = '<div class="cat-tabs">';
+  cats.forEach((c, i) => { tabsHtml += '<a href="#" class="' + (i===currentCategory?'active':'') + '" data-idx="' + i + '">' + c.name + '</a>'; });
+  tabsHtml += '</div>';
+  const cat = cats[currentCategory];
+  if (!cat || !cat.items.length) {
+    container.innerHTML = '<h3 style="margin-bottom:32px">' + vehicle.name + '</h3>' + tabsHtml + '<div class="empty-state">此分類尚無商品</div>'; return;
+  }
+  const activeItems = cat.items.filter(item => item.active);
+  if (!activeItems.length) {
+    container.innerHTML = '<h3 style="margin-bottom:32px">' + vehicle.name + '</h3>' + tabsHtml + '<div class="empty-state">目前沒有顯示中的商品</div>'; return;
+  }
+  let gridHtml = '<div class="grid-3">';
+  activeItems.forEach((item, idx) => {
+    const origIdx = cat.items.indexOf(item);
+    const u = item.unit || "個";
+    const sk = getStockKey(currentVehicleId, item.name);
+    const itemStock = STOCK[sk]?.stock;
+    const pendingTotal = getPendingTotal(item.name);
+    const remaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingTotal : null;
+    let stockLabel = u;
+    if (remaining !== null) stockLabel = remaining > 0 ? "庫存 " + itemStock : "已售完";
+    const imgHtml = item.image ? '<div class="pc-img"><img src="' + item.image + '" alt="' + item.name + '" onerror="this.parentElement.innerHTML=\'\'"></div>' : '';
+    gridHtml += '<div class="product-card">' + imgHtml + '<div class="pc-label">' + stockLabel + '</div><div class="pc-name">' + item.name + '</div><div class="pc-prices">';
+    item.prices.forEach((p, pi) => {
+      const pendingPrice = getPendingQty(item.name, p.label);
+      const itemRemaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingPrice : null;
+      const isSoldOut = itemRemaining !== null && itemRemaining <= 0;
+      const displayLabel = isNaN(parseInt(p.label)) ? p.label : p.label + u;
+      const addBtn = isSoldOut ? '<span style="font-family:var(--font-ui);font-size:9px;color:var(--dust)">sold out</span>' : '<button class="add-btn" data-orig-idx="' + origIdx + '" data-price="' + pi + '"' + (item.prices.length>1?' data-multi="1"':'') + '>' + SVG_ICONS.plus + ' ADD</button>';
+      gridHtml += '<div class="price-line"><span class="pl-label">' + displayLabel + '</span><span class="pl-price">NT$ ' + p.price + '</span>' + addBtn + '</div>';
+    });
+    gridHtml += '</div></div>';
+  });
+  gridHtml += '</div>';
+  container.innerHTML = '<h3 style="margin-bottom:32px">' + vehicle.name + '</h3>' + tabsHtml + gridHtml;
+}
+
+// ============ ITEM MODAL ============
+function openItemModal(catIdx, itemIdx, preselectIdx) {
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const item = cats[catIdx]?.items[itemIdx];
+  if (!item || item.prices.length < 2) return;
+  const startPrice = (preselectIdx !== undefined && preselectIdx < item.prices.length) ? preselectIdx : 0;
+  itemModalState = { categoryIdx: catIdx, itemIdx, selectedPrice: startPrice, qty: 1 };
+  document.getElementById("itemModalTitle").textContent = item.name;
+  const container = document.getElementById("priceOptions");
+  container.innerHTML = "";
+  item.prices.forEach((p, i) => {
+    container.innerHTML += '<div class="price-option ' + (i===startPrice?'selected':'') + '" data-idx="' + i + '"><span class="opt-label">' + p.label + '</span><span class="opt-price">NT$ ' + p.price + '</span></div>';
+  });
+  document.getElementById("itemQtyDisplay").textContent = "1";
+  document.getElementById("itemModal").classList.add("open");
+}
+
+// ============ CART ============
+function switchVehicle(vid) {
+  if (vid === currentVehicleId) { switchTab("menu"); return; }
+  if (CART.length > 0) {
+    showConfirm("切換車輛將清空目前購物車，確定要切換嗎？", () => {
+      CART = []; saveCart();
+      currentVehicleId = vid; saveCurrentVehicle(); currentCategory = 0;
+      updateCartBadge(); switchTab("menu");
+    });
+  } else {
+    currentVehicleId = vid; saveCurrentVehicle(); currentCategory = 0;
+    switchTab("menu");
+  }
+}
+
+function addToCart(catIdx, itemIdx, priceIdx, qty) {
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const item = cats[catIdx]?.items[itemIdx];
+  if (!item) return;
+  const price = item.prices[priceIdx];
+  const sk = getStockKey(currentVehicleId, item.name);
+  const itemStock = STOCK[sk]?.stock;
+  const pendingPrice = getPendingQty(item.name, price.label);
+  const remaining = (itemStock !== undefined && itemStock !== null) ? itemStock - pendingPrice : null;
+  if (remaining !== null && remaining <= 0) { showToast(item.name + " 已售完"); return; }
+  const existing = CART.find(c => c.vehicleId === currentVehicleId && c.itemIdx === itemIdx && c.priceIdx === priceIdx);
+  if (existing) { existing.qty += qty; }
+  else {
+    const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+    CART.push({ vehicleId: currentVehicleId, vehicleName: vehicle ? vehicle.name : "", catIdx, itemIdx, priceIdx, qty, itemName: item.name, priceLabel: price.label, unitPrice: price.price });
+  }
+  saveCart(); showToast("已加入 " + item.name + " (" + price.label + ") x " + qty); updateCartBadge();
+  if (document.getElementById("view-cart").classList.contains("active")) renderCart();
+}
+
+function removeFromCart(index) { CART.splice(index, 1); saveCart(); renderCart(); updateCartBadge(); }
+
+function changeCartQty(index, delta) { CART[index].qty = Math.max(1, CART[index].qty + delta); saveCart(); renderCart(); updateCartBadge(); }
+
+function renderCart() {
+  const container = document.getElementById("view-cart");
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+  let vehicleHtml = "";
+  if (currentVehicleId) {
+    const v = VEHICLES.find(vv => vv.id === currentVehicleId);
+    vehicleHtml = '<h3 style="margin-bottom:32px">' + (v ? v.name : "") + '</h3>';
+  }
+  if (!cartItems.length) {
+    container.innerHTML = vehicleHtml + '<div class="empty-state">購物車是空的<br>請先選購商品</div>'; return;
+  }
+  let html = "";
+  cartItems.forEach((c, i) => {
+    const absIdx = CART.indexOf(c);
+    const sub = c.unitPrice * c.qty;
+    html += '<div class="cart-item"><div class="cart-item-info"><div class="ci-name">' + c.itemName + '</div><div class="ci-meta">' + c.priceLabel + ' \u00b7 NT$ ' + c.unitPrice + ' x ' + c.qty + ' = NT$ ' + sub + '</div></div><div class="cart-item-actions"><button class="qty-btn" onclick="changeCartQty(' + absIdx + ',-1)">-</button><span class="qty-num">' + c.qty + '</span><button class="qty-btn" onclick="changeCartQty(' + absIdx + ',1)">+</button><button class="del-btn" onclick="removeFromCart(' + absIdx + ')">' + SVG_ICONS.x + ' REMOVE</button></div></div>';
+  });
+  const total = cartItems.reduce((s, c) => s + c.unitPrice * c.qty, 0);
+  html += '<div class="cart-total"><span class="total-label">總計</span><span>NT$ ' + total + '</span></div>';
+  html += '<button class="btn btn-full" onclick="checkout()">送出訂單</button>';
+  container.innerHTML = vehicleHtml + html;
+}
+
+async function checkout() {
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+  if (!cartItems.length) return;
+  await loadStockFromFirebase();
+  const insufficient = [];
+  for (const c of cartItems) {
+    const sk = getStockKey(currentVehicleId, c.itemName);
+    const s = STOCK[sk]?.stock;
+    const pendingPrice = getPendingQty(c.itemName, c.priceLabel);
+    const remaining = (s !== undefined && s !== null) ? s - pendingPrice : null;
+    if (remaining !== null && remaining !== -1 && c.qty > remaining) {
+      insufficient.push({ name: c.itemName, stock: s, pending: pendingPrice, remaining, ordered: c.qty });
+    }
+  }
+  if (insufficient.length > 0) {
+    const msg = insufficient.map(i => i.name + " 庫存 " + i.stock + "，待出 " + i.pending + "，剩 " + i.remaining + "，訂了 " + i.ordered).join("\n");
+    showToast("庫存不足\n" + msg); return;
+  }
+  await placeOrder();
+}
+
+async function placeOrder() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const mo = String(now.getMonth()+1).padStart(2,"0");
+  const d = String(now.getDate()).padStart(2,"0");
+  const h = String(now.getHours()).padStart(2,"0");
+  const mi = String(now.getMinutes()).padStart(2,"0");
+  const vehicle = VEHICLES.find(v => v.id === currentVehicleId);
+  const cartItems = CART.filter(c => c.vehicleId === currentVehicleId);
+  const cats = CATEGORIES[currentVehicleId] || [];
+  const order = {
+    id: Date.now(), vehicleId: currentVehicleId, vehicleName: vehicle ? vehicle.name : "",
+    date: y + "/" + mo + "/" + d, time: h + ":" + mi,
+    week: getWeekNumber(now), month: now.getMonth()+1, year: y, status: "pending",
+    items: cartItems.map(c => ({ category: cats[c.catIdx]?.name || "", name: c.itemName, priceLabel: c.priceLabel, unitPrice: c.unitPrice, quantity: c.qty, stockQty: c.qty, subtotal: c.unitPrice * c.qty })),
+    total: cartItems.reduce((s, c) => s + c.unitPrice * c.qty, 0)
+  };
+  ORDERS.unshift(order); saveOrders();
+  CART = CART.filter(c => c.vehicleId !== currentVehicleId); saveCart();
+  renderCart(); updateCartBadge(); switchTab("orders"); showToast("訂單已送出");
+}
+
+function getWeekNumber(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(d.getFullYear(), 0, 4);
+  return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+// ============ ORDERS ============
+function renderOrders() {
+  const container = document.getElementById("view-orders");
+  const displayOrders = isAdmin ? ORDERS : ORDERS.filter(o => o.status === "pending");
+  if (!displayOrders.length) { container.innerHTML = '<div class="empty-state">目前沒有訂單</div>'; return; }
+  let html = "";
+  displayOrders.forEach((o, i) => {
+    const origIdx = ORDERS.indexOf(o);
+    const isPending = o.status === "pending";
+    let itemsHtml = "";
+    o.items.forEach(item => {
+      itemsHtml += '<div class="order-item-line"><span>' + item.name + ' (' + item.priceLabel + ') x ' + item.quantity + '</span><span>NT$ ' + item.subtotal + '</span></div>';
+    });
+    let actionsHtml = "";
+    if (isAdmin) {
+      if (isPending) actionsHtml = '<button class="btn btn-sm" onclick="completeOrder(' + origIdx + ')">結單</button> <button class="btn btn-sm" onclick="deleteOrder(' + origIdx + ')" style="color:var(--dust);border-color:var(--warm-mid)">刪除</button>';
+      else actionsHtml = '<button class="btn btn-sm" onclick="cancelOrder(' + origIdx + ')" style="color:var(--dust);border-color:var(--warm-mid)">取消訂單</button> <button class="btn btn-sm" onclick="deleteOrder(' + origIdx + ')" style="color:var(--dust);border-color:var(--warm-mid)">刪除</button>';
+    } else if (isPending) {
+      actionsHtml = '<button class="btn btn-sm" onclick="cancelOrder(' + origIdx + ')" style="color:var(--dust);border-color:var(--warm-mid)">取消訂單</button>';
+    }
+    html += '<div class="order-card"><div class="order-header"><span>' + (o.vehicleName || "") + ' \u00b7 ' + o.date + ' ' + o.time + ' <span class="order-status">' + (isPending?'待取貨':'已完成') + '</span></span><span>' + actionsHtml + '</span></div><div class="order-items">' + itemsHtml + '</div><div class="order-total"><span>總計</span><span>NT$ ' + o.total + '</span></div></div>';
+  });
+  container.innerHTML = html;
+}
+
+async function completeOrder(index) {
+  await loadStockFromFirebase();
+  const order = ORDERS[index];
+  const insufficient = [];
+  for (const item of order.items) {
+    const sk = getStockKey(order.vehicleId, item.name);
+    const s = STOCK[sk]?.stock;
+    if (s !== undefined && s !== null && s !== -1 && item.stockQty > s) {
+      insufficient.push({ name: item.name, stock: s, needed: item.stockQty });
+    }
+  }
+  if (insufficient.length > 0) {
+    const msg = insufficient.map(i => i.name + " 庫存 " + i.stock + "，需 " + i.needed).join("\n");
+    showConfirm("庫存不足，無法結單\n" + msg + "\n\n仍要強制結單並扣庫存嗎？", async () => {
+      await deductStockForOrder(order); order.status = "completed"; saveOrders(); renderOrders(); showToast("已完成結單，庫存已更新");
+    }); return;
+  }
+  await deductStockForOrder(order); order.status = "completed"; saveOrders(); renderOrders(); showToast("訂單已完成，庫存已扣除");
+}
+
+async function deductStockForOrder(order) {
+  for (const item of order.items) {
+    const sk = getStockKey(order.vehicleId, item.name);
+    if (STOCK[sk]) { STOCK[sk].stock = Math.max(-999, (STOCK[sk].stock || 0) - item.stockQty); }
+    else { STOCK[sk] = { stock: -item.stockQty }; }
+  } await saveStockToFirebase();
+}
+
+async function cancelOrder(index) {
+  const order = ORDERS[index];
+  if (order.status === "completed") {
+    showConfirm("要取消已完成的訂單嗎？庫存將歸還", async () => {
+      await loadStockFromFirebase();
+      for (const item of order.items) {
+        const sk = getStockKey(order.vehicleId, item.name);
+        if (STOCK[sk]) { STOCK[sk].stock = (STOCK[sk].stock || 0) + item.stockQty; }
+        else { STOCK[sk] = { stock: item.stockQty }; }
+      } await saveStockToFirebase();
+      ORDERS.splice(index, 1); saveOrders(); renderOrders(); showToast("訂單已取消，庫存已歸還");
+    });
+  } else {
+    showConfirm("要取消此訂單嗎？", () => { ORDERS.splice(index, 1); saveOrders(); renderOrders(); showToast("訂單已取消"); });
+  }
+}
+
+function deleteOrder(index) {
+  showConfirm("確定刪除此訂單嗎？（庫存不影響）", () => { ORDERS.splice(index, 1); saveOrders(); renderOrders(); showToast("訂單已刪除"); });
+}
+
+// ============ ABOUT ============
+function renderAbout() {
+  const container = document.getElementById("view-about");
+  const address = CONFIG.address || "";
+  const phone = CONFIG.phone || "";
+  const mapUrl = address ? "https://maps.google.com/maps?q=" + encodeURIComponent(address) + "&output=embed" : "";
+  
+  let html = '<div class="about-split">';
+  html += '<div class="about-split-image"><div class="img-placeholder"><span class="slot-num">⑥ 關於圖片</span><span class="slot-label">About Image</span></div></div>';
+  html += '<div class="about-split-content">';
+  html += '<p class="about-split-eyebrow">Our Story</p>';
+  html += '<h2 class="about-split-title">從一塊酸種開始<br>的執念</h2>';
+  html += '<div class="about-split-rule"></div>';
+  html += '<p class="about-split-body">' + (CONFIG.aboutDescription || "我們相信好的麵包不需要多餘的添加物。只需要優質的原料、足夠的發酵時間，以及對每個細節的堅持。") + '</p>';
+  html += '</div></div>';
+  
+  html += '<div class="section-divider"><span>營業資訊</span></div>';
+  html += '<div style="padding:0 80px 80px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px">';
+  html += '<div><h3 style="font-family:var(--font-display);font-size:24px;color:var(--espresso);margin-bottom:20px">門市資訊</h3>';
+  if (address) html += '<p style="font-size:13px;line-height:1.9;color:var(--dust)">' + address + '</p>';
+  html += '<p style="font-size:13px;line-height:1.9;color:var(--dust)">10:00 - 21:00</p></div>';
+  html += '<div><h3 style="font-family:var(--font-display);font-size:24px;color:var(--espresso);margin-bottom:20px">聯絡我們</h3>';
+  if (phone) html += '<p style="font-size:13px;line-height:1.9;color:var(--dust)">' + phone + '</p>';
+  html += '<p style="font-size:13px;line-height:1.9;color:var(--dust)">@' + (CONFIG.shopName || "balabubu") + '</p></div>';
+  html += '<div><h3 style="font-family:var(--font-display);font-size:24px;color:var(--espresso);margin-bottom:20px">地理位置</h3>';
+  if (mapUrl) html += '<iframe class="map-embed" src="' + mapUrl + '" allowfullscreen loading="lazy" style="width:100%;height:200px;border:none;filter:grayscale(0.5)"></iframe>';
+  else html += '<p style="font-size:13px;line-height:1.9;color:var(--dust)">敬請期待</p>';
+  html += '</div></div>';
+  
+  container.innerHTML = html;
+}
+// ============ ADMIN ============
+function renderAdmin() {
+  editingItemIdx = -1; editingPriceIdx = -1; expandedPrices = new Set();
+  const sn = CONFIG.shopName || "芭拉咘咘麵包車";
+  document.getElementById("view-admin").innerHTML =
+    '<div class="admin-section"><h3>車輛管理</h3><div id="adminVehicles"></div><div class="inline-add-row"><input type="text" id="newVehicleInput" placeholder="新增車輛名稱..." maxlength="20"><button onclick="addVehicle()">+ 新增</button></div></div>' +
+    '<div class="admin-section"><h3>品項管理</h3>' +
+    '<div style="margin-bottom:16px"><select id="adminVehicleSelect" style="font-family:var(--font-ui);font-size:11px;color:var(--ink);background:var(--white);border:1px solid var(--parchment);padding:10px 14px;outline:none;width:100%"></select></div>' +
+    '<div class="admin-tabs" id="adminItemTabs"></div><div id="adminItems"></div>' +
+    '<div class="inline-add-row" style="flex-wrap:wrap"><input type="text" id="newItemName" placeholder="品項名稱" maxlength="20" style="flex:2;min-width:60px"><input type="text" id="newItemLabel" placeholder="規格" value="1" style="flex:1;min-width:40px"><input type="number" id="newItemPrice" placeholder="價格" value="" style="width:60px"><input type="number" id="newItemStock" placeholder="庫存" value="" min="0" style="width:60px"><button onclick="addItemInline()">+ 新增</button></div>' +
+    '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm" onclick="showImportModal()">批次匯入</button></div></div>' +
+    '<div class="admin-section"><h3>主題色系</h3><div class="theme-grid" id="themeGrid"></div><div class="color-edit-grid" id="colorEditGrid"></div></div>' +
+    '<div class="admin-section"><h3>店家資訊</h3>' +
+    '<div class="setting-row"><label>店名</label><input type="text" id="editShopName" value="' + sn + '" maxlength="20"><button class="btn btn-sm" onclick="saveShopInfo()">儲存</button></div>' +
+    '<div class="setting-row"><label>地址</label><input type="text" id="editAddress" value="' + (CONFIG.address||"") + '" maxlength="50"><button class="toggle-switch ' + (CONFIG.showAddress?"on":"") + '" id="toggleAddress"></button></div>' +
+    '<div class="setting-row"><label>電話</label><input type="text" id="editPhone" value="' + (CONFIG.phone||"") + '" maxlength="20"><button class="toggle-switch ' + (CONFIG.showPhone?"on":"") + '" id="togglePhone"></button></div>' +
+    '<div class="setting-row" style="flex-wrap:wrap"><label style="width:100%">品牌故事</label><textarea id="editAboutDesc" style="width:100%">' + (CONFIG.aboutDescription||"") + '</textarea></div></div>' +
+    '<div class="admin-section"><h3>首頁輪播</h3><div id="slideList"></div><div class="inline-add-row"><input type="text" id="newSlideUrl" placeholder="圖片網址" style="flex:1"><button onclick="addSlide()">+ 新增</button></div></div>' +
+    '<div class="admin-section"><h3>系統設定</h3>' +
+    '<div class="setting-row"><label>密碼</label><div style="display:flex;gap:8px;flex:1;align-items:center"><div class="pwd-wrap" style="flex:1"><input type="password" id="newPwdInput" placeholder="4位數密碼"><button class="eye-btn" id="newPwdEye" type="button" tabindex="-1"></button></div><button class="btn btn-sm" onclick="changePassword()">變更</button></div></div>' +
+    '<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn btn-sm" onclick="exportData()" style="flex:1">匯出資料</button><button class="btn btn-sm" onclick="document.getElementById(\"importInput\").click()" style="flex:1">匯入資料</button></div>' +
+    '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn btn-sm" onclick="resetAll()" style="flex:1;color:var(--dust);border-color:var(--warm-mid)">重置所有資料</button><button class="btn btn-sm" onclick="logout()" style="flex:1;color:var(--dust);border-color:var(--warm-mid)">登出管理</button></div></div>';
+  renderAdminVehicles(); renderAdminVehicleSelect(); renderAdminItemTabs(); renderAdminItems(); renderThemeSettings(); renderSlideList(); attachAdminListeners();
+}
+
+function attachAdminListeners() {
+  const newEye = document.getElementById("newPwdEye");
+  if (newEye) {
+    newEye.innerHTML = SVG_ICONS.eye; newEye.style.color = "var(--dust)";
+    newEye.addEventListener("click", () => {
+      const input = document.getElementById("newPwdInput");
+      const visible = input.type === "password";
+      input.type = visible ? "text" : "password";
+      newEye.innerHTML = visible ? SVG_ICONS.eyeOff : SVG_ICONS.eye;
+      newEye.style.color = visible ? "var(--espresso)" : "var(--dust)";
+    });
+  }
+}
+
+// Admin: Vehicles
+function renderAdminVehicles() {
+  const container = document.getElementById("adminVehicles");
+  if (!container) return;
+  let html = "";
+  VEHICLES.forEach((v, i) => {
+    html += '<div class="admin-row" draggable="true" data-idx="' + i + '"><span class="drag-handle">' + SVG_ICONS.grip + '</span><span class="admin-row-name">' + v.name + '</span><div class="admin-row-actions"><button onclick="renameVehicle(' + i + ')">RENAME</button><button onclick="deleteVehicle(' + i + ')">DELETE</button></div></div>';
+  });
+  container.innerHTML = html; initDragSort(container, "vehicle");
+}
+
+function addVehicle() {
+  const input = document.getElementById("newVehicleInput");
+  const name = input.value.trim();
+  if (!name) { showToast("請輸入車輛名稱"); return; }
+  const id = "v" + Date.now(); VEHICLES.push({ id, name, sortOrder: VEHICLES.length }); CATEGORIES[id] = [];
+  saveVehicles(); saveCategories(); input.value = "";
+  renderAdminVehicles(); renderAdminVehicleSelect(); renderAdminItemTabs(); renderAdminItems();
+  showToast("已新增車輛：" + name);
+}
+
+function renameVehicle(idx) {
+  const v = VEHICLES[idx];
+  const name = prompt("請輸入新名稱：", v.name);
+  if (!name || !name.trim()) return;
+  VEHICLES[idx].name = name.trim(); saveVehicles(); renderAdminVehicles(); renderAdminVehicleSelect();
+  showToast("車輛已重新命名");
+}
+
+function deleteVehicle(idx) {
+  const v = VEHICLES[idx];
+  const count = (CATEGORIES[v.id] || []).reduce((s, c) => s + c.items.length, 0);
+  showConfirm("確定刪除車輛「" + v.name + "」嗎？共有 " + count + " 個品項", () => {
+    VEHICLES.splice(idx, 1); delete CATEGORIES[v.id];
+    if (currentVehicleId === v.id) currentVehicleId = null;
+    saveVehicles(); saveCategories(); renderAdminVehicles(); renderAdminVehicleSelect(); renderAdminItemTabs(); renderAdminItems();
+    showToast("車輛已刪除");
+  });
+}
+
+// Admin: Item management
+function renderAdminVehicleSelect() {
+  const sel = document.getElementById("adminVehicleSelect");
+  if (!sel) return;
+  const cur = sel.value || (VEHICLES.length ? VEHICLES[0].id : "");
+  let html = "";
+  VEHICLES.forEach(v => { html += '<option value="' + v.id + '"' + (v.id===cur?' selected':'') + '>' + v.name + '</option>'; });
+  sel.innerHTML = html;
+}
+
+function getSelectedVehicleId() { const sel = document.getElementById("adminVehicleSelect"); return sel ? sel.value : null; }
+
+function renderAdminItemTabs() {
+  const container = document.getElementById("adminItemTabs");
+  const vid = getSelectedVehicleId();
+  if (!container || !vid) return;
+  const cats = CATEGORIES[vid] || [];
+  if (!cats.length) { container.innerHTML = '<span style="font-family:var(--font-ui);font-size:10px;color:var(--dust)">尚無分類，請新增</span>'; return; }
+  let html = "";
+  cats.forEach((c, i) => { html += '<a href="#" class="' + (i===currentCategory?'active':'') + '" data-idx="' + i + '">' + c.name + '</a>'; });
+  container.innerHTML = html;
+  container.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", e => { e.preventDefault(); currentCategory = parseInt(a.dataset.idx); renderAdminItemTabs(); renderAdminItems(); });
+  });
+}
+function renderAdminItems() {
+  const container = document.getElementById("adminItems");
+  const vid = getSelectedVehicleId();
+  if (!container || !vid) return;
+  const cats = CATEGORIES[vid] || [];
+  const cat = cats[currentCategory];
+  if (!cat) {
+    container.innerHTML = '<div class="inline-add-row" style="margin-top:4px"><input type="text" id="newAdminCatInput" placeholder="新增分類名稱" maxlength="20" style="flex:1"><button onclick="addAdminCategory()">+ 新增</button></div>'; return;
+  }
+  let itemsHtml = "";
+  cat.items.forEach((item, i) => {
+    const sk = getStockKey(vid, item.name);
+    const currentStock = STOCK[sk]?.stock;
+    const stockVal = (currentStock !== undefined && currentStock !== null) ? currentStock : "";
+    const priceSummary = item.prices.map(p => "$" + p.price).join(", ");
+    const imgText = item.image ? '<span class="img-url-text" title="' + item.image + '">' + (item.image.length > 25 ? item.image.substring(0,25)+"..." : item.image) + '</span>' : "";
+    itemsHtml += '<div class="admin-row" draggable="true" data-idx="' + i + '"><span class="drag-handle">' + SVG_ICONS.grip + '</span><span class="admin-row-name">' + (item.active?"":"隱 ") + item.name + '</span><span class="admin-row-unit">[' + (item.unit||"個") + ']</span><span style="font-family:var(--font-ui);font-size:10px;color:var(--dust);flex-shrink:0">' + priceSummary + '</span><input type="number" min="0" class="stock-input inline-stock-input" value="' + stockVal + '" data-vid="' + vid + '" data-item="' + item.name + '" placeholder="庫存" onchange="inlineUpdateStock(this)"><div class="admin-row-actions"><button onclick="startEditItem(' + i + ')">EDIT</button><button onclick="toggleAdminPrices(' + i + ')">PRICE</button><button onclick="deleteItem(' + i + ')">DEL</button></div></div><div class="admin-row" style="padding-left:32px;gap:6px;font-size:10px;color:var(--dust);flex-wrap:wrap;border:none">' + imgText + (item.image?' <button class="preview-btn" onclick="previewImage(\'' + item.image.replace(/'/g, "\\'") + '\')">PREVIEW</button>':"") + '<button class="active-toggle ' + (item.active?"on":"") + '" onclick="toggleItemActive(' + i + ')" style="margin-left:auto"></button><span style="font-size:10px;color:var(--dust)">' + (item.active?"顯示中":"隱藏") + '</span></div><div class="admin-prices" id="adminPrices' + i + '" style="display:' + (expandedPrices.has(i)?"block":"none") + '">';
+    item.prices.forEach((p, pi) => {
+      itemsHtml += '<div class="admin-price-row"><span class="apl-label">' + p.label + '</span><span class="apl-amount">NT$ ' + p.price + '</span><button class="admin-inline-btn" onclick="startEditPrice(' + i + ',' + pi + ')">EDIT</button><button class="admin-inline-btn" onclick="deleteItemPrice(' + i + ',' + pi + ')" style="color:var(--dust);border-color:var(--warm-mid)">DEL</button></div>';
+    });
+    itemsHtml += '<div class="admin-price-row" style="border:none;gap:6px;margin-top:6px"><input class="admin-inline-input" id="aqty' + i + '" value="1" style="width:50px"><input class="admin-inline-input" id="apa' + i + '" placeholder="價格" type="number" value="" style="width:70px"><button class="admin-inline-btn" onclick="addItemPrice(' + i + ')">+ ADD</button></div></div>';
+  });
+  container.innerHTML = '<div class="inline-add-row" style="margin-bottom:8px"><input type="text" id="newAdminCatInput" placeholder="新增分類名稱" maxlength="20" style="flex:1"><button onclick="addAdminCategory()">+ 新增分類</button><button onclick="deleteAdminCategory()" style="font-family:var(--font-ui);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);background:transparent;border:1px solid var(--warm-mid);padding:10px 20px;cursor:pointer;transition:all 0.3s">DEL CATEGORY</button></div>' + itemsHtml + '<div class="admin-prices" style="margin-top:4px"><div class="admin-price-row"><input class="admin-inline-input" id="newItemImageUrl" placeholder="圖片網址（選擇性）" style="flex:2"></div></div>';
+  initDragSort(container, "item");
+}
+
+function addAdminCategory() {
+  const vid = getSelectedVehicleId(); if (!vid) { showToast("請先選擇車輛"); return; }
+  const input = document.getElementById("newAdminCatInput"); const name = input.value.trim();
+  if (!name) { showToast("請輸入分類名稱"); return; }
+  if (!CATEGORIES[vid]) CATEGORIES[vid] = [];
+  CATEGORIES[vid].push({ name, items: [] }); saveCategories(); input.value = "";
+  currentCategory = CATEGORIES[vid].length - 1; renderAdminItemTabs(); renderAdminItems();
+  showToast("已新增分類：" + name);
+}
+
+function deleteAdminCategory() {
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory]; if (!cat) return;
+  const count = cat.items.length;
+  showConfirm("確定刪除分類「" + cat.name + "」？內有 " + count + " 個品項", () => {
+    cats.splice(currentCategory, 1);
+    if (currentCategory >= cats.length) currentCategory = Math.max(0, cats.length - 1);
+    saveCategories(); renderAdminItemTabs(); renderAdminItems(); showToast("分類已刪除");
+  });
+}
+
+function addItemInline() {
+  const vid = getSelectedVehicleId(); if (!vid) { showToast("請先選擇車輛"); return; }
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory]; if (!cat) { showToast("請先選擇分類"); return; }
+  const nameInput = document.getElementById("newItemName");
+  const labelInput = document.getElementById("newItemLabel");
+  const priceInput = document.getElementById("newItemPrice");
+  const stockInput = document.getElementById("newItemStock");
+  const imageInput = document.getElementById("newItemImageUrl");
+  const name = nameInput.value.trim(); if (!name) { showToast("請輸入品項名稱"); return; }
+  const label = labelInput.value.trim() || "1"; const price = parseInt(priceInput.value);
+  if (isNaN(price) || price < 0) { showToast("請輸入有效價格"); return; }
+  const image = imageInput ? imageInput.value.trim() : "";
+  cat.items.push({ name, unit: "個", active: true, image, prices: [{ label, price }] }); saveCategories();
+  const sk = getStockKey(vid, name); const stockVal = stockInput.value.trim();
+  const num = stockVal !== "" ? parseInt(stockVal) : 0;
+  if (!isNaN(num) && num >= 0) { STOCK[sk] = { stock: num }; saveStockToFirebase(); }
+  nameInput.value = ""; priceInput.value = ""; if (stockInput) stockInput.value = ""; if (imageInput) imageInput.value = "";
+  renderAdminItems(); showToast("已新增品項：" + name);
+}
+
+function startEditItem(idx) { editingItemIdx = idx; editingPriceIdx = -1; renderAdminItems(); }
+
+async function saveEditItem(idx) {
+  const nameInput = document.getElementById("itemEditName"); const unitInput = document.getElementById("itemEditUnit");
+  const name = nameInput?.value.trim(); const unit = unitInput?.value.trim();
+  if (!name) { showToast("名稱不可為空"); return; }
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory];
+  if (!cat || !cat.items[idx]) return;
+  const oldName = cat.items[idx].name; cat.items[idx].name = name; cat.items[idx].unit = unit || "個";
+  const imgInput = document.getElementById("itemEditImage");
+  if (imgInput) cat.items[idx].image = imgInput.value.trim();
+  editingItemIdx = -1; saveCategories();
+  const oldSk = getStockKey(vid, oldName); const newSk = getStockKey(vid, name);
+  if (oldName !== name && STOCK[oldSk] !== undefined) { STOCK[newSk] = STOCK[oldSk]; delete STOCK[oldSk]; }
+  const stockInput = document.getElementById("itemEditStock");
+  if (stockInput) {
+    const val = stockInput.value.trim(); const num = val !== "" ? parseInt(val) : (STOCK[newSk]?.stock ?? 10);
+    if (!isNaN(num) && num >= 0) { STOCK[newSk] = { stock: num }; await saveStockToFirebase(); }
+  } else if (STOCK[newSk] === undefined) { STOCK[newSk] = { stock: 10 }; await saveStockToFirebase(); }
+  renderAdminItems(); showToast("品項已更新");
+}
+
+function cancelEditItem() { editingItemIdx = -1; editingPriceIdx = -1; renderAdminItems(); }
+
+async function deleteItem(idx) {
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory]; if (!cat) return;
+  const itemName = cat.items[idx].name;
+  showConfirm("確定刪除品項「" + itemName + "」？", async () => {
+    cat.items.splice(idx, 1); const sk = getStockKey(vid, itemName); delete STOCK[sk];
+    await saveStockToFirebase(); saveCategories(); renderAdminItems(); showToast("品項已刪除");
+  });
+}
+
+function toggleItemActive(idx) {
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory];
+  if (!cat || !cat.items[idx]) return;
+  cat.items[idx].active = !cat.items[idx].active; saveCategories(); renderAdminItems();
+  showToast(cat.items[idx].active ? "已顯示" : "已隱藏");
+}
+
+function toggleAdminPrices(idx) { if (expandedPrices.has(idx)) expandedPrices.delete(idx); else expandedPrices.add(idx); renderAdminItems(); }
+
+function addItemPrice(itemIdx) {
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx]) return;
+  const item = cat.items[itemIdx];
+  const qty = parseInt(document.getElementById("aqty" + itemIdx)?.value) || 1;
+  const price = parseInt(document.getElementById("apa" + itemIdx)?.value);
+  if (isNaN(price) || price < 0) { showToast("請輸入有效價格"); return; }
+  item.prices.push({ label: qty.toString(), price }); saveCategories(); renderAdminItems(); showToast("已新增規格");
+}
+
+function startEditPrice(itemIdx, priceIdx) { editingItemIdx = itemIdx; editingPriceIdx = priceIdx; renderAdminItems(); }
+
+function saveEditPrice(itemIdx, priceIdx) {
+  const qty = parseInt(document.getElementById("peQty_" + itemIdx + "_" + priceIdx)?.value);
+  const amt = parseInt(document.getElementById("peAmt_" + itemIdx + "_" + priceIdx)?.value);
+  if (!qty || qty < 1) { showToast("請輸入有效數量"); return; }
+  if (isNaN(amt) || amt < 0) { showToast("請輸入有效價格"); return; }
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx] || !cat.items[itemIdx].prices[priceIdx]) return;
+  cat.items[itemIdx].prices[priceIdx].label = qty.toString(); cat.items[itemIdx].prices[priceIdx].price = amt;
+  editingItemIdx = -1; editingPriceIdx = -1; saveCategories(); renderAdminItems(); showToast("規格已更新");
+}
+
+function cancelEditPrice() { editingItemIdx = -1; editingPriceIdx = -1; renderAdminItems(); }
+
+function deleteItemPrice(itemIdx, priceIdx) {
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory];
+  if (!cat || !cat.items[itemIdx]) return;
+  const item = cat.items[itemIdx]; if (item.prices.length <= 1) { showToast("至少保留一個規格"); return; }
+  showConfirm("確定刪除「" + item.prices[priceIdx].label + " NT$" + item.prices[priceIdx].price + "」？", () => {
+    item.prices.splice(priceIdx, 1); saveCategories(); renderAdminItems(); showToast("規格已刪除");
+  });
+}
+
+function inlineUpdateStock(input) {
+  const vid = input.dataset.vid; const itemName = input.dataset.item;
+  if (!vid || !itemName) return;
+  const sk = getStockKey(vid, itemName); const val = input.value.trim();
+  if (val === "") { delete STOCK[sk]; } else { const num = parseInt(val); if (!isNaN(num) && num >= 0) STOCK[sk] = { stock: num }; }
+  saveStockToFirebase();
+}
+
+function previewImage(url) {
+  if (!url) { showToast("請輸入圖片網址"); return; }
+  document.getElementById("imgPreviewContent").src = url; document.getElementById("imgPreviewModal").classList.add("open");
+}
+
+// Admin: Theme
+function renderThemeSettings() {
+  const grid = document.getElementById("themeGrid"); if (!grid) return;
+  const themeNames = Object.keys(THEMES); let html = "";
+  themeNames.forEach(name => {
+    const c = THEMES[name]; const active = CONFIG.themeName === name ? "active" : "";
+    html += '<div class="theme-card ' + active + '" data-theme="' + name + '"><div class="swatch"><span style="background:' + c.primary + '"></span><span style="background:' + c.bg + '"></span><span style="background:' + c.card + ';border-color:var(--parchment)"></span><span style="background:' + c.accent + '"></span></div>' + name + '</div>';
+  });
+  grid.innerHTML = html;
+  const colorGrid = document.getElementById("colorEditGrid"); if (!colorGrid) return;
+  const labels = { primary:"主色", bg:"背景", card:"卡片", text:"文字", accent:"強調" };
+  const colors = CONFIG.colors; html = "";
+  Object.keys(colors || THEMES["經典質感"]).forEach(k => {
+    html += '<div class="color-edit-item"><label>' + (labels[k]||k) + '</label><input type="color" value="' + ((colors||THEMES["經典質感"])[k]) + '" data-key="' + k + '" onchange="customColor(this)"></div>';
+  });
+  colorGrid.innerHTML = html;
+}
+
+function selectTheme(name) { CONFIG.themeName = name; CONFIG.colors = { ...THEMES[name] }; applyTheme(CONFIG.colors); saveConfig(); renderThemeSettings(); }
+
+function customColor(input) { CONFIG.colors[input.dataset.key] = input.value; CONFIG.themeName = ""; applyTheme(CONFIG.colors); saveConfig(); document.querySelectorAll(".theme-card").forEach(c => c.classList.remove("active")); }
+// Admin: Slides
+function renderSlideList() {
+  const container = document.getElementById("slideList"); if (!container) return;
+  const slides = CONFIG.homepageSlides || []; let html = "";
+  slides.forEach((s, i) => {
+    html += '<div class="slide-row"><span style="font-family:var(--font-ui);font-size:10px;color:var(--dust)">' + (i+1) + '.</span><input type="text" value="' + s.imageUrl + '" onchange="updateSlide(' + i + ', this.value)" placeholder="圖片網址"><button class="preview-btn" onclick="previewImage(\'' + s.imageUrl.replace(/'/g, "\\'") + '\')">PREVIEW</button><button class="preview-btn" onclick="deleteSlide(' + i + ')" style="color:var(--dust)">DEL</button></div>';
+  });
+  container.innerHTML = html;
+}
+
+function addSlide() {
+  const input = document.getElementById("newSlideUrl"); const url = input.value.trim();
+  if (!url) { showToast("請輸入圖片網址"); return; }
+  if (!CONFIG.homepageSlides) CONFIG.homepageSlides = [];
+  CONFIG.homepageSlides.push({ imageUrl: url }); saveConfig(); input.value = ""; renderSlideList(); showToast("已新增輪播圖片");
+}
+
+function updateSlide(idx, url) { if (!CONFIG.homepageSlides) CONFIG.homepageSlides = []; CONFIG.homepageSlides[idx].imageUrl = url; saveConfig(); }
+
+function deleteSlide(idx) { CONFIG.homepageSlides.splice(idx, 1); saveConfig(); renderSlideList(); showToast("已刪除"); }
+
+// Admin: Info
+function saveShopInfo() {
+  const name = document.getElementById("editShopName").value.trim();
+  if (!name) { showToast("店名不可為空"); return; }
+  CONFIG.shopName = name; CONFIG.address = document.getElementById("editAddress").value.trim();
+  CONFIG.phone = document.getElementById("editPhone").value.trim();
+  CONFIG.aboutDescription = document.getElementById("editAboutDesc")?.value.trim() || "";
+  saveConfig(); updateLogo(); renderAdmin(); showToast("店家資訊已更新");
+}
+
+// Admin: Drag
+function initDragSort(container, type) {
+  let dragSrc = null;
+  const rows = () => container.querySelectorAll(".admin-row");
+  function onDragStart(e) {
+    const row = e.target.closest(".admin-row"); if (!row) return;
+    dragSrc = parseInt(row.dataset.idx); row.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch(ex) {}
+  }
+  function onDragEnd(e) {
+    const row = e.target.closest(".admin-row"); if (row) row.classList.remove("dragging");
+    rows().forEach(r => r.classList.remove("dragOver"));
+  }
+  function onDragOver(e) {
+    e.preventDefault(); e.dataTransfer.dropEffect = "move";
+    const row = e.target.closest(".admin-row"); if (!row) return;
+    rows().forEach(r => r.classList.remove("dragOver"));
+    if (parseInt(row.dataset.idx) !== dragSrc) row.classList.add("dragOver");
+  }
+  function onDrop(e) {
+    e.preventDefault(); rows().forEach(r => r.classList.remove("dragOver", "dragging"));
+    const row = e.target.closest(".admin-row"); if (!row || dragSrc === null) return;
+    const dropIdx = parseInt(row.dataset.idx); if (dragSrc === dropIdx) { dragSrc = null; return; }
+    if (type === "vehicle") {
+      const [item] = VEHICLES.splice(dragSrc, 1); VEHICLES.splice(dropIdx, 0, item);
+      VEHICLES.forEach((v, i) => v.sortOrder = i); saveVehicles(); renderAdminVehicles(); renderAdminVehicleSelect();
+    } else if (type === "item") {
+      const vid = getSelectedVehicleId(); if (!vid) return;
+      const cats = CATEGORIES[vid] || []; const cat = cats[currentCategory]; if (!cat) return;
+      const [item] = cat.items.splice(dragSrc, 1); cat.items.splice(dropIdx, 0, item); saveCategories(); renderAdminItems();
+    }
+    dragSrc = null;
+  }
+  container.removeEventListener("dragstart", onDragStart); container.removeEventListener("dragend", onDragEnd);
+  container.removeEventListener("dragover", onDragOver); container.removeEventListener("drop", onDrop);
+  container.addEventListener("dragstart", onDragStart); container.addEventListener("dragend", onDragEnd);
+  container.addEventListener("dragover", onDragOver); container.addEventListener("drop", onDrop);
+}
+
+// ============ EXPORT / IMPORT ============
+function exportData() {
+  const data = getAllData();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = (CONFIG.shopName || "bakery") + "_export_" + new Date().toISOString().slice(0,10) + ".json";
+  a.click(); URL.revokeObjectURL(a.href); showToast("資料已匯出");
+}
+
+function showImportModal() {
+  const vid = getSelectedVehicleId(); if (!vid) { showToast("請先選擇車輛"); return; }
+  const cats = CATEGORIES[vid] || []; const sel = document.getElementById("importCatSelect");
+  if (!sel) return; let html = "";
+  cats.forEach(c => { html += '<option value="' + c.name + '">' + c.name + '</option>'; });
+  sel.innerHTML = html; document.getElementById("importTextarea").value = ""; document.getElementById("importModal").classList.add("open");
+}
+
+function execImport() {
+  const text = document.getElementById("importTextarea").value.trim(); if (!text) { showToast("請輸入資料"); return; }
+  const vid = getSelectedVehicleId(); if (!vid) return;
+  const cats = CATEGORIES[vid] || []; const sel = document.getElementById("importCatSelect");
+  const cat = cats.find(c => c.name === sel?.value); if (!cat) { showToast("請選擇分類"); return; }
+  const lines = text.split("\n").filter(l => l.trim()); let count = 0;
+  lines.forEach(line => {
+    const parts = line.split("-").map(s => s.trim());
+    if (parts.length >= 3) {
+      const name = parts.slice(0, parts.length - 2).join("-"); const unit = parts[parts.length - 2]; const price = parseInt(parts[parts.length - 1]);
+      if (name && !isNaN(price)) { cat.items.push({ name, unit: unit || "個", active: true, image: "", prices: [{ label: "1", price }] }); count++; }
+    } else if (parts.length >= 2) {
+      const name = parts.slice(0, parts.length - 1).join("-"); const price = parseInt(parts[parts.length - 1]);
+      if (name && !isNaN(price)) { cat.items.push({ name, unit: "個", active: true, image: "", prices: [{ label: "1", price }] }); count++; }
+    }
+  });
+  if (count > 0) { saveCategories(); document.getElementById("importModal").classList.remove("open"); renderAdminItems(); showToast("已匯入 " + count + " 項"); }
+  else { showToast("無法解析資料，請確認格式"); }
+}
+
+function importData(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.config && data.categories) {
+        CONFIG = data.config; VEHICLES = data.vehicles || VEHICLES; CATEGORIES = data.categories; ORDERS = data.orders || [];
+        saveConfig(); saveVehicles(); saveCategories(); saveOrders();
+        applyTheme(CONFIG.colors); updateLogo(); renderAdmin(); showToast("資料已匯入");
+      } else { showToast("檔案格式錯誤"); }
+    } catch(e) { showToast("檔案格式錯誤"); }
+  }; reader.readAsText(file);
+}
+
+// ============ SYSTEM ============
+function changePassword() {
+  const input = document.getElementById("newPwdInput"); const pwd = input.value.trim();
+  if (!pwd) { showToast("請輸入密碼"); return; }
+  if (pwd.length < 4) { showToast("密碼至少4位數"); return; }
+  CONFIG.password = pwd; saveConfig(); input.value = ""; showToast("密碼已更新");
+}
+
+function resetAll() {
+  showConfirm("確定重置所有資料嗎？此操作無法復原", () => {
+    localStorage.removeItem("mv_config"); localStorage.removeItem("mv_vehicles"); localStorage.removeItem("mv_categories");
+    localStorage.removeItem("mv_orders"); localStorage.removeItem("mv_cart"); localStorage.removeItem("mv_currentVehicle"); localStorage.removeItem("mv_admin");
+    location.reload();
+  });
+}
+
+function logout() { isAdmin = false; saveAdmin(); updateNavVisibility(); if (document.getElementById("view-admin").classList.contains("active")) switchTab("home"); showToast("已登出"); }
+
+// ============ CONFIRM MODAL ============
+function showConfirm(msg, cb) {
+  document.getElementById("confirmMsg").textContent = msg; document.getElementById("confirmAlt").style.display = "none";
+  confirmCallback = cb; confirmAltCallback = null; confirmNoCallback = null; document.getElementById("confirmModal").classList.add("open");
+}
+
+// ============ LOGIN ============
+function showLogin() {
+  document.getElementById("loginPwd").value = ""; document.getElementById("loginError").style.display = "none";
+  document.getElementById("loginModal").classList.add("open"); setTimeout(() => document.getElementById("loginPwd").focus(), 100);
+}
+
+let loginCooldownTimer = null;
+
+function attemptLogin() {
+  if (loginCooldownTimer) return;
+  const pwd = document.getElementById("loginPwd").value; const errEl = document.getElementById("loginError"); const loginBtn = document.getElementById("loginBtn");
+  if (pwd === CONFIG.password) {
+    localStorage.removeItem("mv_loginFails"); isAdmin = true; saveAdmin();
+    document.getElementById("loginModal").classList.remove("open"); errEl.style.display = "none"; updateNavVisibility(); showToast("管理員登入成功"); return;
+  }
+  const fails = (parseInt(localStorage.getItem("mv_loginFails") || "0", 10)) + 1;
+  localStorage.setItem("mv_loginFails", String(fails));
+  const delay = Math.pow(2, fails - 1);
+  errEl.textContent = "密碼錯誤，" + delay + " 秒後可重試"; errEl.style.display = "block";
+  document.getElementById("loginPwd").value = ""; document.getElementById("loginPwd").focus();
+  loginBtn.disabled = true;
+  loginCooldownTimer = setTimeout(() => { loginBtn.disabled = false; loginCooldownTimer = null; }, delay * 1000);
+}
+
+// ============ QR ============
+function showQR() {
+  const base = window.location.origin + window.location.pathname;
+  const img = document.getElementById("qrImage");
+  img.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(base);
+  img.onerror = function() { img.src = "https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=" + encodeURIComponent(base); };
+  document.getElementById("qrUrl").textContent = base; document.getElementById("qrModal").classList.add("open");
+}
+// ============ INIT ============
+async function init() {
+  loadData();
+  await loadStockFromFirebase(); listenStock();
+  const loaded = await loadShopFromFirebase();
+  if (loaded) { saveVehicles(); saveCategories(); saveConfig(); }
+  await loadStockFromFirebase(); listenOrders();
+  isAdmin = localStorage.getItem("mv_admin") === "true";
+  applyTheme(CONFIG.colors || THEMES["經典質感"]); updateLogo(); updateNavVisibility();
+  if (currentVehicleId && !VEHICLES.find(v => v.id === currentVehicleId)) currentVehicleId = null;
+
+  // Nav clicks
+  document.querySelectorAll(".nav-links a[data-view], .tab-bar a[data-view]").forEach(btn => {
+    btn.addEventListener("click", e => { e.preventDefault(); switchTab(btn.dataset.view); });
+  });
+
+  // Logo click = login
+  document.getElementById("shopLogo").addEventListener("click", () => showLogin());
+
+  // Login
+  document.getElementById("loginBtn").addEventListener("click", attemptLogin);
+  document.getElementById("loginPwd").addEventListener("keydown", e => { if (e.key === "Enter") attemptLogin(); });
+  function resetLoginState() {
+    localStorage.removeItem("mv_loginFails");
+    if (loginCooldownTimer) { clearTimeout(loginCooldownTimer); loginCooldownTimer = null; }
+    document.getElementById("loginBtn").disabled = false; document.getElementById("loginError").style.display = "none";
+    document.getElementById("loginModal").classList.remove("open");
+  }
+  document.getElementById("loginCancelBtn").addEventListener("click", resetLoginState);
+  document.getElementById("loginCloseBtn").addEventListener("click", resetLoginState);
+  document.getElementById("loginModal").addEventListener("click", e => { if (e.target === e.currentTarget) resetLoginState(); });
+
+  // PWD eye
+  const pwdEye = document.getElementById("pwdEye");
+  if (pwdEye) {
+    pwdEye.innerHTML = SVG_ICONS.eyeOff; pwdEye.style.color = "var(--dust)";
+    pwdEye.addEventListener("click", () => {
+      const input = document.getElementById("loginPwd"); const visible = input.type === "password";
+      input.type = visible ? "text" : "password";
+      pwdEye.innerHTML = visible ? SVG_ICONS.eye : SVG_ICONS.eyeOff;
+      pwdEye.style.color = visible ? "var(--espresso)" : "var(--dust)";
+    });
+  }
+
+  // QR
+  document.getElementById("qrCloseBtn").addEventListener("click", () => document.getElementById("qrModal").classList.remove("open"));
+  document.getElementById("qrModal").addEventListener("click", e => { if (e.target === e.currentTarget) document.getElementById("qrModal").classList.remove("open"); });
+
+  // Vehicle selection
+  document.getElementById("view-vehicles").addEventListener("click", e => {
+    const card = e.target.closest(".vehicle-card");
+    if (card) switchVehicle(card.dataset.vid);
+  });
+
+  // Menu: category tabs
+  document.getElementById("view-menu").addEventListener("click", e => {
+    const link = e.target.closest(".cat-tabs a");
+    if (link) { e.preventDefault(); currentCategory = parseInt(link.dataset.idx); renderMenu(); }
+  });
+
+  // Menu: add-to-cart
+  document.getElementById("view-menu").addEventListener("click", e => {
+    const addBtn = e.target.closest(".add-btn"); if (!addBtn) return;
+    const origIdx = parseInt(addBtn.dataset.origIdx);
+    const priceIdx = addBtn.dataset.price !== undefined ? parseInt(addBtn.dataset.price) : 0;
+    const cats = CATEGORIES[currentVehicleId] || []; const cat = cats[currentCategory];
+    if (!cat || !cat.items[origIdx]) return;
+    if (addBtn.dataset.multi === "1") { openItemModal(currentCategory, origIdx, priceIdx); }
+    else { addToCart(currentCategory, origIdx, priceIdx, 1); }
+  });
+
+  // Item Modal
+  document.getElementById("priceOptions").addEventListener("click", e => {
+    const opt = e.target.closest(".price-option"); if (!opt || !itemModalState) return;
+    document.querySelectorAll(".price-option").forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected"); itemModalState.selectedPrice = parseInt(opt.dataset.idx);
+  });
+  document.getElementById("itemQtyMinus").addEventListener("click", () => {
+    if (!itemModalState) return; itemModalState.qty = Math.max(1, itemModalState.qty - 1);
+    document.getElementById("itemQtyDisplay").textContent = itemModalState.qty;
+  });
+  document.getElementById("itemQtyPlus").addEventListener("click", () => {
+    if (!itemModalState) return; itemModalState.qty = Math.min(99, itemModalState.qty + 1);
+    document.getElementById("itemQtyDisplay").textContent = itemModalState.qty;
+  });
+  document.getElementById("btnAddToCart").addEventListener("click", () => {
+    if (!itemModalState) return;
+    addToCart(itemModalState.categoryIdx, itemModalState.itemIdx, itemModalState.selectedPrice, itemModalState.qty);
+    document.getElementById("itemModal").classList.remove("open"); itemModalState = null;
+  });
+  document.getElementById("itemModalClose").addEventListener("click", () => { document.getElementById("itemModal").classList.remove("open"); itemModalState = null; });
+  document.getElementById("itemModal").addEventListener("click", e => {
+    if (e.target === e.currentTarget) { document.getElementById("itemModal").classList.remove("open"); itemModalState = null; }
+  });
+
+  // Close modals on overlay
+  document.querySelectorAll(".modal-overlay").forEach(m => {
+    m.addEventListener("click", e => {
+      if (e.target === m) { m.classList.remove("open"); confirmCallback = null; confirmAltCallback = null; confirmNoCallback = null; }
+    });
+  });
+
+  // Confirm modal
+  document.getElementById("confirmYes").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmCallback) { const cb = confirmCallback; confirmCallback = null; cb(); }
+  });
+  document.getElementById("confirmAlt").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmAltCallback) { const cb = confirmAltCallback; confirmAltCallback = null; cb(); }
+  });
+  document.getElementById("confirmNo").addEventListener("click", () => {
+    document.getElementById("confirmModal").classList.remove("open");
+    if (confirmNoCallback) { const cb = confirmNoCallback; confirmNoCallback = null; cb(); }
+    confirmCallback = null; confirmAltCallback = null;
+  });
+
+  // Import
+  document.getElementById("importInput").addEventListener("change", e => { importData(e.target.files[0]); });
+  document.getElementById("importModalClose").addEventListener("click", () => document.getElementById("importModal").classList.remove("open"));
+
+  // Admin: vehicle select change
+  document.addEventListener("change", e => {
+    if (e.target.id === "adminVehicleSelect") { currentCategory = 0; renderAdminItemTabs(); renderAdminItems(); }
+  });
+
+  // Theme cards
+  document.addEventListener("click", e => {
+    const card = e.target.closest(".themeCard");
+    if (card && card.dataset.theme) selectTheme(card.dataset.theme);
+  });
+
+  // Image preview close
+  document.getElementById("imgPreviewClose").addEventListener("click", () => document.getElementById("imgPreviewModal").classList.remove("open"));
+
+  // Admin toggles
+  document.addEventListener("click", e => {
+    if (e.target.id === "toggleAddress") {
+      const addr = document.getElementById("editAddress"); if (addr) CONFIG.address = addr.value.trim();
+      CONFIG.showAddress = !CONFIG.showAddress; saveConfig(); updateLogo(); renderAdmin();
+    }
+    if (e.target.id === "togglePhone") {
+      const phone = document.getElementById("editPhone"); if (phone) CONFIG.phone = phone.value.trim();
+      CONFIG.showPhone = !CONFIG.showPhone; saveConfig(); updateLogo(); renderAdmin();
+    }
+  });
+
+  // Start on home
+  switchTab("home");
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
